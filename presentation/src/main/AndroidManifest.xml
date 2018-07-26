@@ -13,7 +13,7 @@
 
     <activity
         android:name=".features.launch.LaunchActivity"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.Launcher">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
