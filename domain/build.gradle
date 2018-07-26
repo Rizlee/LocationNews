@@ -1,0 +1,13 @@
+apply plugin: 'java-library'
+
+dependencies {
+    //rx
+    api "io.reactivex.rxjava2:rxjava:2.1.16"
+    //dagger
+    api 'javax.inject:javax.inject:1'
+    //api
+    api 'com.google.code.gson:gson:2.8.2'
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
