@@ -3,21 +3,19 @@ package com.lnews.evgen.domain.usecases;
 import com.lnews.evgen.domain.executor.ExecutionThread;
 import com.lnews.evgen.domain.executor.PostExecutionThread;
 import com.lnews.evgen.domain.repository.IRepository;
-import com.lnews.evgen.domain.usecases.base.CompletableUseCase;
-import io.reactivex.Completable;
+import com.lnews.evgen.domain.usecases.base.SingleUseCase;
+import io.reactivex.Single;
 import javax.inject.Inject;
 
-public class AuthorizationUseCase extends
-    CompletableUseCase<AuthorizationUseCase.AuthorizationData> {
+public class AuthorizationUseCase extends SingleUseCase<AuthorizationUseCase.AuthorizationData, Single> {
 
-    @Inject
-    AuthorizationUseCase(IRepository repository, ExecutionThread executionThread, PostExecutionThread postExecutionThread) {
+    @Inject AuthorizationUseCase(IRepository repository, ExecutionThread executionThread, PostExecutionThread postExecutionThread) {
         super(repository, executionThread, postExecutionThread);
     }
 
     @Override
-    protected Completable buildUseCase(AuthorizationUseCase.AuthorizationData params) {
-        return repository.login(params.getEmail(), params.getPassword());
+    protected Single buildUseCase(AuthorizationUseCase.AuthorizationData params) {
+        return repository.auth(params.getEmail(), params.getPassword());
     }
 
     public static final class AuthorizationData {

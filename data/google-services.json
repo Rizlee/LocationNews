@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "846800839221",
+    "firebase_url": "https://locationnews-7d5ec.firebaseio.com",
+    "project_id": "locationnews-7d5ec",
+    "storage_bucket": "locationnews-7d5ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846800839221:android:3425790a87c125c2",
+        "android_client_info": {
+          "package_name": "com.lnews.evgen.data"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846800839221-n97otnff8em6ecc944ta7pito0856f5t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6vkF81WYBXYiwTZIQgP2Mmud1s-xK5J0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

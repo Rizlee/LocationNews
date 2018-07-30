@@ -1,23 +1,14 @@
 package com.lnews.evgen.domain.entities;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class UserEntity {
 
-    @SerializedName("id")
-    @Expose
-    private Integer id;
-    @SerializedName("email")
-    @Expose
     private String email;
 
-    public Integer getId() {
-        return id;
-    }
+    private String password;
 
-    public void setId(Integer id) {
-        this.id = id;
+    public UserEntity(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public String getEmail() {
@@ -26,5 +17,13 @@ public class UserEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

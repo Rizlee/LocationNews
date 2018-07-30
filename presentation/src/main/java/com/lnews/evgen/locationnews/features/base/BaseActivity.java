@@ -31,6 +31,11 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseA
         finish();
     }
 
+    @Override public void startNextActivity(Intent intent) {
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     public void showToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();

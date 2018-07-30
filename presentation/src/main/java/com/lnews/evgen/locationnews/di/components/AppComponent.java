@@ -12,5 +12,9 @@ public interface AppComponent {
 
     void inject(LaunchActivity activity);
 
-    AuthComponent plusAuthComponent();
+    AuthenticationComponent plusAuthComponent();
+
+    TutorialComponent plusTutorialComponent();
+
+    NewsListComponent plusNewsListComponent();
 }

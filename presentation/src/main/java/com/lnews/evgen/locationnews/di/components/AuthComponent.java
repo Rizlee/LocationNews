@@ -1,12 +1,14 @@
 package com.lnews.evgen.locationnews.di.components;
 
-import com.lnews.evgen.locationnews.di.annotations.*;
+import com.lnews.evgen.locationnews.di.annotations.PerFragment;
 import com.lnews.evgen.locationnews.di.modules.AuthModule;
-import com.lnews.evgen.locationnews.features.auth.AuthActivity;
+import com.lnews.evgen.locationnews.features.authorization.AuthFragment;
 import dagger.Subcomponent;
 
-@PerActivity(AuthActivity.class)
+@PerFragment(AuthFragment.class)
 @Subcomponent(modules = AuthModule.class)
 public interface AuthComponent {
-    void inject(AuthActivity activity);
+
+    void inject(AuthFragment fragment);
+
 }

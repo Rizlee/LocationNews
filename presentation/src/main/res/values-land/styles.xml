@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!--Auth-->
+  <style name="EditTextAuth">
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">@dimen/view_auth_height</item>
+    <item name="android:layout_marginEnd">128dp</item>
+    <item name="android:layout_marginStart">128dp</item>
+    <item name="layout_constraintWidth_max">600dp</item>
+    <item name="android:background">@drawable/edittext_bg</item>
+    <item name="android:fontFamily">serif-monospace</item>
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="MainButtonAuth">
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">@dimen/view_auth_height</item>
+    <item name="android:layout_marginEnd">128dp</item>
+    <item name="android:layout_marginStart">128dp</item>
+    <item name="layout_constraintWidth_max">600dp</item>
+    <item name="android:layout_marginTop">20dp</item>
+    <item name="android:background">@drawable/button_bg</item>
+    <item name="android:fontFamily">serif</item>
+  </style>
+
+  <style name="TextViewTitle">
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginEnd">16dp</item>
+    <item name="android:layout_marginStart">16dp</item>
+    <item name="android:fontFamily">sans-serif</item>
+    <item name="android:gravity">center</item>
+    <item name="android:textSize">24sp</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textColor">@color/primary_light</item>
+    <item name="android:textAllCaps">true</item>
+  </style>
+</resources>

@@ -3,9 +3,13 @@ package com.lnews.evgen.locationnews.di;
 import android.app.Application;
 import com.lnews.evgen.locationnews.di.components.AppComponent;
 import com.lnews.evgen.locationnews.di.components.AuthComponent;
+import com.lnews.evgen.locationnews.di.components.AuthenticationComponent;
 import com.lnews.evgen.locationnews.di.components.DaggerAppComponent;
 import com.lnews.evgen.locationnews.di.components.DescriptionComponent;
 import com.lnews.evgen.locationnews.di.components.NewsListComponent;
+import com.lnews.evgen.locationnews.di.components.PassRecoveryComponent;
+import com.lnews.evgen.locationnews.di.components.RegistrationComponent;
+import com.lnews.evgen.locationnews.di.components.TutorialComponent;
 import com.lnews.evgen.locationnews.di.modules.AppModule;
 
 public class Injector {
@@ -13,31 +17,95 @@ public class Injector {
     private static final Injector injector = new Injector();
 
     private AppComponent appComponent;
-    private AuthComponent authComponent;
+    private AuthenticationComponent authenticationComponent;
     private DescriptionComponent descriptionComponent;
     private NewsListComponent newsListComponent;
+    private TutorialComponent tutorialComponent;
+    private AuthComponent authComponent;
+    private PassRecoveryComponent passRecoveryComponent;
+    private RegistrationComponent registrationComponent;
 
     public static Injector getInstance() {
         return injector;
     }
 
-    private Injector() {}
+    private Injector() {
+    }
 
     public AppComponent getAppComponent() {
         return appComponent;
     }
 
     public void initializeAppComponent(Application application) {
-        appComponent = DaggerAppComponent.builder()
-            .appModule(new AppModule(application))
-            .build();
+        appComponent = DaggerAppComponent.builder().appModule(new AppModule(application)).build();
     }
 
-    public AuthComponent plusAuthComponent(){
+    public AuthenticationComponent plusAuthenticationComponent() {
+        if (authenticationComponent == null) {
+            authenticationComponent = appComponent.plusAuthComponent();
+        }
+        return authenticationComponent;
+    }
+
+    public void clearAuthenticationComponent() {
+        authenticationComponent = null;
+    }
+
+    public TutorialComponent plusTutorialComponent() {
+        if (tutorialComponent == null) {
+            tutorialComponent = appComponent.plusTutorialComponent();
+        }
+        return tutorialComponent;
+    }
+
+    public void clearTutorialComponent() {
+        tutorialComponent = null;
+    }
+
+    public PassRecoveryComponent plusPassRecoveryComponent() {
+        if (passRecoveryComponent == null) {
+            plusAuthenticationComponent();
+            passRecoveryComponent = authenticationComponent.plusPassRecoveryComponent();
+        }
+        return passRecoveryComponent;
+    }
+
+    public void clearPassRecoveryComponent() {
+        passRecoveryComponent = null;
+    }
+
+    public AuthComponent plusAuthComponent() {
         if (authComponent == null) {
-            authComponent = appComponent.plusAuthComponent();
+            plusAuthenticationComponent();
+            authComponent = authenticationComponent.plusAuthComponent();
         }
         return authComponent;
     }
 
+    public void clearAuthComponent() {
+        authComponent = null;
+    }
+
+    public RegistrationComponent plusRegistrationComponent() {
+        if (registrationComponent == null) {
+            plusAuthenticationComponent();
+            registrationComponent = authenticationComponent.plusRegistrationComponent();
+        }
+        return registrationComponent;
+    }
+
+    public void clearRegistrationComponent() {
+        registrationComponent = null;
+    }
+
+    public NewsListComponent plusNewsListComponent(){
+        if (newsListComponent == null){
+            newsListComponent = appComponent.plusNewsListComponent();
+        }
+        return newsListComponent;
+    }
+
+    public void clearNewsListComponent(){
+        newsListComponent = null;
+    }
 }

@@ -1,15 +1,16 @@
 package com.lnews.evgen.data.network;
 
+import com.google.firebase.auth.AuthResult;
 import com.lnews.evgen.data.local.Cache;
-import com.lnews.evgen.domain.entities.LoginBody;
-import com.lnews.evgen.domain.entities.UserEntity;
-import io.reactivex.Single;
+import com.lnews.evgen.data.util.RxFirebaseAuth;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import retrofit2.Response;
+import com.google.firebase.auth.FirebaseAuth;
 
 @Singleton
-public class RestApiService{
+public class RestApiService {
 
     private final RestApi restApi;
 
@@ -21,7 +22,15 @@ public class RestApiService{
         this.cache = cache;
     }
 
-    public Single<UserEntity> login(String email, String password){
-        return restApi.logIn(new LoginBody(email, password));
+    public Maybe<AuthResult> register(String email, String password){
+        return RxFirebaseAuth.createUserWithEmailAndPassword(FirebaseAuth.getInstance(),email, password);
+    }
+
+    public Maybe<AuthResult> auth(String email, String password){
+        return RxFirebaseAuth.signInWithEmailAndPassword(FirebaseAuth.getInstance(), email, password);
+    }
+
+    public Completable sendResetRequest(String email){
+        return RxFirebaseAuth.sendPasswordResetEmail(FirebaseAuth.getInstance(), email);
     }
 }

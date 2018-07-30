@@ -11,7 +11,7 @@ public abstract class SingleUseCase<InParam, OutParam> extends BaseUseCase {
         super(repository, threadExecutor, postExecutionThread);
     }
 
-    abstract Single<OutParam> buildUseCase(InParam param);
+    protected abstract Single<OutParam> buildUseCase(InParam param);
 
     public Single<OutParam> execute(InParam param) {
         return buildUseCase(param)

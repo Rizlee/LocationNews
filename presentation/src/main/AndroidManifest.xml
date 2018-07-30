@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lnews.evgen.locationnews">
+  <uses-permission android:name="android.permission.INTERNET" />
 
   <application
       android:name=".application.MainApp"
@@ -19,7 +20,11 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name=".features.auth.AuthActivity"/>
+    <activity android:name=".features.authentication.AuthenticationActivity"
+        android:windowSoftInputMode="adjustResize|stateHidden"/>
+
+    <activity android:name=".features.tutorial.TutorialActvity"/>
+    <activity android:name=".features.newslist.NewsListActivity"/>
   </application>
 
 </manifest>

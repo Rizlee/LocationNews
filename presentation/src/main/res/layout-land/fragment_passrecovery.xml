@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+  <TextView
+      android:text="@string/forgot_pass_btn"
+      app:layout_constraintBottom_toTopOf="@id/textview_forgot_instr"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      style="@style/TextViewTitle"
+      />
+
+  <TextView
+      android:id="@+id/textview_forgot_instr"
+      android:layout_width="0dp"
+      android:layout_height="40dp"
+      android:layout_marginBottom="20dp"
+      android:layout_marginEnd="24dp"
+      android:layout_marginStart="24dp"
+      android:textColor="@color/primary_light"
+      android:gravity="center"
+      android:text="@string/reset_pass_instr"
+      app:layout_constraintBottom_toTopOf="@id/edittext_email"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="1.0"
+      />
+
+  <EditText
+      android:id="@+id/edittext_email"
+      android:hint="@string/password_hint"
+      android:inputType="textEmailAddress"
+      android:selectAllOnFocus="false"
+      android:singleLine="false"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      style="@style/EditTextAuth"
+      />
+
+  <Button
+      android:id="@+id/button_reset_pass"
+      android:text="@string/reset_pass_btn"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/edittext_email"
+      style="@style/MainButtonAuth"
+      />
+</android.support.constraint.ConstraintLayout>

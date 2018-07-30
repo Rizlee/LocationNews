@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+  <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginStart="16dp"
+      android:background="@drawable/ic_registration"
+      app:layout_constraintBottom_toTopOf="@id/edittext_email"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <EditText
+      android:id="@+id/edittext_email"
+      android:layout_marginBottom="20dp"
+      android:hint="@string/email_hint"
+      android:inputType="textEmailAddress"
+      android:selectAllOnFocus="false"
+      android:singleLine="false"
+      app:layout_constraintBottom_toTopOf="@id/edittext_password"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="1.0"
+      style="@style/EditTextAuth"
+      />
+
+  <EditText
+      android:id="@+id/edittext_password"
+      android:hint="@string/password_hint"
+      android:inputType="textPassword"
+      android:selectAllOnFocus="false"
+      android:singleLine="false"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      style="@style/EditTextAuth"
+      />
+
+  <Button
+      android:id="@+id/button_register"
+      android:text="@string/register_btn"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/edittext_password"
+      style="@style/MainButtonAuth"
+      />
+</android.support.constraint.ConstraintLayout>

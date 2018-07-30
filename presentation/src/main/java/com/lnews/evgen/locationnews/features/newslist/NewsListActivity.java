@@ -1,13 +1,31 @@
 package com.lnews.evgen.locationnews.features.newslist;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.lnews.evgen.locationnews.R;
+import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.features.base.BaseActivity;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 public class NewsListActivity extends BaseActivity implements NewsListView {
 
-    @InjectPresenter NewsListPresenter newsListPresenter;
+    @InjectPresenter
+    NewsListPresenter presenter;
+    @Inject Provider<NewsListPresenter> presenterProvider;
+
+    @ProvidePresenter
+    NewsListPresenter providePresenter() {
+        return presenterProvider.get();
+    }
+
+    public static Intent getActivityIntent(Context context){
+        return new Intent(context, NewsListActivity.class);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +35,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
 
     @Override
     protected void injectComponent() {
-
+        Injector.getInstance().plusNewsListComponent().inject(this);
     }
 
     @Override
