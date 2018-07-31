@@ -22,6 +22,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.features.base.BaseActivity;
+import com.lnews.evgen.locationnews.features.tutorial.adapter.TutorialEnum;
 import com.lnews.evgen.locationnews.features.tutorial.adapter.TutorialPagerAdapter;
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -29,22 +30,18 @@ import javax.inject.Provider;
 public class TutorialActivity extends BaseActivity implements TutorialView {
     private static final int FIRST_PAGE = 0;
     private static final int ONE_PAGE = 1;
-    private static final int[] LAYOUTS = {
-        R.layout.tutorial_screen_1,
-        R.layout.tutorial_screen_2,
-        R.layout.tutorial_screen_3};
+    private static final int LAYOUTS_COUNT = TutorialEnum.values().length;
 
     //TODO
     private TextView[] dots;
-    private TutorialPagerAdapter tutorialPagerAdapter;
 
-    @BindView(R.id.button_next)
+    @BindView(R.id.button_tutorial_next)
     Button buttonNext;
-    @BindView(R.id.button_skip)
+    @BindView(R.id.button_tutorial_skip)
     Button buttonSkip;
-    @BindView(R.id.view_pager_tutorial)
+    @BindView(R.id.viewpager_tutorial)
     ViewPager viewPagerTutorial;
-    @BindView(R.id.linearlayout_dots)
+    @BindView(R.id.linearlayout_tutorial_dots)
     LinearLayout linearLayoutDots;
 
     @BindString(R.string.tutorial_start_button)
@@ -52,14 +49,14 @@ public class TutorialActivity extends BaseActivity implements TutorialView {
     @BindString(R.string.tutorial_next_button)
     String nextButtonDescription;
 
-    @OnClick(R.id.button_skip)
+    @OnClick(R.id.button_tutorial_skip)
     public void buttonSkipListener(){
         tutorialPresenter.buttonSkipPressed();
     }
 
-    @OnClick(R.id.button_next)
+    @OnClick(R.id.button_tutorial_next)
     public void buttonNextListener(){
-        tutorialPresenter.buttonNextPressed(getNextPage(), LAYOUTS.length);
+        tutorialPresenter.buttonNextPressed(getNextPage(), LAYOUTS_COUNT);
     }
 
     @InjectPresenter
@@ -83,7 +80,8 @@ public class TutorialActivity extends BaseActivity implements TutorialView {
 
         addBottomDots(FIRST_PAGE);
 
-        tutorialPagerAdapter = new TutorialPagerAdapter((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE), LAYOUTS);
+        TutorialPagerAdapter tutorialPagerAdapter = new TutorialPagerAdapter(
+            (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE));
         viewPagerTutorial.setAdapter(tutorialPagerAdapter);
         viewPagerTutorial.addOnPageChangeListener(simpleOnPageChangeListener);
 
@@ -106,7 +104,7 @@ public class TutorialActivity extends BaseActivity implements TutorialView {
 
 //TODO
     private void addBottomDots(int currentPage) {
-        dots = new TextView[LAYOUTS.length];
+        dots = new TextView[LAYOUTS_COUNT];
 
         int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
         int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
@@ -140,7 +138,7 @@ public class TutorialActivity extends BaseActivity implements TutorialView {
 
             addBottomDots(position);
 
-            if (position == LAYOUTS.length - 1) {
+            if (position == LAYOUTS_COUNT - 1) {
                 buttonNext.setText(startButtonDescription);
                 buttonSkip.setVisibility(View.GONE);
             } else {

@@ -33,11 +33,11 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
 
     public void btnPressedListener(int id){
         switch (id){
-            case R.id.button_forgot_pass:{
+            case R.id.button_auth_forgot_pass:{
                 getViewState().showFragment(PassRecoveryFragment.getInstance());
                 break;
             }
-            case R.id.button_new_member:{
+            case R.id.button_auth_new_member:{
                 getViewState().showFragment(RegistrationFragment.getInstance());
                 break;
             }
