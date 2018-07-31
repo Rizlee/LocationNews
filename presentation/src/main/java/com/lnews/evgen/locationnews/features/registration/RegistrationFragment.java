@@ -21,12 +21,12 @@ import javax.inject.Provider;
 public class RegistrationFragment extends BaseFragment implements RegistrationView {
     private AuthenticationEventListener authenticationEventListener;
 
-    @BindView(R.id.edittext_email)
+    @BindView(R.id.edittext_registration_email)
     EditText editTextEmail;
-    @BindView(R.id.edittext_password)
+    @BindView(R.id.edittext_registration_password)
     EditText editTextPassword;
 
-    @OnClick(R.id.button_register)
+    @OnClick(R.id.button_registration_register)
     public void btnRegisterListener(){
         presenter.btnRegisterListener(editTextEmail.getText(), editTextPassword.getText());
     }

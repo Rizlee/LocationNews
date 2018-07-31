@@ -22,24 +22,24 @@ public class AuthFragment extends BaseFragment implements AuthView{
 
     private AuthenticationEventListener authenticationEventListener;
 
-    @BindView(R.id.edittext_email)
+    @BindView(R.id.edittext_auth_email)
     EditText editTextEmail;
-    @BindView(R.id.edittext_password)
+    @BindView(R.id.edittext_auth_password)
     EditText editTextPassword;
 
-    @OnClick(R.id.button_forgot_pass) //TODO
+    @OnClick(R.id.button_auth_forgot_pass) //TODO
     public void btnForgotPassListener(){
-        /*presenter.btnChooseFragmentListener(R.id.button_forgot_pass);*/
-        authenticationEventListener.buttonPressedEvent(R.id.button_forgot_pass);
+       // presenter.btnChooseFragmentListener(R.id.button_forgot_pass);*/
+        authenticationEventListener.buttonPressedEvent(R.id.button_auth_forgot_pass);
     }
 
-    @OnClick(R.id.button_new_member)
+    @OnClick(R.id.button_auth_new_member)
     public void btnNewMemberListener(){
         /*presenter.btnChooseFragmentListener(R.id.button_new_member);*/
-        authenticationEventListener.buttonPressedEvent(R.id.button_new_member);
+        authenticationEventListener.buttonPressedEvent(R.id.button_auth_new_member);
     }
 
-    @OnClick(R.id.button_login)
+    @OnClick(R.id.button_auth_login)
     public void btnLoginListener(){
         presenter.btnLoginListener(editTextEmail.getText(), editTextPassword.getText());
     }
@@ -62,6 +62,7 @@ public class AuthFragment extends BaseFragment implements AuthView{
 
     }
 
+    //todo deprecated
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -79,6 +80,7 @@ public class AuthFragment extends BaseFragment implements AuthView{
         Injector.getInstance().plusAuthComponent().inject(this);
     }
 
+    //todo избавиться от id
     @Override
     public void sendEvent(int id){
         authenticationEventListener.buttonPressedEvent(id);

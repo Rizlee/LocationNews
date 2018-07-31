@@ -7,7 +7,6 @@ import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.di.annotations.PerFragment;
 import com.lnews.evgen.locationnews.features.base.BasePresenter;
-import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
 import javax.inject.Inject;
 
@@ -28,14 +27,15 @@ import javax.inject.Inject;
         getViewState().sendEvent(id);
     }
 
+    //todo убрать editable
     public void btnLoginListener(Editable email, Editable password) {
         if (email.length() == 0) {
-            getViewState().showToast(R.string.email_edittext_empty);
+            getViewState().showToast(R.string.auth_email_field_empty);
             return;
         }
 
         if (password.length() == 0) {
-            getViewState().showToast(R.string.password_edittext_empty);
+            getViewState().showToast(R.string.auth_password_field_empty);
             return;
         }
 

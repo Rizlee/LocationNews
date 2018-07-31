@@ -3,6 +3,11 @@ package com.lnews.evgen.locationnews.features.newslist;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
+import butterknife.BindView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.lnews.evgen.locationnews.R;
@@ -12,6 +17,11 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 public class NewsListActivity extends BaseActivity implements NewsListView {
+
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.drawerlayout_main) DrawerLayout drawerLayout;
+    @BindView(R.id.navigationview_newslist_menu) NavigationView navigationView;
+
 
     @InjectPresenter
     NewsListPresenter presenter;
@@ -26,11 +36,13 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
         return new Intent(context, NewsListActivity.class);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newslist);
+
+        setupToolbar();
+        setupMenu();
     }
 
     @Override
@@ -86,5 +98,17 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
     @Override
     public void changeCategoryList() {
 
+    }
+
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+        if (actionbar != null) {
+            actionbar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    private void setupMenu() {
+        //TODO
     }
 }

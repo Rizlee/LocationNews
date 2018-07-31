@@ -5,22 +5,17 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import butterknife.BindArray;
 import butterknife.BindString;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -28,11 +23,10 @@ import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.features.base.BaseActivity;
 import com.lnews.evgen.locationnews.features.tutorial.adapter.TutorialPagerAdapter;
-import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-public class TutorialActvity extends BaseActivity implements TutorialView {
+public class TutorialActivity extends BaseActivity implements TutorialView {
     private static final int FIRST_PAGE = 0;
     private static final int ONE_PAGE = 1;
     private static final int[] LAYOUTS = {
@@ -53,9 +47,9 @@ public class TutorialActvity extends BaseActivity implements TutorialView {
     @BindView(R.id.linearlayout_dots)
     LinearLayout linearLayoutDots;
 
-    @BindString(R.string.start_btn)
+    @BindString(R.string.tutorial_start_button)
     String startButtonDescription;
-    @BindString(R.string.next_btn)
+    @BindString(R.string.tutorial_next_button)
     String nextButtonDescription;
 
     @OnClick(R.id.button_skip)
@@ -79,7 +73,7 @@ public class TutorialActvity extends BaseActivity implements TutorialView {
     }
 
     public static Intent getActivityIntent(Context context) {
-        return new Intent(context, TutorialActvity.class);
+        return new Intent(context, TutorialActivity.class);
     }
 
     @Override

@@ -23,7 +23,7 @@
     <activity android:name=".features.authentication.AuthenticationActivity"
         android:windowSoftInputMode="adjustResize|stateHidden"/>
 
-    <activity android:name=".features.tutorial.TutorialActvity"/>
+    <activity android:name=".features.tutorial.TutorialActivity"/>
     <activity android:name=".features.newslist.NewsListActivity"/>
   </application>
 

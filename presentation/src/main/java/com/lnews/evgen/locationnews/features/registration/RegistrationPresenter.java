@@ -27,14 +27,15 @@ public class RegistrationPresenter extends BasePresenter<RegistrationView> {
 
     public void btnRegisterListener(Editable email, Editable password) {
         if (email.length() == 0) {
-            getViewState().showToast(R.string.email_edittext_empty);
+            getViewState().showToast(R.string.auth_email_field_empty);
             return;
         }
         if (password.length() == 0) {
-            getViewState().showToast(R.string.password_edittext_empty);
+            getViewState().showToast(R.string.auth_password_field_empty);
             return;
+            //todo магическое число
         }else if(password.length() < 6){
-            getViewState().showToast(R.string.password_edittext_less_than_6);
+            getViewState().showToast(R.string.auth_password_less_than_6);
             return;
         }
 

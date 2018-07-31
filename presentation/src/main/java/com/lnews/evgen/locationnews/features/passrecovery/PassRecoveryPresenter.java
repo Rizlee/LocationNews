@@ -28,7 +28,7 @@ public class PassRecoveryPresenter extends BasePresenter<PassRecoveryView>{
 
     public void btnResetPassListener(Editable email) {
         if (email.length() == 0) {
-            getViewState().showToast(R.string.email_edittext_empty);
+            getViewState().showToast(R.string.auth_email_field_empty);
             return;
         }
 
@@ -36,7 +36,7 @@ public class PassRecoveryPresenter extends BasePresenter<PassRecoveryView>{
             new DisposableCompletableObserver(){
 
                 @Override public void onComplete() {
-                    getViewState().showToast(R.string.password_reset_confirm);
+                    getViewState().showToast(R.string.auth_password_reset_confirm);
                 }
 
                 @Override public void onError(Throwable e) {

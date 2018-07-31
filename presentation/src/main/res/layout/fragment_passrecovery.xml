@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -9,26 +10,27 @@
   <ImageView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
-      android:layout_marginStart="16dp"
+      android:layout_marginEnd="@dimen/margin_auth_view_24dp"
+      android:layout_marginStart="@dimen/margin_auth_view_24dp"
       android:background="@drawable/ic_forgot_pass"
-      app:layout_constraintBottom_toTopOf="@id/textview_forgot_instr"
+      app:layout_constraintBottom_toTopOf="@id/textview_passrecovery_forgot"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
+      tools:ignore="ContentDescription"
       />
 
   <TextView
-      android:id="@+id/textview_forgot_instr"
+      android:id="@+id/textview_passrecovery_forgot"
       android:layout_width="0dp"
       android:layout_height="40dp"
-      android:layout_marginBottom="20dp"
-      android:layout_marginEnd="24dp"
-      android:layout_marginStart="24dp"
+      android:layout_marginBottom="@dimen/margin_auth_view_20dp"
+      android:layout_marginEnd="@dimen/margin_auth_view_24dp"
+      android:layout_marginStart="@dimen/margin_auth_view_24dp"
       android:gravity="center"
-      android:text="@string/reset_pass_instr"
+      android:text="@string/auth_reset_pass_instruction"
       android:textColor="@color/primary_light"
-      app:layout_constraintBottom_toTopOf="@id/edittext_email"
+      app:layout_constraintBottom_toTopOf="@id/edittext_passrecovery_email"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
@@ -37,8 +39,12 @@
       />
 
   <EditText
-      android:id="@+id/edittext_email"
-      android:hint="@string/email_hint"
+      android:id="@+id/edittext_passrecovery_email"
+      android:layout_width="0dp"
+      android:layout_height="@dimen/height_auth_edittext"
+      android:layout_marginEnd="@dimen/margin_auth_view_24dp"
+      android:layout_marginStart="@dimen/margin_auth_view_24dp"
+      android:hint="@string/auth_email_hint"
       android:inputType="textEmailAddress"
       android:selectAllOnFocus="false"
       android:singleLine="false"
@@ -50,11 +56,16 @@
       />
 
   <Button
-      android:id="@+id/button_reset_pass"
-      android:text="@string/reset_pass_btn"
+      android:id="@+id/button_passrecovery_reset"
+      android:layout_width="0dp"
+      android:layout_height="@dimen/height_auth_edittext"
+      android:layout_marginEnd="@dimen/margin_auth_view_24dp"
+      android:layout_marginStart="@dimen/margin_auth_view_24dp"
+      android:layout_marginTop="@dimen/margin_auth_view_20dp"
+      android:text="@string/auth_reset_pass_button"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/edittext_email"
+      app:layout_constraintTop_toBottomOf="@id/edittext_passrecovery_email"
       style="@style/MainButtonAuth"
       />
 </android.support.constraint.ConstraintLayout>

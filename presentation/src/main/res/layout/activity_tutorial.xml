@@ -2,53 +2,52 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
   <android.support.v4.view.ViewPager
-      android:id="@+id/view_pager_tutorial"
+      android:id="@+id/viewpager_tutorial"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       />
 
   <LinearLayout
-      android:id="@+id/linearlayout_dots"
+      android:id="@+id/linearlayout_tutorial_dots"
       android:layout_width="match_parent"
       android:layout_height="@dimen/dots_height"
       android:layout_marginBottom="@dimen/dots_margin_bottom"
       android:gravity="center"
       android:orientation="horizontal"
-      app:layout_constraintTop_toBottomOf="@id/view_line"
+      app:layout_constraintTop_toBottomOf="@id/view_tutorial_line"
       />
 
   <View
-      android:id="@+id/view_line"
+      android:id="@+id/view_tutorial_line"
       android:layout_width="match_parent"
       android:layout_height="1dp"
       android:alpha=".5"
       android:background="@android:color/white"
-      app:layout_constraintBottom_toTopOf="@id/button_skip"
+      app:layout_constraintBottom_toTopOf="@id/button_tutorial_skip"
       />
 
   <Button
-      android:id="@+id/button_next"
+      android:id="@+id/button_tutorial_next"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:background="@null"
-      android:text="@string/next_btn"
+      android:text="@string/tutorial_next_button"
       android:textColor="@android:color/white"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       />
 
   <Button
-      android:id="@+id/button_skip"
+      android:id="@+id/button_tutorial_skip"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:background="@null"
-      android:text="@string/skip_btn"
+      android:text="@string/tutorial_skip_button"
       android:textColor="@android:color/white"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"

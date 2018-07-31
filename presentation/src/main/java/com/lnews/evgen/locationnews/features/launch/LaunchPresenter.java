@@ -5,7 +5,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.lnews.evgen.domain.interactors.LaunchInteractor;
 import com.lnews.evgen.locationnews.features.authentication.AuthenticationActivity;
-import com.lnews.evgen.locationnews.features.tutorial.TutorialActvity;
+import com.lnews.evgen.locationnews.features.tutorial.TutorialActivity;
 import javax.inject.Inject;
 
 @InjectViewState
@@ -35,7 +35,7 @@ public class LaunchPresenter extends MvpPresenter<LaunchView> {
 
     private void showNextActivity() {
         if (interactor.isFirstLaunch()) {
-            getViewState().startNextActivity(TutorialActvity.getActivityIntent(context));
+            getViewState().startNextActivity(TutorialActivity.getActivityIntent(context));
         }else if(interactor.isAuth()){
 
         }else {

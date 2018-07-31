@@ -18,10 +18,10 @@ import javax.inject.Provider;
 
 public class PassRecoveryFragment extends BaseFragment implements PassRecoveryView{
 
-    @BindView(R.id.edittext_email)
+    @BindView(R.id.edittext_passrecovery_email)
     EditText editTextEmail;
 
-    @OnClick(R.id.button_reset_pass)
+    @OnClick(R.id.button_passrecovery_reset)
     public void btnResetPassListener(){
         presenter.btnResetPassListener(editTextEmail.getText());
     }
@@ -36,6 +36,7 @@ public class PassRecoveryFragment extends BaseFragment implements PassRecoveryVi
         return presenterProvider.get();
     }
 
+    //todo исправить на new
     public static Fragment getInstance(){
         return new PassRecoveryFragment();
     }

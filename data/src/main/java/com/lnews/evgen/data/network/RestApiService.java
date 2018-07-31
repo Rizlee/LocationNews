@@ -22,6 +22,7 @@ public class RestApiService {
         this.cache = cache;
     }
 
+    //todo убрать RxFirebaseAuth статику
     public Maybe<AuthResult> register(String email, String password){
         return RxFirebaseAuth.createUserWithEmailAndPassword(FirebaseAuth.getInstance(),email, password);
     }

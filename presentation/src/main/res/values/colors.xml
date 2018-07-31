@@ -23,9 +23,7 @@
     <item>#e3b4fb</item>
   </array>
 
-
   <!--Auth-->
   <color name="start_gradient">#0b6976</color>
   <color name="end_gradient">#00bbd3</color>
-
 </resources>

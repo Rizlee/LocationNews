@@ -2,11 +2,11 @@ package com.lnews.evgen.locationnews.di.components;
 
 import com.lnews.evgen.locationnews.di.annotations.PerActivity;
 import com.lnews.evgen.locationnews.di.modules.TutorialModule;
-import com.lnews.evgen.locationnews.features.tutorial.TutorialActvity;
+import com.lnews.evgen.locationnews.features.tutorial.TutorialActivity;
 import dagger.Subcomponent;
 
-@PerActivity(TutorialActvity.class)
+@PerActivity(TutorialActivity.class)
 @Subcomponent(modules = TutorialModule.class)
 public interface TutorialComponent {
-    void inject(TutorialActvity actvity);
+    void inject(TutorialActivity actvity);
 }
