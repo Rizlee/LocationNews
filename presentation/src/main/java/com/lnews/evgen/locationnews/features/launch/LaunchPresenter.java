@@ -34,10 +34,10 @@ public class LaunchPresenter extends MvpPresenter<LaunchView> {
 
 
     private void showNextActivity() {
-        if (interactor.isFirstLaunch()) {
+        if (interactor.isTutorialNeed()) {
             getViewState().startNextActivity(TutorialActivity.getActivityIntent(context));
         }else if(interactor.isAuth()){
-
+//TODO
         }else {
             getViewState().startNextActivity(AuthenticationActivity.getActivityIntent(context));
         }

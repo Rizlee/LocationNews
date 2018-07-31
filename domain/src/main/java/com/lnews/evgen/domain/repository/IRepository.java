@@ -13,9 +13,9 @@ public interface IRepository {
 
     boolean isAuth();
 
-    boolean isFirstLaunch();
+    boolean isTutorialNeed();
 
-    void disableFirstLaunch();
+    void disableTutorialNeed();
 
     UserEntity getAuthUser();
 

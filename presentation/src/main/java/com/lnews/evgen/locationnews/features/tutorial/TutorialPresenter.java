@@ -25,7 +25,7 @@ public class TutorialPresenter extends BasePresenter<TutorialView> {
     }
 
     public void buttonSkipPressed(){
-        interactor.disableFirstLaunch();
+        interactor.disableTutorialNeed();
         getViewState().startNextActivity(AuthenticationActivity.getActivityIntent(context));
     }
 

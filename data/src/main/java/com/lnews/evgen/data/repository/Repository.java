@@ -6,7 +6,6 @@ import com.lnews.evgen.data.network.RestApiService;
 import com.lnews.evgen.domain.entities.UserEntity;
 import com.lnews.evgen.domain.repository.IRepository;
 import io.reactivex.Completable;
-import io.reactivex.Emitter;
 import io.reactivex.Single;
 import javax.inject.Inject;
 
@@ -39,13 +38,13 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public boolean isFirstLaunch() {
-        return cache.isFirstLaunch();
+    public boolean isTutorialNeed() {
+        return cache.isTutorialNeed();
     }
 
     @Override
-    public void disableFirstLaunch(){
-        cache.setFirstLaunch(false);
+    public void disableTutorialNeed(){
+        cache.setTutorialNeed(false);
     }
 
     @Override public UserEntity getAuthUser() {

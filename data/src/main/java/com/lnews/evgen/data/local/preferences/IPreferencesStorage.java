@@ -7,9 +7,9 @@ public interface IPreferencesStorage {
 
     String getToken();
 
-    void setFirstLaunch(boolean isFirstLaunchFlag);
+    void setTutorialNeed(boolean isTutorialNeed);
 
-    boolean isFirstLaunch();
+    boolean isTutorialNeed();
 
     UserEntity getAuthUser();
 

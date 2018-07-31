@@ -37,14 +37,14 @@ public class PreferencesStorage implements IPreferencesStorage {
     }
 
     @Override
-    public void setFirstLaunch(boolean isFirstLaunchFlag) {
+    public void setTutorialNeed(boolean isTutorialNeed) {
         pref.edit()
-            .putBoolean(PREFERENCE_IS_FIRST_LAUNCH, isFirstLaunchFlag)
+            .putBoolean(PREFERENCE_IS_FIRST_LAUNCH, isTutorialNeed)
             .apply();
     }
 
     @Override
-    public boolean isFirstLaunch() {
+    public boolean isTutorialNeed() {
         return pref.getBoolean(PREFERENCE_IS_FIRST_LAUNCH, true);
     }
 

@@ -23,12 +23,12 @@ public class Cache {
         preferencesStorage.setToken(token);
     }
 
-    public void setFirstLaunch(boolean isFirstLaunchFlag){
-        preferencesStorage.setFirstLaunch(isFirstLaunchFlag);
+    public void setTutorialNeed(boolean isTutorialNeed){
+        preferencesStorage.setTutorialNeed(isTutorialNeed);
     }
 
-    public boolean isFirstLaunch(){
-        return preferencesStorage.isFirstLaunch();
+    public boolean isTutorialNeed(){
+        return preferencesStorage.isTutorialNeed();
     }
 
     public UserEntity getAuthUser(){

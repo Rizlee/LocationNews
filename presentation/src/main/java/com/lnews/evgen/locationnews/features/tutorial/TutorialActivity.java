@@ -32,9 +32,6 @@ public class TutorialActivity extends BaseActivity implements TutorialView {
     private static final int ONE_PAGE = 1;
     private static final int LAYOUTS_COUNT = TutorialEnum.values().length;
 
-    //TODO
-    private TextView[] dots;
-
     @BindView(R.id.button_tutorial_next)
     Button buttonNext;
     @BindView(R.id.button_tutorial_skip)
@@ -48,16 +45,6 @@ public class TutorialActivity extends BaseActivity implements TutorialView {
     String startButtonDescription;
     @BindString(R.string.tutorial_next_button)
     String nextButtonDescription;
-
-    @OnClick(R.id.button_tutorial_skip)
-    public void buttonSkipListener(){
-        tutorialPresenter.buttonSkipPressed();
-    }
-
-    @OnClick(R.id.button_tutorial_next)
-    public void buttonNextListener(){
-        tutorialPresenter.buttonNextPressed(getNextPage(), LAYOUTS_COUNT);
-    }
 
     @InjectPresenter
     TutorialPresenter tutorialPresenter;
@@ -93,18 +80,28 @@ public class TutorialActivity extends BaseActivity implements TutorialView {
         Injector.getInstance().plusTutorialComponent().inject(this);
     }
 
-    private int getNextPage() {
-        return viewPagerTutorial.getCurrentItem() + ONE_PAGE;
-    }
-
     @Override
     public void showItem(int id) {
         viewPagerTutorial.setCurrentItem(id);
     }
 
-//TODO
+    @OnClick(R.id.button_tutorial_skip)
+    public void buttonSkipListener(){
+        tutorialPresenter.buttonSkipPressed();
+    }
+
+    @OnClick(R.id.button_tutorial_next)
+    public void buttonNextListener(){
+        tutorialPresenter.buttonNextPressed(getNextPage(), LAYOUTS_COUNT);
+    }
+
+    private int getNextPage() {
+        return viewPagerTutorial.getCurrentItem() + ONE_PAGE;
+    }
+
+    //TODO
     private void addBottomDots(int currentPage) {
-        dots = new TextView[LAYOUTS_COUNT];
+        TextView[] dots = new TextView[LAYOUTS_COUNT];
 
         int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
         int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);

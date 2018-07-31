@@ -3,15 +3,15 @@ package com.lnews.evgen.domain.usecases;
 import com.lnews.evgen.domain.repository.IRepository;
 import javax.inject.Inject;
 
-public class FirstLaunchUseCase {
+public class IsTutorialNeedUseCase {
     private final IRepository repository;
 
     @Inject
-    FirstLaunchUseCase(IRepository repository) {
+    IsTutorialNeedUseCase(IRepository repository) {
         this.repository = repository;
     }
 
-    public void execute() {
-        repository.disableFirstLaunch();
+    public boolean execute() {
+        return repository.isTutorialNeed();
     }
 }
