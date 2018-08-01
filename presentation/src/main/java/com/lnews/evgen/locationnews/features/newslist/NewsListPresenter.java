@@ -19,4 +19,10 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     protected void clearComponent() {
         Injector.getInstance().clearNewsListComponent();
     }
+
+    @Override
+    public void onDestroy() {
+        clearComponent();
+        super.onDestroy();
+    }
 }

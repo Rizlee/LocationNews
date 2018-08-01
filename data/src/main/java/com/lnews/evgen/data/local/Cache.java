@@ -1,7 +1,6 @@
 package com.lnews.evgen.data.local;
 
 import com.lnews.evgen.data.local.preferences.IPreferencesStorage;
-import com.lnews.evgen.domain.entities.UserEntity;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -23,20 +22,11 @@ public class Cache {
         preferencesStorage.setToken(token);
     }
 
-    public void setFirstLaunch(boolean isFirstLaunchFlag){
-        preferencesStorage.setFirstLaunch(isFirstLaunchFlag);
+    public void setTutorialNeed(boolean isTutorialNeed){
+        preferencesStorage.setTutorialNeed(isTutorialNeed);
     }
 
-    public boolean isFirstLaunch(){
-        return preferencesStorage.isFirstLaunch();
+    public boolean isTutorialNeed(){
+        return preferencesStorage.isTutorialNeed();
     }
-
-    public UserEntity getAuthUser(){
-        return preferencesStorage.getAuthUser();
-    }
-
-    public void setAuthUser(UserEntity user){
-        preferencesStorage.setAuthUser(user);
-    }
-
 }

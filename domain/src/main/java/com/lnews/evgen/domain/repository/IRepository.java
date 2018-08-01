@@ -1,6 +1,5 @@
 package com.lnews.evgen.domain.repository;
 
-import com.lnews.evgen.domain.entities.UserEntity;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
@@ -13,11 +12,9 @@ public interface IRepository {
 
     boolean isAuth();
 
-    boolean isFirstLaunch();
+    boolean isTutorialNeed();
 
-    void disableFirstLaunch();
+    void disableTutorialNeed();
 
-    UserEntity getAuthUser();
-
-    void setAuthUser(UserEntity user);
+    void saveToken();
 }

@@ -1,17 +1,11 @@
 package com.lnews.evgen.data.local.preferences;
 
-import com.lnews.evgen.domain.entities.UserEntity;
-
 public interface IPreferencesStorage {
     void setToken(String token);
 
     String getToken();
 
-    void setFirstLaunch(boolean isFirstLaunchFlag);
+    void setTutorialNeed(boolean isTutorialNeed);
 
-    boolean isFirstLaunch();
-
-    UserEntity getAuthUser();
-
-    void setAuthUser(UserEntity user);
+    boolean isTutorialNeed();
 }

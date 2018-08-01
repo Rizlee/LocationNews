@@ -1,6 +1,6 @@
 package com.lnews.evgen.locationnews.features.registration;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,15 +21,10 @@ import javax.inject.Provider;
 public class RegistrationFragment extends BaseFragment implements RegistrationView {
     private AuthenticationEventListener authenticationEventListener;
 
-    @BindView(R.id.edittext_email)
+    @BindView(R.id.edittext_registration_email)
     EditText editTextEmail;
-    @BindView(R.id.edittext_password)
+    @BindView(R.id.edittext_registration_password)
     EditText editTextPassword;
-
-    @OnClick(R.id.button_register)
-    public void btnRegisterListener(){
-        presenter.btnRegisterListener(editTextEmail.getText(), editTextPassword.getText());
-    }
 
     @InjectPresenter
     RegistrationPresenter presenter;
@@ -41,7 +36,7 @@ public class RegistrationFragment extends BaseFragment implements RegistrationVi
         return presenterProvider.get();
     }
 
-    public static Fragment getInstance(){
+    public static Fragment newInstance(){
         return new RegistrationFragment();
     }
 
@@ -49,9 +44,9 @@ public class RegistrationFragment extends BaseFragment implements RegistrationVi
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        authenticationEventListener = (AuthenticationEventListener) activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        authenticationEventListener = (AuthenticationEventListener) context;
     }
 
     @Override
@@ -67,5 +62,10 @@ public class RegistrationFragment extends BaseFragment implements RegistrationVi
 
     @Override public void onRegisterSuccess() {
         authenticationEventListener.authSuccessEvent();
+    }
+
+    @OnClick(R.id.button_registration_register)
+    public void btnRegisterListener(){
+        presenter.btnRegisterListener(editTextEmail.getText().toString(), editTextPassword.getText().toString());
     }
 }

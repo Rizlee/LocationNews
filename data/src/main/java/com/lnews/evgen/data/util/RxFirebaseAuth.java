@@ -2,10 +2,7 @@ package com.lnews.evgen.data.util;
 
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.lnews.evgen.data.util.RxHandler;
 import io.reactivex.Completable;
-import io.reactivex.CompletableEmitter;
-import io.reactivex.CompletableOnSubscribe;
 import io.reactivex.Maybe;
 
 public class RxFirebaseAuth {
@@ -23,12 +20,8 @@ public class RxFirebaseAuth {
     }
 
     public static Completable sendPasswordResetEmail(final FirebaseAuth firebaseAuth, final String email) {
-        return Completable.create(new CompletableOnSubscribe() {
-            @Override
-            public void subscribe(CompletableEmitter emitter) throws Exception {
-                RxCompletableHandler.assignOnTask(emitter, firebaseAuth.sendPasswordResetEmail(email));
-            }
-        });
+        return Completable.create(
+            emitter -> RxCompletableHandler.assignOnTask(emitter, firebaseAuth.sendPasswordResetEmail(email)));
     }
 }
 

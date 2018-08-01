@@ -18,13 +18,8 @@ import javax.inject.Provider;
 
 public class PassRecoveryFragment extends BaseFragment implements PassRecoveryView{
 
-    @BindView(R.id.edittext_email)
+    @BindView(R.id.edittext_passrecovery_email)
     EditText editTextEmail;
-
-    @OnClick(R.id.button_reset_pass)
-    public void btnResetPassListener(){
-        presenter.btnResetPassListener(editTextEmail.getText());
-    }
 
     @InjectPresenter
     PassRecoveryPresenter presenter;
@@ -36,7 +31,7 @@ public class PassRecoveryFragment extends BaseFragment implements PassRecoveryVi
         return presenterProvider.get();
     }
 
-    public static Fragment getInstance(){
+    public static Fragment newInstance(){
         return new PassRecoveryFragment();
     }
 
@@ -55,7 +50,8 @@ public class PassRecoveryFragment extends BaseFragment implements PassRecoveryVi
         Injector.getInstance().plusPassRecoveryComponent().inject(this);
     }
 
-    @Override public void hideKeyboard() {
-
+    @OnClick(R.id.button_passrecovery_reset)
+    public void btnResetPassListener(){
+        presenter.btnResetPassListener(editTextEmail.getText().toString());
     }
 }

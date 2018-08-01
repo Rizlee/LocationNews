@@ -1,6 +1,5 @@
 package com.lnews.evgen.locationnews.features.authentication;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -71,11 +70,16 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
     }
 
     @Override
-    public void buttonPressedEvent(int id) {
-        presenter.btnPressedListener(id);
+    public void showForgotPassEvent() {
+        presenter.showForgotPassEvent();
+    }
+
+    @Override
+    public void showRegistrationEvent() {
+        presenter.showRegistrationEvent();
     }
 
     @Override public void authSuccessEvent() {
-        presenter.authSuccessListener();
+        presenter.authSuccessEvent();
     }
 }

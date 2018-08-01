@@ -1,31 +1,35 @@
 <resources>
   <!--All-->
   <string name="app_name">LocationNews</string>
-  <string name="action_settings">Settings</string>
-  <string name="authorization_title">Authorization</string>
-  <string name="description_title">Description</string>
-  <string name="location_title">Location</string>
+  <string name="all_auth_title">Authorization</string>
 
   <!--Tutorial-->
-  <string name="auth_tutorial">Log in to save your settings</string>
-  <string name="location_tutorial">Change the location to view the news wherever you want</string>
-  <string name="description_tutorial">View the detailed description of the news</string>
-  <string name="next_btn">Next</string>
-  <string name="skip_btn">Skip</string>
-  <string name="start_btn">Got it</string>
+  <string name="tutorial_auth_description">Log in to save your settings</string>
+  <string name="tutorial_location_title">Location</string>
+  <string name="tutorial_news_title">Description</string>
+  <string name="tutorial_location_description">Change the location to view the news wherever you want</string>
+  <string name="tutorial_news_description">View the detailed description of the news</string>
+  <string name="tutorial_next_button">Next</string>
+  <string name="tutorial_skip_button">Skip</string>
+  <string name="tutorial_start_button">Got it</string>
 
   <!--Auth-->
-  <string name="email_hint">E-mail</string>
-  <string name="password_hint">Password</string>
-  <string name="login_btn">Log In</string>
-  <string name="register_btn">Register</string>
-  <string name="registration_title">Registration</string>
-  <string name="forgot_pass_btn">Forgot password?</string>
-  <string name="not_a_member_btn">Not a member? Get registered now!</string>
-  <string name="reset_pass_btn">Reset password</string>
-  <string name="reset_pass_instr">We will send further instructions to your e-mail</string>
-  <string name="email_edittext_empty">Enter e-mail</string>
-  <string name="password_reset_confirm">Check your e-mail</string>
-  <string name="password_edittext_empty">Enter password</string>
-  <string name="password_edittext_less_than_6">Your password less than 6 symbols</string>
+  <string name="auth_email_hint">E-mail</string>
+  <string name="auth_password_hint">Password</string>
+  <string name="auth_login_button">Log In</string>
+  <string name="auth_register_button">Register</string>
+  <string name="auth_registration_title">Registration</string>
+  <string name="auth_forgot_pass_button">Forgot password?</string>
+  <string name="auth_not_a_member_button">Not a member? Get registered now!</string>
+  <string name="auth_reset_pass_button">Reset password</string>
+  <string name="auth_reset_pass_instruction">We will send further instructions to your e-mail</string>
+  <string name="auth_email_field_empty">Enter e-mail</string>
+  <string name="auth_password_reset_confirm">Check your e-mail</string>
+  <string name="auth_password_field_empty">Enter password</string>
+  <string name="auth_password_less_than_6">Your password less than 6 symbols</string>
+
+  <!--Newslist-->
+  <string name="newslist_search_hint">Search</string>
+  <string name="newslist_add_hint">Add category</string>
+  <string name="newslist_location_hint">Location</string>
 </resources>

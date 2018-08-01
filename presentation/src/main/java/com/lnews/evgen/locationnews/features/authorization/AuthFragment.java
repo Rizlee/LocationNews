@@ -1,6 +1,6 @@
 package com.lnews.evgen.locationnews.features.authorization;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,27 +22,10 @@ public class AuthFragment extends BaseFragment implements AuthView{
 
     private AuthenticationEventListener authenticationEventListener;
 
-    @BindView(R.id.edittext_email)
+    @BindView(R.id.edittext_auth_email)
     EditText editTextEmail;
-    @BindView(R.id.edittext_password)
+    @BindView(R.id.edittext_auth_password)
     EditText editTextPassword;
-
-    @OnClick(R.id.button_forgot_pass) //TODO
-    public void btnForgotPassListener(){
-        /*presenter.btnChooseFragmentListener(R.id.button_forgot_pass);*/
-        authenticationEventListener.buttonPressedEvent(R.id.button_forgot_pass);
-    }
-
-    @OnClick(R.id.button_new_member)
-    public void btnNewMemberListener(){
-        /*presenter.btnChooseFragmentListener(R.id.button_new_member);*/
-        authenticationEventListener.buttonPressedEvent(R.id.button_new_member);
-    }
-
-    @OnClick(R.id.button_login)
-    public void btnLoginListener(){
-        presenter.btnLoginListener(editTextEmail.getText(), editTextPassword.getText());
-    }
 
     @InjectPresenter
     AuthPresenter presenter;
@@ -54,7 +37,7 @@ public class AuthFragment extends BaseFragment implements AuthView{
         return presenterProvider.get();
     }
 
-    public static Fragment getInstance(){
+    public static Fragment newInstance(){
         return new AuthFragment();
     }
 
@@ -63,9 +46,9 @@ public class AuthFragment extends BaseFragment implements AuthView{
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        authenticationEventListener = (AuthenticationEventListener) activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        authenticationEventListener = (AuthenticationEventListener) context;
     }
 
     @Override
@@ -74,14 +57,36 @@ public class AuthFragment extends BaseFragment implements AuthView{
         return inflater.inflate(R.layout.fragment_auth, container, false);
     }
 
+    @OnClick(R.id.button_auth_forgot_pass)
+    public void btnForgotPassListener(){
+        //presenter.buttonForgotPassPressed();
+        showForgotPass();
+    }
+
+    @OnClick(R.id.button_auth_new_member)
+    public void btnNewMemberListener(){
+        //presenter.buttonRegistrationPressed();
+        showRegistration();
+    }
+
+    @OnClick(R.id.button_auth_login)
+    public void btnLoginListener(){
+        presenter.btnLoginListener(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+    }
+
     @Override
     protected void injectComponent() {
         Injector.getInstance().plusAuthComponent().inject(this);
     }
 
     @Override
-    public void sendEvent(int id){
-        authenticationEventListener.buttonPressedEvent(id);
+    public void showForgotPass() {
+        authenticationEventListener.showForgotPassEvent();
+    }
+
+    @Override
+    public void showRegistration() {
+        authenticationEventListener.showRegistrationEvent();
     }
 
     @Override public void onAuthSuccess() {
