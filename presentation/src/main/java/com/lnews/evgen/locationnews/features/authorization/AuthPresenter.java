@@ -1,11 +1,11 @@
 package com.lnews.evgen.locationnews.features.authorization;
 
-import android.text.Editable;
 import com.arellomobile.mvp.InjectViewState;
 import com.lnews.evgen.domain.interactors.AuthorizationInteractor;
 import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.di.annotations.PerFragment;
+import com.lnews.evgen.locationnews.features.authentication.AuthenticationEventListener;
 import com.lnews.evgen.locationnews.features.base.BasePresenter;
 import io.reactivex.observers.DisposableSingleObserver;
 import javax.inject.Inject;
@@ -23,23 +23,33 @@ import javax.inject.Inject;
         Injector.getInstance().clearAuthComponent();
     }
 
-    public void btnChooseFragmentListener(int id) {
-        getViewState().sendEvent(id);
+    @Override
+    public void onDestroy() {
+        authorizationInteractor.dispose();
+        clearComponent();
+        super.onDestroy();
     }
 
-    //todo убрать editable
-    public void btnLoginListener(Editable email, Editable password) {
-        if (email.length() == 0) {
+    public void buttonForgotPassPressed(){
+        getViewState().showForgotPass();
+    }
+
+    public void buttonRegistrationPressed(){
+        getViewState().showRegistration();
+    }
+
+    public void btnLoginListener(String email, String password) {
+        if (email.isEmpty()) {
             getViewState().showToast(R.string.auth_email_field_empty);
             return;
         }
 
-        if (password.length() == 0) {
+        if (password.isEmpty()) {
             getViewState().showToast(R.string.auth_password_field_empty);
             return;
         }
 
-        authorizationInteractor.auth(email.toString(), password.toString(),
+        authorizationInteractor.auth(email, password,
             new DisposableSingleObserver() {
                 @Override public void onSuccess(Object o) {
                     getViewState().onAuthSuccess();

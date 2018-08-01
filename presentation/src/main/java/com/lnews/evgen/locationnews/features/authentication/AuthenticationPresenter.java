@@ -2,7 +2,6 @@ package com.lnews.evgen.locationnews.features.authentication;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.lnews.evgen.domain.interactors.AuthorizationInteractor;
-import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.di.annotations.PerActivity;
 import com.lnews.evgen.locationnews.features.authorization.AuthFragment;
@@ -16,35 +15,40 @@ import javax.inject.Inject;
 @PerActivity(AuthenticationActivity.class)
 public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
 
-    @Inject
-    AuthenticationPresenter(){
+    private final AuthorizationInteractor authorizationInteractor;
 
+    @Inject
+    AuthenticationPresenter(AuthorizationInteractor authorizationInteractor){
+        this.authorizationInteractor = authorizationInteractor;
     }
 
     @Override
     public void attachView(AuthenticationView view) {
         super.attachView(view);
-        getViewState().showFragment(AuthFragment.getInstance());
+        getViewState().showFragment(AuthFragment.newInstance());
     }
 
     @Override protected void clearComponent() {
         Injector.getInstance().clearAuthenticationComponent();
     }
 
-    public void btnPressedListener(int id){
-        switch (id){
-            case R.id.button_auth_forgot_pass:{
-                getViewState().showFragment(PassRecoveryFragment.getInstance());
-                break;
-            }
-            case R.id.button_auth_new_member:{
-                getViewState().showFragment(RegistrationFragment.getInstance());
-                break;
-            }
-        }
+    @Override
+    public void onDestroy() {
+        authorizationInteractor.dispose();
+        clearComponent();
+        super.onDestroy();
     }
 
-    public void authSuccessListener(){
+    public void showForgotPassEvent(){
+        getViewState().showFragment(PassRecoveryFragment.newInstance());
+    }
+
+    public void showRegistrationEvent(){
+        getViewState().showFragment(RegistrationFragment.newInstance());
+    }
+
+    public void authSuccessEvent(){
+        authorizationInteractor.saveToken();
         getViewState().startNextActivity(NewsListActivity.getActivityIntent(context));
     }
 }

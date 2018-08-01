@@ -3,7 +3,6 @@ package com.lnews.evgen.data.repository;
 import com.google.firebase.auth.AuthResult;
 import com.lnews.evgen.data.local.Cache;
 import com.lnews.evgen.data.network.RestApiService;
-import com.lnews.evgen.domain.entities.UserEntity;
 import com.lnews.evgen.domain.repository.IRepository;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -34,7 +33,7 @@ public class Repository implements IRepository {
 
     @Override
     public boolean isAuth() {
-        return false;
+        return !cache.getToken().isEmpty();
     }
 
     @Override
@@ -47,11 +46,8 @@ public class Repository implements IRepository {
         cache.setTutorialNeed(false);
     }
 
-    @Override public UserEntity getAuthUser() {
-        return null; //TODO
-    }
-
-    @Override public void setAuthUser(UserEntity user) {
-        //TODO
+    @Override
+    public void saveToken() {
+        cache.setToken(networkRepository.getToken());
     }
 }

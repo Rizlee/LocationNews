@@ -2,10 +2,7 @@ package com.lnews.evgen.data.util;
 
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.lnews.evgen.data.util.RxHandler;
 import io.reactivex.Completable;
-import io.reactivex.CompletableEmitter;
-import io.reactivex.CompletableOnSubscribe;
 import io.reactivex.Maybe;
 
 public class RxFirebaseAuth {

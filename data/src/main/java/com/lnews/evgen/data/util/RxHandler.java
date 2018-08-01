@@ -25,7 +25,7 @@ public class RxHandler<T> implements OnSuccessListener<T>, OnFailureListener,
         } catch (Throwable ignored) {
         }
     }
-    //TODO
+
     @Override
     public void onSuccess(T res) {
         if (res != null) {

@@ -1,6 +1,5 @@
 package com.lnews.evgen.locationnews.features.registration;
 
-import android.text.Editable;
 import com.arellomobile.mvp.InjectViewState;
 import com.lnews.evgen.domain.interactors.AuthorizationInteractor;
 import com.lnews.evgen.locationnews.R;
@@ -14,6 +13,8 @@ import javax.inject.Inject;
 @PerFragment(RegistrationFragment.class)
 public class RegistrationPresenter extends BasePresenter<RegistrationView> {
 
+    private static final int MIN_PASSWORD_LENGTH = 6;
+
     private final AuthorizationInteractor authorizationInteractor;
 
     @Inject RegistrationPresenter(AuthorizationInteractor authorizationInteractor) {
@@ -25,21 +26,27 @@ public class RegistrationPresenter extends BasePresenter<RegistrationView> {
         Injector.getInstance().clearRegistrationComponent();
     }
 
-    public void btnRegisterListener(Editable email, Editable password) {
-        if (email.length() == 0) {
+    @Override
+    public void onDestroy() {
+        authorizationInteractor.dispose();
+        clearComponent();
+        super.onDestroy();
+    }
+
+    public void btnRegisterListener(String email, String password) {
+        if (email.isEmpty()) {
             getViewState().showToast(R.string.auth_email_field_empty);
             return;
         }
-        if (password.length() == 0) {
+        if (password.isEmpty()) {
             getViewState().showToast(R.string.auth_password_field_empty);
             return;
-            //todo магическое число
-        }else if(password.length() < 6){
+        }else if(password.length() < MIN_PASSWORD_LENGTH){
             getViewState().showToast(R.string.auth_password_less_than_6);
             return;
         }
 
-        authorizationInteractor.register(email.toString(), password.toString(),
+        authorizationInteractor.register(email, password,
             new DisposableSingleObserver() {
                 @Override public void onSuccess(Object o) {
                     getViewState().onRegisterSuccess();
