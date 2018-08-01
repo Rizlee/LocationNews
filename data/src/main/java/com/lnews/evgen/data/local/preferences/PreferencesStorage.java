@@ -30,7 +30,7 @@ public class PreferencesStorage implements IPreferencesStorage {
     @Override
     public String getToken() {
         return pref
-            .getString(PREFERENCE_TOKEN, null);
+            .getString(PREFERENCE_TOKEN, "");
     }
 
     @Override

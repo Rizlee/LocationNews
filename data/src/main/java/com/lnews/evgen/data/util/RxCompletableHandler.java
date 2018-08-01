@@ -26,7 +26,6 @@ public class RxCompletableHandler implements OnFailureListener, OnSuccessListene
         }
     }
 
-
     @Override
     public void onFailure(@NonNull Exception e) {
         if (!completableEmitter.isDisposed())
