@@ -1,5 +1,6 @@
 package com.lnews.evgen.locationnews.features.newslist;
 
+import android.location.Location;
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.lnews.evgen.locationnews.features.base.BaseView;
@@ -25,4 +26,8 @@ public interface NewsListView extends BaseView {
     void changeLocation();
 
     void changeCategoryList();
+
+    void showRequestPermission(int permissionCode);
+
+    void setToolbarTitle(String text);
 }

@@ -2,6 +2,7 @@
   <!--All-->
   <string name="app_name">LocationNews</string>
   <string name="all_auth_title">Authorization</string>
+  <string name="all_permissions_not_granted_description">You have to take permissions to use all the features of the application</string>
 
   <!--Tutorial-->
   <string name="tutorial_auth_description">Log in to save your settings</string>
@@ -32,4 +33,5 @@
   <string name="newslist_search_hint">Search</string>
   <string name="newslist_add_hint">Add category</string>
   <string name="newslist_location_hint">Location</string>
+  <string name="newslist_location_error">We can\'t determine the country in which you are located</string>
 </resources>

@@ -24,19 +24,20 @@ public class RestApiService {
     }
 
     //todo убрать RxFirebaseAuth статику
-    public Maybe<AuthResult> register(String email, String password){
-        return RxFirebaseAuth.createUserWithEmailAndPassword(FirebaseAuth.getInstance(),email, password);
+    public Maybe<AuthResult> register(String email, String password) {
+        return RxFirebaseAuth.createUserWithEmailAndPassword(FirebaseAuth.getInstance(), email,
+            password);
     }
 
-    public Maybe<AuthResult> auth(String email, String password){
+    public Maybe<AuthResult> auth(String email, String password) {
         return RxFirebaseAuth.signInWithEmailAndPassword(FirebaseAuth.getInstance(), email, password);
     }
 
-    public Completable sendResetRequest(String email){
+    public Completable sendResetRequest(String email) {
         return RxFirebaseAuth.sendPasswordResetEmail(FirebaseAuth.getInstance(), email);
     }
 
-    public String getToken(){
+    public String getToken() {
         return Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getIdToken(true).toString();
     }
 }

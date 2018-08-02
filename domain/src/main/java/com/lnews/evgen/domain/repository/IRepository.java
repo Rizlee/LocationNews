@@ -1,6 +1,8 @@
 package com.lnews.evgen.domain.repository;
 
+import com.lnews.evgen.domain.entities.Location;
 import io.reactivex.Completable;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public interface IRepository {
@@ -17,4 +19,8 @@ public interface IRepository {
     void disableTutorialNeed();
 
     void saveToken();
+
+    Single getLastLocation();
+
+    Observable getAddressFromLocation(Location location);
 }
