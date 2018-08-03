@@ -103,6 +103,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
 
     @Override
     public void showRequestPermission(int permissionCode) {
+        //todo
         ActivityCompat.requestPermissions(this, new String[] {
             Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
         }, permissionCode);

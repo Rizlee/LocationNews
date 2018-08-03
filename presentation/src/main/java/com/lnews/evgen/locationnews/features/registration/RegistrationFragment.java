@@ -33,7 +33,8 @@ public class RegistrationFragment extends BaseFragment implements RegistrationVi
 
     @ProvidePresenter
     RegistrationPresenter providePresenter() {
-        return presenterProvider.get();
+        return
+                presenterProvider.get();
     }
 
     public static Fragment newInstance() {

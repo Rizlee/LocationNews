@@ -2,7 +2,9 @@ package com.lnews.evgen.locationnews.features.tutorial.adapter;
 
 import com.lnews.evgen.locationnews.R;
 
+//todo исправить на коллекцию
 public enum TutorialEnum {
+
     AUTH(R.string.all_auth_title,
         R.string.tutorial_auth_description,
         R.drawable.ic_auth,
