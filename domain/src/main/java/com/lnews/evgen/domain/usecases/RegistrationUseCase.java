@@ -7,9 +7,12 @@ import com.lnews.evgen.domain.usecases.base.SingleUseCase;
 import io.reactivex.Single;
 import javax.inject.Inject;
 
-public class RegistrationUseCase extends SingleUseCase<RegistrationUseCase.RegistrationData, Single> {
+public class RegistrationUseCase
+    extends SingleUseCase<RegistrationUseCase.RegistrationData, Single> {
 
-    @Inject RegistrationUseCase(IRepository repository, ExecutionThread executionThread, PostExecutionThread postExecutionThread) {
+    @Inject
+    RegistrationUseCase(IRepository repository, ExecutionThread executionThread,
+        PostExecutionThread postExecutionThread) {
         super(repository, executionThread, postExecutionThread);
     }
 

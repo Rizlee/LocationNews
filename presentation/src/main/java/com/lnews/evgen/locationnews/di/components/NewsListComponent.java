@@ -9,4 +9,6 @@ import dagger.Subcomponent;
 @Subcomponent(modules = NewsListModule.class)
 public interface NewsListComponent {
     void inject(NewsListActivity activity);
+
+    NewsListTabComponent plusNewsListTabComponent();
 }

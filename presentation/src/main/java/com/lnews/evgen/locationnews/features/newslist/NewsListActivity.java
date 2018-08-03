@@ -3,12 +3,12 @@ package com.lnews.evgen.locationnews.features.newslist;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -23,21 +23,31 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.features.base.BaseActivity;
-import java.util.List;
-import java.util.Locale;
+import com.lnews.evgen.locationnews.features.newslist.adapter.NewsPagerAdapter;
+import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
 public class NewsListActivity extends BaseActivity implements NewsListView {
     private static final String START_TOOLBAR_TITLE = "";
 
+    private NewsPagerAdapter newsPagerAdapter;
 
-    @BindView(R.id.toolbar_newslist) Toolbar toolbar;
-    @BindView(R.id.drawerlayout_newslist) DrawerLayout drawerLayout;
-    @BindView(R.id.navigationview_newslist_menu) NavigationView navigationView;
+    @BindView(R.id.toolbar_newslist)
+    Toolbar toolbar;
+    @BindView(R.id.drawerlayout_newslist)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.navigationview_newslist_menu)
+    NavigationView navigationView;
+    @BindView(R.id.viewpager_newslist)
+    ViewPager viewPager;
+    @BindView(R.id.tablayout_newslist)
+    TabLayout tabLayout;
 
-    @InjectPresenter NewsListPresenter presenter;
-    @Inject Provider<NewsListPresenter> presenterProvider;
+    @InjectPresenter
+    NewsListPresenter presenter;
+    @Inject
+    Provider<NewsListPresenter> presenterProvider;
 
     @ProvidePresenter
     NewsListPresenter providePresenter() {
@@ -55,6 +65,8 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
 
         setupToolbar();
         setupMenu();
+        setupViewPager();
+
         presenter.checkLocationPermission();
     }
 
@@ -77,10 +89,14 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
                 break;
             }
 
-            case R.id.action_location:{
+            case R.id.action_location: {
                 presenter.checkLocationPermission();
+                break;
             }
 
+            case R.id.action_add: {
+                break;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -150,7 +166,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
 
     @Override
     public void setToolbarTitle(String title) {
-        getSupportActionBar().setTitle(title);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(title);
     }
 
     private void setupToolbar() {
@@ -164,5 +180,13 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
 
     private void setupMenu() {
         //TODO
+    }
+
+    private void setupViewPager() {
+        newsPagerAdapter =
+            new NewsPagerAdapter(getSupportFragmentManager(), presenter.getNewsListTabFragments(),
+                presenter.getTitles());
+        viewPager.setAdapter(newsPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 }

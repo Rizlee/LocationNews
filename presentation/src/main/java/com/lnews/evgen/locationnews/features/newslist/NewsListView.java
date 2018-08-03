@@ -1,6 +1,5 @@
 package com.lnews.evgen.locationnews.features.newslist;
 
-import android.location.Location;
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.lnews.evgen.locationnews.features.base.BaseView;

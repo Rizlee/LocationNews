@@ -6,12 +6,12 @@ import com.google.firebase.auth.AuthResult;
 import com.lnews.evgen.data.local.Cache;
 import com.lnews.evgen.data.network.LocationService;
 import com.lnews.evgen.data.network.RestApiService;
+import com.lnews.evgen.domain.entities.RootObject;
 import com.lnews.evgen.domain.repository.IRepository;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 public class Repository implements IRepository {
     private final RestApiService networkRepository;
@@ -66,5 +66,10 @@ public class Repository implements IRepository {
     @Override
     public Observable<Address> getAddressFromLocation(com.lnews.evgen.domain.entities.Location location) {
         return locationRepository.getAddressFromLocation((Location)location.getLocation()).toObservable();
+    }
+
+    @Override
+    public Single<RootObject> getNewsByCategory(String country, String category) {
+        return networkRepository.getNewsByCategory(country, category);
     }
 }

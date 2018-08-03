@@ -17,7 +17,8 @@ public class RegistrationPresenter extends BasePresenter<RegistrationView> {
 
     private final AuthorizationInteractor authorizationInteractor;
 
-    @Inject RegistrationPresenter(AuthorizationInteractor authorizationInteractor) {
+    @Inject
+    RegistrationPresenter(AuthorizationInteractor authorizationInteractor) {
         this.authorizationInteractor = authorizationInteractor;
     }
 
@@ -41,21 +42,21 @@ public class RegistrationPresenter extends BasePresenter<RegistrationView> {
         if (password.isEmpty()) {
             getViewState().showToast(R.string.auth_password_field_empty);
             return;
-        }else if(password.length() < MIN_PASSWORD_LENGTH){
+        } else if (password.length() < MIN_PASSWORD_LENGTH) {
             getViewState().showToast(R.string.auth_password_less_than_6);
             return;
         }
 
-        authorizationInteractor.register(email, password,
-            new DisposableSingleObserver() {
-                @Override public void onSuccess(Object o) {
-                    getViewState().onRegisterSuccess();
-                }
+        authorizationInteractor.register(email, password, new DisposableSingleObserver() {
+            @Override
+            public void onSuccess(Object o) {
+                getViewState().onRegisterSuccess();
+            }
 
-                @Override public void onError(Throwable e) {
-                    getViewState().showToast(e.getMessage());
-                }
-            });
-
+            @Override
+            public void onError(Throwable e) {
+                getViewState().showToast(e.getMessage());
+            }
+        });
     }
 }

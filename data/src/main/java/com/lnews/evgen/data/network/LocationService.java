@@ -1,11 +1,8 @@
 package com.lnews.evgen.data.network;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Location;
-import android.support.v4.app.ActivityCompat;
 import com.patloew.rxlocation.RxLocation;
 import io.reactivex.Maybe;
 import javax.inject.Inject;

@@ -32,15 +32,15 @@ public class RegistrationFragment extends BaseFragment implements RegistrationVi
     Provider<RegistrationPresenter> presenterProvider;
 
     @ProvidePresenter
-    RegistrationPresenter providePresenter(){
+    RegistrationPresenter providePresenter() {
         return presenterProvider.get();
     }
 
-    public static Fragment newInstance(){
+    public static Fragment newInstance() {
         return new RegistrationFragment();
     }
 
-    public RegistrationFragment(){
+    public RegistrationFragment() {
     }
 
     @Override
@@ -60,12 +60,14 @@ public class RegistrationFragment extends BaseFragment implements RegistrationVi
         Injector.getInstance().plusRegistrationComponent().inject(this);
     }
 
-    @Override public void onRegisterSuccess() {
+    @Override
+    public void onRegisterSuccess() {
         authenticationEventListener.authSuccessEvent();
     }
 
     @OnClick(R.id.button_registration_register)
-    public void btnRegisterListener(){
-        presenter.btnRegisterListener(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+    public void btnRegisterListener() {
+        presenter.btnRegisterListener(editTextEmail.getText().toString(),
+            editTextPassword.getText().toString());
     }
 }

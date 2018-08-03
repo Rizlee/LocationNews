@@ -8,11 +8,11 @@ public class LastLocationUsecase {
     private final IRepository repository;
 
     @Inject
-    LastLocationUsecase(IRepository repository){
+    LastLocationUsecase(IRepository repository) {
         this.repository = repository;
     }
 
-    public Single execute(){
+    public Single execute() {
         return repository.getLastLocation();
     }
 }

@@ -9,11 +9,11 @@ public class AddressUseCase {
     private final IRepository repository;
 
     @Inject
-    AddressUseCase(IRepository repository){
+    AddressUseCase(IRepository repository) {
         this.repository = repository;
     }
 
-    public Observable execute(Location location){
+    public Observable execute(Location location) {
         return repository.getAddressFromLocation(location);
     }
 }

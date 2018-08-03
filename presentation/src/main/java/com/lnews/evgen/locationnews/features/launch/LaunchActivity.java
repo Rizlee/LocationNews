@@ -7,7 +7,7 @@ import com.lnews.evgen.locationnews.features.base.BaseActivity;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-public class LaunchActivity extends BaseActivity implements LaunchView{
+public class LaunchActivity extends BaseActivity implements LaunchView {
 
     @InjectPresenter
     LaunchPresenter presenter;

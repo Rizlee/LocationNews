@@ -36,9 +36,9 @@ public class LaunchPresenter extends MvpPresenter<LaunchView> {
     private void showNextActivity() {
         if (interactor.isTutorialNeed()) {
             getViewState().startNextActivity(TutorialActivity.getActivityIntent(context));
-        }else if(interactor.isAuth()){
+        } else if (interactor.isAuth()) {
             getViewState().startNextActivity(NewsListActivity.getActivityIntent(context));
-        }else {
+        } else {
             getViewState().startNextActivity(AuthenticationActivity.getActivityIntent(context));
         }
     }

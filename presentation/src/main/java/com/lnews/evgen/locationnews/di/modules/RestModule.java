@@ -15,6 +15,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public interface RestModule {
+    String BASE_URL = "https://newsapi.org/v2/";
+
     @Provides
     @Singleton
     static RestApi provideRestApi(Retrofit retrofit) {
@@ -25,7 +27,7 @@ public interface RestModule {
     @Singleton
     static Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
-            .baseUrl("http://mytasks.elatesof.w07.hoster.by/")
+            .baseUrl(BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)

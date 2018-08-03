@@ -18,7 +18,7 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
     private final AuthorizationInteractor authorizationInteractor;
 
     @Inject
-    AuthenticationPresenter(AuthorizationInteractor authorizationInteractor){
+    AuthenticationPresenter(AuthorizationInteractor authorizationInteractor) {
         this.authorizationInteractor = authorizationInteractor;
     }
 
@@ -28,7 +28,8 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
         getViewState().showFragment(AuthFragment.newInstance());
     }
 
-    @Override protected void clearComponent() {
+    @Override
+    protected void clearComponent() {
         Injector.getInstance().clearAuthenticationComponent();
     }
 
@@ -39,15 +40,15 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
         super.onDestroy();
     }
 
-    public void showForgotPassEvent(){
+    public void showForgotPassEvent() {
         getViewState().showFragment(PassRecoveryFragment.newInstance());
     }
 
-    public void showRegistrationEvent(){
+    public void showRegistrationEvent() {
         getViewState().showFragment(RegistrationFragment.newInstance());
     }
 
-    public void authSuccessEvent(){
+    public void authSuccessEvent() {
         authorizationInteractor.saveToken();
         getViewState().startNextActivity(NewsListActivity.getActivityIntent(context));
     }

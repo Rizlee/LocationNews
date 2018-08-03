@@ -14,9 +14,12 @@ import com.lnews.evgen.locationnews.R;
 public class TutorialPagerAdapter extends PagerAdapter {
     private LayoutInflater layoutInflater;
 
-    @BindView(R.id.textview_tutorial_title) TextView textViewTitle;
-    @BindView(R.id.textview_tutorial_description) TextView textViewDescription;
-    @BindView(R.id.imageview_tutorial_icon) ImageView imageViewIcon;
+    @BindView(R.id.textview_tutorial_title)
+    TextView textViewTitle;
+    @BindView(R.id.textview_tutorial_description)
+    TextView textViewDescription;
+    @BindView(R.id.imageview_tutorial_icon)
+    ImageView imageViewIcon;
 
     public TutorialPagerAdapter(LayoutInflater layoutInflater) {
         this.layoutInflater = layoutInflater;
@@ -24,7 +27,9 @@ public class TutorialPagerAdapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+    public Object instantiateItem(
+        @NonNull
+            ViewGroup container, int position) {
         TutorialEnum tutorialEnum = TutorialEnum.values()[position];
         ViewGroup view =
             (ViewGroup) layoutInflater.inflate(R.layout.tutorial_screen, container, false);
@@ -46,12 +51,20 @@ public class TutorialPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object obj) {
+    public boolean isViewFromObject(
+        @NonNull
+            View view,
+        @NonNull
+            Object obj) {
         return view == obj;
     }
 
     @Override
-    public void destroyItem(@NonNull ViewGroup collection, int position, @NonNull Object view) {
+    public void destroyItem(
+        @NonNull
+            ViewGroup collection, int position,
+        @NonNull
+            Object view) {
         collection.removeView((View) view);
     }
 }

@@ -29,6 +29,8 @@ dependencies {
   implementation 'com.android.support:appcompat-v7:27.1.1'
   implementation 'com.android.support.constraint:constraint-layout:1.1.2'
   implementation 'com.android.support:design:27.1.1'
+  implementation 'com.android.support:recyclerview-v7:27.1.1'
+  implementation 'de.hdodenhof:circleimageview:2.2.0'
   //mvp
   implementation 'com.arello-mobile:moxy:1.5.5'
   implementation 'com.arello-mobile:moxy-app-compat:1.5.5'

@@ -14,8 +14,8 @@ import com.lnews.evgen.locationnews.features.base.BaseActivity;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-public class AuthenticationActivity extends BaseActivity implements AuthenticationView,
-    AuthenticationEventListener {
+public class AuthenticationActivity extends BaseActivity
+    implements AuthenticationView, AuthenticationEventListener {
 
     @InjectPresenter
     AuthenticationPresenter presenter;
@@ -27,7 +27,7 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
         return presenterProvider.get();
     }
 
-    public static Intent getActivityIntent(Context context){
+    public static Intent getActivityIntent(Context context) {
         return new Intent(context, AuthenticationActivity.class);
     }
 
@@ -44,22 +44,21 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1){
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
             finish();
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
 
     @Override
     public void showFragment(Fragment fragment) {
-        String backStateName =  fragment.getClass().getName();
+        String backStateName = fragment.getClass().getName();
 
         FragmentManager manager = getSupportFragmentManager();
-        boolean fragmentPopped = manager.popBackStackImmediate (backStateName, 0);
+        boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
 
-        if (!fragmentPopped && manager.findFragmentByTag(backStateName) == null){
+        if (!fragmentPopped && manager.findFragmentByTag(backStateName) == null) {
             FragmentTransaction ft = manager.beginTransaction();
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             ft.setCustomAnimations(R.anim.slide_left, R.anim.slide_right);
@@ -79,7 +78,8 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
         presenter.showRegistrationEvent();
     }
 
-    @Override public void authSuccessEvent() {
+    @Override
+    public void authSuccessEvent() {
         presenter.authSuccessEvent();
     }
 }
