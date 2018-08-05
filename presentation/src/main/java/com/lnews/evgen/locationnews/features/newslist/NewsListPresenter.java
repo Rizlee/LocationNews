@@ -37,7 +37,6 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     NewsListPresenter(LocationInteractor locationInteractor) {
         this.locationInteractor = locationInteractor;
         initTitles();
-        initFragments();
     }
 
     @Override
@@ -47,7 +46,6 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     @Override
     public void onDestroy() {
-        locationInteractor.dispose();
         clearComponent();
         super.onDestroy();
     }
@@ -130,17 +128,6 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         titles.add("technology");
         titles.add("science");
         titles.add("sports");
-    }
-
-    public void initFragments() {
-        newsListTabFragments = new ArrayList<>();
-        newsListTabFragments.add(NewsListTabFragment.newInstance(titles.get(0)));
-        newsListTabFragments.add(NewsListTabFragment.newInstance(titles.get(1)));
-        newsListTabFragments.add(NewsListTabFragment.newInstance(titles.get(2)));
-    }
-
-    public ArrayList<NewsListTabFragment> getNewsListTabFragments() {
-        return newsListTabFragments;
     }
 
     public ArrayList<String> getTitles() {

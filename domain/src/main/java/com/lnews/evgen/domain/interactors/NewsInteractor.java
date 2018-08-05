@@ -17,4 +17,5 @@ public class NewsInteractor extends BaseInteractor {
     public Single<RootObject> getNews(String country, String category, String keyWord) {
         return newsUseCase.execute(new NewsUseCase.NewsData(country, category, keyWord));
     }
+
 }

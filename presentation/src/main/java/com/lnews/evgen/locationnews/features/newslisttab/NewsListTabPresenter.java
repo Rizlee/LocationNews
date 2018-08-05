@@ -29,7 +29,6 @@ public class NewsListTabPresenter extends BasePresenter<NewsListTabView> {
 
     @Override
     public void onDestroy() {
-        newsInteractor.dispose();
         clearComponent();
         super.onDestroy();
     }

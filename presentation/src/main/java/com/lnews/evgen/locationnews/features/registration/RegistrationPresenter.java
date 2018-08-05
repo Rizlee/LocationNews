@@ -29,7 +29,6 @@ public class RegistrationPresenter extends BasePresenter<RegistrationView> {
 
     @Override
     public void onDestroy() {
-        authorizationInteractor.dispose();
         clearComponent();
         super.onDestroy();
     }

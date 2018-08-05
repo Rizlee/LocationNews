@@ -27,7 +27,6 @@ public class PassRecoveryPresenter extends BasePresenter<PassRecoveryView> {
 
     @Override
     public void onDestroy() {
-        authorizationInteractor.dispose();
         clearComponent();
         super.onDestroy();
     }

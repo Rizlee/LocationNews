@@ -6,16 +6,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import com.lnews.evgen.locationnews.features.newslisttab.NewsListTabFragment;
 import java.util.ArrayList;
+import java.util.List;
 
 public class NewsPagerAdapter extends FragmentPagerAdapter {
-    private ArrayList<NewsListTabFragment> fragments;
-    private ArrayList<String> titles;
+    private List<NewsListTabFragment> fragments;
+    private List<String> titles;
 
-    public NewsPagerAdapter(FragmentManager fm, ArrayList<NewsListTabFragment> fragments,
-        ArrayList<String> titles) {
+    public NewsPagerAdapter(FragmentManager fm) {
         super(fm);
-        this.fragments = fragments;
-        this.titles = titles;
+        fragments = new ArrayList<>();
+        titles = new ArrayList<>();
     }
 
     @Override
@@ -34,9 +34,17 @@ public class NewsPagerAdapter extends FragmentPagerAdapter {
         return titles.get(position);
     }
 
-    public void addFragment(NewsListTabFragment fragment, String title) {
-        fragments.add(fragment);
+    public void addFragment(String title) {
+        fragments.add(NewsListTabFragment.newInstance(title));
         titles.add(title);
+    }
+
+    public void addFragment(ArrayList<String> title) {
+        for (int i = 0; i< title.size(); i++){
+            fragments.add(NewsListTabFragment.newInstance(title.get(i)));
+            titles.add(title.get(i));
+        }
+
     }
 }
 

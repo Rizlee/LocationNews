@@ -59,8 +59,8 @@ public class AuthFragment extends BaseFragment implements AuthView{
 
     @OnClick(R.id.button_auth_forgot_pass)
     public void btnForgotPassListener(){
-        //presenter.buttonForgotPassPressed();
-        showForgotPass();
+        presenter.buttonForgotPassPressed();
+        //showForgotPass();
     }
 
     @OnClick(R.id.button_auth_new_member)

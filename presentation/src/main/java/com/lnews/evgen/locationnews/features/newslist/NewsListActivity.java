@@ -30,8 +30,9 @@ import javax.inject.Provider;
 
 public class NewsListActivity extends BaseActivity implements NewsListView {
     private static final String START_TOOLBAR_TITLE = "";
-
-    private NewsPagerAdapter newsPagerAdapter;
+    private static final String[] PERMISSIONS =
+        { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
+    private static final int OFFSCREEN_PAGE_LIMIT = 4;
 
     @BindView(R.id.toolbar_newslist)
     Toolbar toolbar;
@@ -103,9 +104,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
 
     @Override
     public void showRequestPermission(int permissionCode) {
-        ActivityCompat.requestPermissions(this, new String[] {
-            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
-        }, permissionCode);
+        ActivityCompat.requestPermissions(this,PERMISSIONS, permissionCode);
     }
 
     @Override
@@ -183,10 +182,11 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
     }
 
     private void setupViewPager() {
-        newsPagerAdapter =
-            new NewsPagerAdapter(getSupportFragmentManager(), presenter.getNewsListTabFragments(),
-                presenter.getTitles());
+        NewsPagerAdapter newsPagerAdapter =
+            new NewsPagerAdapter(getSupportFragmentManager());
+        newsPagerAdapter.addFragment(presenter.getTitles());
         viewPager.setAdapter(newsPagerAdapter);
+        viewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);
         tabLayout.setupWithViewPager(viewPager);
     }
 }

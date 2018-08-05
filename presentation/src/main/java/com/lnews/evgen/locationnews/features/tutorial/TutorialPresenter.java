@@ -23,7 +23,6 @@ public class TutorialPresenter extends BasePresenter<TutorialView> {
 
     @Override
     public void onDestroy() {
-        interactor.dispose();
         clearComponent();
         super.onDestroy();
     }

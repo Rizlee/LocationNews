@@ -27,7 +27,6 @@ public class AuthPresenter extends BasePresenter<AuthView> {
 
     @Override
     public void onDestroy() {
-        authorizationInteractor.dispose();
         clearComponent();
         super.onDestroy();
     }

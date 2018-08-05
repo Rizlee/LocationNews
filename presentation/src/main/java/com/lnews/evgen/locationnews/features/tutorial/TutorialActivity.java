@@ -20,14 +20,13 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.features.base.BaseActivity;
-import com.lnews.evgen.locationnews.features.tutorial.adapter.TutorialEnum;
 import com.lnews.evgen.locationnews.features.tutorial.adapter.TutorialPagerAdapter;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
 public class TutorialActivity extends BaseActivity implements TutorialView {
     private static final int ONE_PAGE = 1;
-    private static final int LAYOUTS_COUNT = TutorialEnum.values().length;
+    private TutorialPagerAdapter tutorialPagerAdapter;
 
     @BindView(R.id.button_tutorial_next)
     Button buttonNext;
@@ -84,7 +83,7 @@ public class TutorialActivity extends BaseActivity implements TutorialView {
 
     @OnClick(R.id.button_tutorial_next)
     public void buttonNextListener() {
-        tutorialPresenter.buttonNextPressed(getNextPage(), LAYOUTS_COUNT);
+        tutorialPresenter.buttonNextPressed(getNextPage(), tutorialPagerAdapter.getCount());
     }
 
     private int getNextPage() {
@@ -103,7 +102,7 @@ public class TutorialActivity extends BaseActivity implements TutorialView {
     }
 
     private void setupViewPager() {
-        TutorialPagerAdapter tutorialPagerAdapter = new TutorialPagerAdapter(
+        tutorialPagerAdapter = new TutorialPagerAdapter(
             (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE));
         viewPagerTutorial.setAdapter(tutorialPagerAdapter);
         viewPagerTutorial.addOnPageChangeListener(simpleOnPageChangeListener);
@@ -119,7 +118,7 @@ public class TutorialActivity extends BaseActivity implements TutorialView {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
 
-                if (position == LAYOUTS_COUNT - 1) {
+                if (position == tutorialPagerAdapter.getCount() - 1) {
                     buttonNext.setText(startButtonDescription);
                     buttonSkip.setVisibility(View.GONE);
                 } else {
