@@ -60,46 +60,11 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     private void getAddressFromLocation(Location location) {
         locationInteractor.getAddressFromLocation(
             new com.lnews.evgen.domain.entities.Location(location))
-            .subscribe(new Observer<Address>() {
-                @Override
-                public void onSubscribe(Disposable d) {
-
-                }
-
-                @Override
-                public void onNext(Address address) {
-                    lastAddress = address;
-                    getViewState().setToolbarTitle(address.getCountryName());
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    getViewState().showToast(R.string.newslist_location_error);
-                }
-
-                @Override
-                public void onComplete() {
-
-                }
-            });
+            .subscribe(new );
     }
 
     public void getLastLocation() {
-        locationInteractor.getLastLocation().subscribe(new SingleObserver<Location>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onSuccess(Location location) {
-                getAddressFromLocation(location);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-            }
-        });
+        locationInteractor.getLastLocation().subscribe();
     }
 
     public void checkLocationPermission() {

@@ -2,6 +2,7 @@ package com.lnews.evgen.locationnews.features.authorization;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,8 +53,8 @@ public class AuthFragment extends BaseFragment implements AuthView{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_auth, container, false);
     }
 
@@ -65,8 +66,8 @@ public class AuthFragment extends BaseFragment implements AuthView{
 
     @OnClick(R.id.button_auth_new_member)
     public void btnNewMemberListener(){
-        //presenter.buttonRegistrationPressed();
-        showRegistration();
+        presenter.buttonRegistrationPressed();
+        //showRegistration();
     }
 
     @OnClick(R.id.button_auth_login)
