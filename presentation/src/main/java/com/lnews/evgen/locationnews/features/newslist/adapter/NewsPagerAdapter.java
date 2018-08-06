@@ -34,14 +34,14 @@ public class NewsPagerAdapter extends FragmentPagerAdapter {
         return titles.get(position);
     }
 
-    public void addFragment(String title) {
-        fragments.add(NewsListTabFragment.newInstance(title));
+    public void addFragment(String title, String countryCode) {
+        fragments.add(NewsListTabFragment.newInstance(title,countryCode));
         titles.add(title);
     }
 
-    public void addFragment(ArrayList<String> title) {
+    public void addFragment(ArrayList<String> title, String countryCode) {
         for (int i = 0; i< title.size(); i++){
-            fragments.add(NewsListTabFragment.newInstance(title.get(i)));
+            fragments.add(NewsListTabFragment.newInstance(title.get(i), countryCode));
             titles.add(title.get(i));
         }
 

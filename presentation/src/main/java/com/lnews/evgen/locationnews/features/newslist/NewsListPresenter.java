@@ -11,7 +11,6 @@ import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.di.annotations.PerActivity;
 import com.lnews.evgen.locationnews.features.base.BasePresenter;
-import com.lnews.evgen.locationnews.features.newslisttab.NewsListTabFragment;
 import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
@@ -24,13 +23,10 @@ import javax.inject.Inject;
 public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;
-
     private final LocationInteractor locationInteractor;
-
-    private ArrayList<NewsListTabFragment> newsListTabFragments;
     private ArrayList<String> titles;
-
-    private Address lastAddress;
+    private String country;
+    private String countryCode;
         //TODO возможно при каждом успешном определении сохранять в бд(вместе со списком новостей)
 
     @Inject
@@ -60,11 +56,49 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     private void getAddressFromLocation(Location location) {
         locationInteractor.getAddressFromLocation(
             new com.lnews.evgen.domain.entities.Location(location))
-            .subscribe(new );
+            .subscribe(new Observer<Address>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+
+                }
+
+                @Override
+                public void onNext(Address address) {
+                    country = address.getCountryName();
+                    countryCode = address.getCountryCode();
+
+                    getViewState().setToolbarTitle(country);
+                    getViewState().setupViewPager();
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    getViewState().showToast(R.string.newslist_location_error);
+                }
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
     }
 
     public void getLastLocation() {
-        locationInteractor.getLastLocation().subscribe();
+        locationInteractor.getLastLocation().subscribe(new SingleObserver<Location>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(Location location) {
+                getAddressFromLocation(location);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+        });
     }
 
     public void checkLocationPermission() {
@@ -97,5 +131,29 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     public ArrayList<String> getTitles() {
         return titles;
+    }
+
+    public String getCountryCode(){
+        return countryCode;
+    }
+
+    public void changeLocationAction(){
+        getViewState().showLocationDialog();
+    }
+
+    public void changeCategoryAction(){
+        getViewState().showAddCategoryDialog();
+    }
+
+    public void countrySelectEvent(String country, String countryCode){
+        this.country = country;
+        this.countryCode = countryCode;
+        getViewState().setToolbarTitle(country);
+        getViewState().setupViewPager(); //TODO
+    }
+
+    public void addTitleEvent(String title){
+        titles.add(title);
+        //TODO
     }
 }

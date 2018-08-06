@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    >
+
+  <TextView
+      android:id="@+id/textview_newslist_category_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_newslist_dialog_16dp"
+      android:gravity="center"
+      android:text="@string/newslist_add_hint"
+      android:textColor="@color/primary_text"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+  <TextView
+      android:id="@+id/textview_newslist_category_hint"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_newslist_dialog_16dp"
+      android:text="@string/newslist_category_add_hint"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/textview_newslist_category_title"
+      />
+
+  <Spinner
+      android:id="@+id/spinner_newslist_category"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_newslist_dialog_16dp"
+      android:background="@drawable/spinner_bg"
+      android:entries="@array/newslist_categories"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/textview_newslist_category_hint"
+      />
+
+  <Button
+      android:id="@+id/button_newslist_category_apply"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@drawable/apply_button_bg"
+      android:text="@string/all_button_apply"
+      android:textColor="@color/primary_light"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/spinner_newslist_category"
+      />
+
+  <Button
+      android:id="@+id/button_newslist_category_cancel"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="16dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@drawable/cancel_button_bg"
+      android:text="@string/all_button_cancel"
+      android:textColor="@color/primary_light"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/button_newslist_category_apply"
+      />
+
+</android.support.constraint.ConstraintLayout>

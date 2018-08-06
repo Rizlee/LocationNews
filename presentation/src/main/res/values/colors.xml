@@ -27,4 +27,9 @@
   <!--Auth-->
   <color name="start_gradient">#0b6976</color>
   <color name="end_gradient">#00bbd3</color>
+  
+  <!--NewsList-->
+  <color name="button_apply">#8c30d22a</color>
+  <color name="button_cancel">#8cd22a2a</color>
+  <color name="spinner_bg">#8da7a7a7</color>
 </resources>

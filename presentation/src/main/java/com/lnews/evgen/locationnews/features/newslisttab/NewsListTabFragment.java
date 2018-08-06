@@ -21,6 +21,8 @@ import javax.inject.Provider;
 
 public class NewsListTabFragment extends BaseFragment implements NewsListTabView {
     private static final String TITLE_TAG = "title";
+    private static final String COUNTRY_CODE_TAG = "country_code";
+    private static final String DEFAULT_COUNTRY_CODE = "ru";
 
     private NewsRecyclerAdapter newsRecyclerAdapter;
 
@@ -41,11 +43,12 @@ public class NewsListTabFragment extends BaseFragment implements NewsListTabView
 
     }
 
-    public static NewsListTabFragment newInstance(String title) {
+    public static NewsListTabFragment newInstance(String title, String countryCode) {
         NewsListTabFragment fragment = new NewsListTabFragment();
 
         Bundle args = new Bundle();
         args.putString(TITLE_TAG, title);
+        args.putString(COUNTRY_CODE_TAG, countryCode);
         fragment.setArguments(args);
 
         return fragment;
@@ -58,6 +61,7 @@ public class NewsListTabFragment extends BaseFragment implements NewsListTabView
 
         if (getArguments() != null) {
             presenter.titleChanged(getArguments().getString(TITLE_TAG));
+            presenter.setCountryCode(getArguments().getString(COUNTRY_CODE_TAG, DEFAULT_COUNTRY_CODE));
         }
         ButterKnife.bind(this, view);
 
