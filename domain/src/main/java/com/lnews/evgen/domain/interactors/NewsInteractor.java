@@ -4,6 +4,7 @@ import com.lnews.evgen.domain.entities.RootObject;
 import com.lnews.evgen.domain.interactors.base.BaseInteractor;
 import com.lnews.evgen.domain.usecases.NewsUseCase;
 import io.reactivex.Single;
+import io.reactivex.observers.DisposableSingleObserver;
 import javax.inject.Inject;
 
 public class NewsInteractor extends BaseInteractor {
@@ -14,8 +15,8 @@ public class NewsInteractor extends BaseInteractor {
         this.newsUseCase = newsUseCase;
     }
 
-    public Single<RootObject> getNews(String country, String category, String keyWord) {
-        return newsUseCase.execute(new NewsUseCase.NewsData(country, category, keyWord));
+    public void getNews(String country, String category, String keyWord,DisposableSingleObserver<RootObject> observer) {
+        execute(newsUseCase,new NewsUseCase.NewsData(country, category, keyWord), observer);
     }
 
 }

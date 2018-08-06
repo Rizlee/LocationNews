@@ -8,6 +8,7 @@ import com.lnews.evgen.locationnews.di.annotations.PerFragment;
 import com.lnews.evgen.locationnews.features.base.BasePresenter;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableSingleObserver;
 import javax.inject.Inject;
 
 @InjectViewState
@@ -16,6 +17,7 @@ public class NewsListTabPresenter extends BasePresenter<NewsListTabView> {
     private final NewsInteractor newsInteractor;
 
     private String title;
+    private String countryCode;
 
     @Inject
     NewsListTabPresenter(NewsInteractor newsInteractor) {
@@ -39,12 +41,7 @@ public class NewsListTabPresenter extends BasePresenter<NewsListTabView> {
 
     public void updateList() {
         //newsInteractor.getNews("ru", title, "").doOnSuccess(getViewState()::showList);
-        newsInteractor.getNews("ru", title, "").subscribe(new SingleObserver<RootObject>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
+        newsInteractor.getNews(countryCode, title, "", new DisposableSingleObserver<RootObject>() {
             @Override
             public void onSuccess(RootObject rootObject) {
                 getViewState().showList(rootObject);
@@ -55,5 +52,9 @@ public class NewsListTabPresenter extends BasePresenter<NewsListTabView> {
                 getViewState().showToast(e.getMessage());
             }
         });
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 }

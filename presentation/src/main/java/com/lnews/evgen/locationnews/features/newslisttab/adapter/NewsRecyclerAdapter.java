@@ -18,6 +18,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.NewsViewHolder> {
+    private static final String DATE_FORMAT = "dd.MM.yyyy";
     private RootObject rootObject;
 
     public void setItems(RootObject rootObject) {
@@ -49,7 +50,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     class NewsViewHolder extends RecyclerView.ViewHolder {
         @SuppressLint("SimpleDateFormat")
-        private final Format formatter = new SimpleDateFormat("dd.MM.yyyy");
+        private final Format formatter = new SimpleDateFormat(DATE_FORMAT);
 
         @BindView(R.id.circleimage_newslist_item)
         CircleImageView imageView;
