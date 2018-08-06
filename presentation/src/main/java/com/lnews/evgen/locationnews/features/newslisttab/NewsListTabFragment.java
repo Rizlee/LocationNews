@@ -63,6 +63,7 @@ public class NewsListTabFragment extends BaseFragment implements NewsListTabView
             presenter.titleChanged(getArguments().getString(TITLE_TAG));
             presenter.setCountryCode(getArguments().getString(COUNTRY_CODE_TAG, DEFAULT_COUNTRY_CODE));
         }
+        //todo в базовом классе уже есть
         ButterKnife.bind(this, view);
 
         setupRecyclerView();

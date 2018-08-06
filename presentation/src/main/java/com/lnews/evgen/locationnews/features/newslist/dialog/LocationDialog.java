@@ -43,7 +43,7 @@ public class LocationDialog extends DialogFragment {
     @OnClick(R.id.button_newslist_location_apply)
     public void applyLocationListener() {
         if (dialogResult != null) {
-            int selectedItemId = (int)spinnerCountries.getSelectedItemId();
+            int selectedItemId = (int) spinnerCountries.getSelectedItemId();
             dialogResult.countrySelectEvent(countries[selectedItemId], countriesCode[selectedItemId]);
         }
         dismiss();

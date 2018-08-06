@@ -157,8 +157,9 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
 
     @Override
     public void setupViewPager() {
-        NewsPagerAdapter newsPagerAdapter = new NewsPagerAdapter(getSupportFragmentManager());
-        newsPagerAdapter.addFragment(presenter.getTitles(), presenter.getCountryCode());
+        NewsPagerAdapter newsPagerAdapter = new NewsPagerAdapter(getSupportFragmentManager(),
+                presenter.getTitles(), presenter.getCountryCode());
+       // newsPagerAdapter.addFragment  (presenter.getTitles(), presenter.getCountryCode());
         viewPager.setAdapter(newsPagerAdapter);
         viewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);
         tabLayout.setupWithViewPager(viewPager);

@@ -129,6 +129,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         titles.add("sports");
     }
 
+    //todo испарвить на list
     public ArrayList<String> getTitles() {
         return titles;
     }

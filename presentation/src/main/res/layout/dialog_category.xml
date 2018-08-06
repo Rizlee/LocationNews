@@ -56,8 +56,8 @@
       android:textColor="@color/primary_light"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/spinner_newslist_category"
-      />
+      style="@style/MainButtonAuth"
+      app:layout_constraintTop_toBottomOf="@id/spinner_newslist_category"/>
 
   <Button
       android:id="@+id/button_newslist_category_cancel"

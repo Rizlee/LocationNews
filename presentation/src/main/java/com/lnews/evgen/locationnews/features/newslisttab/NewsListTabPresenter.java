@@ -12,7 +12,6 @@ import io.reactivex.observers.DisposableSingleObserver;
 import javax.inject.Inject;
 
 @InjectViewState
-@PerFragment(NewsListTabFragment.class)
 public class NewsListTabPresenter extends BasePresenter<NewsListTabView> {
     private final NewsInteractor newsInteractor;
 
