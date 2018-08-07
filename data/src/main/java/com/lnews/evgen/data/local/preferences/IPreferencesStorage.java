@@ -8,4 +8,6 @@ public interface IPreferencesStorage {
     void setTutorialNeed(boolean isTutorialNeed);
 
     boolean isTutorialNeed();
+
+    void resetToken();
 }

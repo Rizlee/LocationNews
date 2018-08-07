@@ -11,20 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewsPagerAdapter extends FragmentStatePagerAdapter {
-    //private List<NewsListTabFragment> fragments;
+    private List<NewsListTabFragment> fragments;
     private List<String> titles;
     private String countryCode;
 
-    public NewsPagerAdapter(FragmentManager fm, List<String> titles,  String countryCode) {
+    public NewsPagerAdapter(FragmentManager fm, List<String> titles, String countryCode) {
         super(fm);
-      //  fragments = new ArrayList<>();
         this.countryCode = countryCode;
         this.titles = titles;
+        initFragments();
     }
 
     @Override
-    public Fragment getItem(int position) {
-        return NewsListTabFragment.newInstance(titles.get(position), countryCode);
+    public NewsListTabFragment getItem(int position) {
+        return fragments.get(position);
     }
 
     @Override
@@ -38,18 +38,24 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
         return titles.get(position);
     }
 
-//    public void addFragment(String title, String countryCode) {
-//        fragments.add(NewsListTabFragment.newInstance(title,countryCode));
-//        titles.add(title);
-//    }
-//
-//    public void addFragment(ArrayList<String> title, String countryCode) {
-//        for (int i = 0; i< title.size(); i++){
-//            fragments.add(NewsListTabFragment.newInstance(title.get(i), countryCode));
-//            titles.add(title.get(i));
-//        }
-//
-//    }
+    public void rewriteCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+        for (int i = 0; i < titles.size(); i++) {
+            fragments.get(i).setCountryCode(countryCode);
+        }
+    }
+
+    public void addFragment(String title) {
+        fragments.add(NewsListTabFragment.newInstance(title, countryCode));
+        notifyDataSetChanged();
+    }
+
+    private void initFragments() {
+        fragments = new ArrayList<>();
+        for (int i = 0; i < titles.size(); i++) {
+            fragments.add(NewsListTabFragment.newInstance(titles.get(i), countryCode));
+        }
+    }
 }
 
 

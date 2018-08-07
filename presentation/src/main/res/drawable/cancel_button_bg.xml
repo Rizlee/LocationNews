@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector
     xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:state_pressed="true">
+    <shape>
+      <solid android:color="@color/button_cancel_dark"/>
+      <corners android:bottomRightRadius="@dimen/radius_rounded_view_0.1dp"
+          android:bottomLeftRadius="@dimen/radius_rounded_view_10dp"
+          android:topLeftRadius="@dimen/radius_rounded_view_0.1dp"
+          android:topRightRadius="@dimen/radius_rounded_view_10dp"/>
+    </shape>
+  </item>
+
   <item>
     <shape>
       <solid android:color="@color/button_cancel"/>
-      <corners android:bottomRightRadius="0.1dp"
-          android:bottomLeftRadius="10dp"
-          android:topLeftRadius="0.1dp"
-          android:topRightRadius="10dp"/>
+      <corners android:bottomRightRadius="@dimen/radius_rounded_view_0.1dp"
+          android:bottomLeftRadius="@dimen/radius_rounded_view_10dp"
+          android:topLeftRadius="@dimen/radius_rounded_view_0.1dp"
+          android:topRightRadius="@dimen/radius_rounded_view_10dp"/>
     </shape>
   </item>
 </selector>

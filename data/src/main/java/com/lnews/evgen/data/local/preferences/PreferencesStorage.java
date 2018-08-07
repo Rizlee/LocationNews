@@ -22,26 +22,26 @@ public class PreferencesStorage implements IPreferencesStorage {
 
     @Override
     public void setToken(String token) {
-        pref.edit()
-            .putString(PREFERENCE_TOKEN, token)
-            .apply();
+        pref.edit().putString(PREFERENCE_TOKEN, token).apply();
     }
 
     @Override
     public String getToken() {
-        return pref
-            .getString(PREFERENCE_TOKEN, "");
+        return pref.getString(PREFERENCE_TOKEN, "");
     }
 
     @Override
     public void setTutorialNeed(boolean isTutorialNeed) {
-        pref.edit()
-            .putBoolean(PREFERENCE_IS_FIRST_LAUNCH, isTutorialNeed)
-            .apply();
+        pref.edit().putBoolean(PREFERENCE_IS_FIRST_LAUNCH, isTutorialNeed).apply();
     }
 
     @Override
     public boolean isTutorialNeed() {
         return pref.getBoolean(PREFERENCE_IS_FIRST_LAUNCH, true);
+    }
+
+    @Override
+    public void resetToken() {
+        pref.edit().putString(PREFERENCE_TOKEN, "").apply();
     }
 }

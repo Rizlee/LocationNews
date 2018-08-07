@@ -29,7 +29,7 @@ import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-public class NewsListActivity extends BaseActivity implements NewsListView {
+public class NewsListActivity extends BaseActivity implements NewsListView, NavigationView.OnNavigationItemSelectedListener {
     private static final String START_TOOLBAR_TITLE = "";
     private static final String[] PERMISSIONS =
         { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
@@ -70,6 +70,9 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
         setupToolbar();
         setupMenu();
 
+        presenter.initPagerAdapter(getSupportFragmentManager());
+        setupViewPager();
+
         presenter.checkLocationPermission();
     }
 
@@ -99,6 +102,23 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
 
             case R.id.action_add: {
                 presenter.changeCategoryAction();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        drawerLayout.closeDrawers();
+        switch (item.getItemId()) {
+            case R.id.nav_manage_tab: {
+                //TODO
+                break;
+            }
+
+            case R.id.nav_logout: {
+                presenter.logOutAction();
                 break;
             }
         }
@@ -155,12 +175,8 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
         Objects.requireNonNull(getSupportActionBar()).setTitle(title);
     }
 
-    @Override
-    public void setupViewPager() {
-        NewsPagerAdapter newsPagerAdapter = new NewsPagerAdapter(getSupportFragmentManager(),
-                presenter.getTitles(), presenter.getCountryCode());
-       // newsPagerAdapter.addFragment  (presenter.getTitles(), presenter.getCountryCode());
-        viewPager.setAdapter(newsPagerAdapter);
+    private void setupViewPager() {
+        viewPager.setAdapter(presenter.getNewsPagerAdapter());
         viewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -175,6 +191,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView {
     }
 
     private void setupMenu() {
-        //TODO
+        navigationView.setNavigationItemSelectedListener(this);
     }
+
 }

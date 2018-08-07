@@ -4,6 +4,7 @@
   <color name="primary_dark">#485d81</color>
   <color name="primary_light">#F5F5F5</color>
   <color name="accent">#f1fd71</color>
+  <color name="accent_dark">#979f43</color>
   <color name="primary_text">#212121</color>
   <color name="secondary_text">#757575</color>
   <color name="edittext_bg">#78ffffff</color>
@@ -30,6 +31,7 @@
   
   <!--NewsList-->
   <color name="button_apply">#8c30d22a</color>
+  <color name="button_apply_dark">#8c1c8019</color>
   <color name="button_cancel">#8cd22a2a</color>
-  <color name="spinner_bg">#8da7a7a7</color>
+  <color name="button_cancel_dark">#8c861b1b</color>
 </resources>

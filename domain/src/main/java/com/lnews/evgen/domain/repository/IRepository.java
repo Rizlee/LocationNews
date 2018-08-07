@@ -21,6 +21,8 @@ public interface IRepository {
 
     void saveToken();
 
+    void resetToken();
+
     Single getLastLocation();
 
     Observable getAddressFromLocation(Location location);

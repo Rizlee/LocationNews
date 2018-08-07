@@ -48,32 +48,30 @@
       android:id="@+id/button_newslist_category_apply"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginTop="16dp"
-      android:background="@drawable/apply_button_bg"
+      android:layout_marginEnd="@dimen/margin_newslist_dialog_16dp"
+      android:layout_marginStart="@dimen/margin_newslist_dialog_16dp"
+      android:layout_marginTop="@dimen/margin_newslist_dialog_16dp"
       android:text="@string/all_button_apply"
-      android:textColor="@color/primary_light"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      style="@style/MainButtonAuth"
-      app:layout_constraintTop_toBottomOf="@id/spinner_newslist_category"/>
+      app:layout_constraintTop_toBottomOf="@id/spinner_newslist_category"
+      style="@style/ApplyButton"
+      />
 
   <Button
       android:id="@+id/button_newslist_category_cancel"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="16dp"
-      android:layout_marginEnd="16dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginTop="16dp"
-      android:background="@drawable/cancel_button_bg"
+      android:layout_marginBottom="@dimen/margin_newslist_dialog_16dp"
+      android:layout_marginEnd="@dimen/margin_newslist_dialog_16dp"
+      android:layout_marginStart="@dimen/margin_newslist_dialog_16dp"
+      android:layout_marginTop="@dimen/margin_newslist_dialog_16dp"
       android:text="@string/all_button_cancel"
-      android:textColor="@color/primary_light"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/button_newslist_category_apply"
+      style="@style/CancelButton"
       />
 
 </android.support.constraint.ConstraintLayout>

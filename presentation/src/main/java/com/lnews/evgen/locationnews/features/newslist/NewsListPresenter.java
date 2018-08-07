@@ -5,12 +5,16 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import com.arellomobile.mvp.InjectViewState;
+import com.lnews.evgen.domain.interactors.AuthorizationInteractor;
 import com.lnews.evgen.domain.interactors.LocationInteractor;
 import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.di.annotations.PerActivity;
+import com.lnews.evgen.locationnews.features.authentication.AuthenticationActivity;
 import com.lnews.evgen.locationnews.features.base.BasePresenter;
+import com.lnews.evgen.locationnews.features.newslist.adapter.NewsPagerAdapter;
 import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
@@ -21,17 +25,22 @@ import javax.inject.Inject;
 @InjectViewState
 @PerActivity(NewsListActivity.class)
 public class NewsListPresenter extends BasePresenter<NewsListView> {
-
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;
+
     private final LocationInteractor locationInteractor;
+    private final AuthorizationInteractor authorizationInteractor;
+
+    private NewsPagerAdapter newsPagerAdapter;
     private ArrayList<String> titles;
     private String country;
     private String countryCode;
-        //TODO возможно при каждом успешном определении сохранять в бд(вместе со списком новостей)
+    //TODO возможно при каждом успешном определении сохранять в бд(вместе со списком новостей)
 
     @Inject
-    NewsListPresenter(LocationInteractor locationInteractor) {
+    NewsListPresenter(LocationInteractor locationInteractor,
+        AuthorizationInteractor authorizationInteractor) {
         this.locationInteractor = locationInteractor;
+        this.authorizationInteractor = authorizationInteractor;
         initTitles();
     }
 
@@ -44,6 +53,12 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     public void onDestroy() {
         clearComponent();
         super.onDestroy();
+    }
+
+    public void initPagerAdapter(FragmentManager fragmentManager) {
+        if (newsPagerAdapter == null) {
+            newsPagerAdapter = new NewsPagerAdapter(fragmentManager, titles, countryCode);
+        }
     }
 
     private boolean isPermissionGranted() {
@@ -64,11 +79,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
                 @Override
                 public void onNext(Address address) {
-                    country = address.getCountryName();
-                    countryCode = address.getCountryCode();
-
-                    getViewState().setToolbarTitle(country);
-                    getViewState().setupViewPager();
+                    countrySelectEvent(address.getCountryName(), address.getCountryCode());
                 }
 
                 @Override
@@ -124,7 +135,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     public void initTitles() { //TODO категории(тайтлы) буду получать от firebase'a, если не доступен то с бд
         titles = new ArrayList<>();
-        titles.add("technology");
+        titles.add("business");
         titles.add("science");
         titles.add("sports");
     }
@@ -134,27 +145,38 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         return titles;
     }
 
-    public String getCountryCode(){
+    public String getCountryCode() {
         return countryCode;
     }
 
-    public void changeLocationAction(){
+    public void changeLocationAction() {
         getViewState().showLocationDialog();
     }
 
-    public void changeCategoryAction(){
+    public void changeCategoryAction() {
         getViewState().showAddCategoryDialog();
     }
 
-    public void countrySelectEvent(String country, String countryCode){
+    public void countrySelectEvent(String country, String countryCode) {
         this.country = country;
         this.countryCode = countryCode;
         getViewState().setToolbarTitle(country);
-        getViewState().setupViewPager(); //TODO
+        newsPagerAdapter.rewriteCountryCode(countryCode);
     }
 
-    public void addTitleEvent(String title){
+    public void addTitleEvent(String title) {
         titles.add(title);
+        newsPagerAdapter.addFragment(title);
         //TODO
+    }
+
+    public void logOutAction() {
+        authorizationInteractor.resetToken();
+        getViewState().showActivity(AuthenticationActivity.getActivityIntent(context));
+        getViewState().finishActivity();
+    }
+
+    public NewsPagerAdapter getNewsPagerAdapter(){
+        return newsPagerAdapter;
     }
 }

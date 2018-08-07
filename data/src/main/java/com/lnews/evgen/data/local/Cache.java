@@ -29,4 +29,8 @@ public class Cache {
     public boolean isTutorialNeed(){
         return preferencesStorage.isTutorialNeed();
     }
+
+    public void resetToken(){
+        preferencesStorage.resetToken();
+    }
 }

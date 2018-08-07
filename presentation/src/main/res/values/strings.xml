@@ -40,6 +40,8 @@
   <string name="newslist_location_error">We can\'t determine the country in which you are located</string>
   <string name="newslist_location_country_hint">You can select a country from the list</string>
   <string name="newslist_location_current">Use current location</string>
+  <string name="newslist_logout_title">LogOut</string>
+  <string name="newslist_manage_tabs_title">Manage tabs</string>
   <string-array name="newslist_countries">
     <item>United Arab Emirates</item>
     <item>Argentina</item>

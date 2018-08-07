@@ -7,4 +7,6 @@
   <dimen name="width_max_auth_edittext">400dp</dimen>
   <dimen name="margin_auth_view_20dp">20dp</dimen>
   <dimen name="margin_newslist_dialog_16dp">16dp</dimen>
+  <dimen name="radius_rounded_view_0.1dp">0.1dp</dimen>
+  <dimen name="radius_rounded_view_10dp">10dp</dimen>
 </resources>

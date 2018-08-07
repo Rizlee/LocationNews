@@ -72,4 +72,9 @@ public class Repository implements IRepository {
     public Single<RootObject> getNewsByCategory(String country, String category) {
         return networkRepository.getNewsByCategory(country, category);
     }
+
+    @Override
+    public void resetToken() {
+        cache.resetToken();
+    }
 }

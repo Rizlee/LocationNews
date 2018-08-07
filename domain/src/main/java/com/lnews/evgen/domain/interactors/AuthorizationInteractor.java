@@ -4,6 +4,7 @@ import com.lnews.evgen.domain.interactors.base.BaseInteractor;
 import com.lnews.evgen.domain.usecases.AuthorizationUseCase;
 import com.lnews.evgen.domain.usecases.RegistrationUseCase;
 import com.lnews.evgen.domain.usecases.ResetPassUseCase;
+import com.lnews.evgen.domain.usecases.ResetTokenUseCase;
 import com.lnews.evgen.domain.usecases.TokenUseCase;
 import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
@@ -14,28 +15,38 @@ public class AuthorizationInteractor extends BaseInteractor {
     private final AuthorizationUseCase authorizationUseCase;
     private final ResetPassUseCase resetPassUseCase;
     private final TokenUseCase tokenUseCase;
+    private final ResetTokenUseCase resetTokenUseCase;
 
     @Inject
-    AuthorizationInteractor(RegistrationUseCase registrationUseCase, AuthorizationUseCase authorizationUseCase, ResetPassUseCase resetPassUseCase, TokenUseCase tokenUseCase) {
+    AuthorizationInteractor(RegistrationUseCase registrationUseCase,
+        AuthorizationUseCase authorizationUseCase, ResetPassUseCase resetPassUseCase,
+        TokenUseCase tokenUseCase, ResetTokenUseCase resetTokenUseCase) {
         this.registrationUseCase = registrationUseCase;
         this.authorizationUseCase = authorizationUseCase;
         this.resetPassUseCase = resetPassUseCase;
         this.tokenUseCase = tokenUseCase;
+        this.resetTokenUseCase = resetTokenUseCase;
     }
 
     public void register(String email, String password, DisposableSingleObserver observer) {
-        execute(registrationUseCase, new RegistrationUseCase.RegistrationData(email, password), observer);
+        execute(registrationUseCase, new RegistrationUseCase.RegistrationData(email, password),
+            observer);
     }
 
-    public void auth(String email, String password, DisposableSingleObserver observer){
-        execute(authorizationUseCase, new AuthorizationUseCase.AuthorizationData(email, password), observer);
+    public void auth(String email, String password, DisposableSingleObserver observer) {
+        execute(authorizationUseCase, new AuthorizationUseCase.AuthorizationData(email, password),
+            observer);
     }
 
-    public void resetPassRequest(String email, DisposableCompletableObserver observer){
+    public void resetPassRequest(String email, DisposableCompletableObserver observer) {
         execute(resetPassUseCase, new ResetPassUseCase.ResetPassData(email), observer);
     }
 
-    public void saveToken(){
+    public void saveToken() {
         tokenUseCase.execute();
+    }
+
+    public void resetToken() {
+        resetTokenUseCase.execute();
     }
 }
