@@ -1,5 +1,6 @@
 package com.lnews.evgen.locationnews.features.newslist.adapter;
 
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -36,6 +37,11 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return titles.get(position);
+    }
+
+    @Override
+    public Parcelable saveState() {
+        return null;
     }
 
     public void rewriteCountryCode(String countryCode) {

@@ -73,7 +73,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
         presenter.initPagerAdapter(getSupportFragmentManager());
         setupViewPager();
 
-        presenter.checkLocationPermission();
+        presenter.checkLocationPermission(true);
     }
 
     @Override
@@ -160,7 +160,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
 
             @Override
             public void currentLocationEvent() {
-                presenter.checkLocationPermission();
+                presenter.checkLocationPermission(false);
             }
         });
     }

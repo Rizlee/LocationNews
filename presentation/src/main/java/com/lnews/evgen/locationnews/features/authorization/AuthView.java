@@ -11,4 +11,8 @@ interface AuthView extends BaseFragmentView {
     void showRegistration();
 
     void onAuthSuccess();
+
+    void showProgressBar();
+
+    void hideProgressBar();
 }

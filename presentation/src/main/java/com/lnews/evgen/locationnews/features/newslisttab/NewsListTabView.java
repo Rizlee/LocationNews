@@ -7,5 +7,7 @@ import com.lnews.evgen.locationnews.features.base.BaseFragmentView;
 
 @StateStrategyType(OneExecutionStateStrategy.class)
 public interface NewsListTabView extends BaseFragmentView {
-    void showList(RootObject rootObject);
+    void showProgressBar();
+
+    void hideProgressBar();
 }

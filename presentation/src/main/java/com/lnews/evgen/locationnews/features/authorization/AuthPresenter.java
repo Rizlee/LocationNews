@@ -50,14 +50,17 @@ public class AuthPresenter extends BasePresenter<AuthView> {
             return;
         }
 
+        getViewState().showProgressBar();
         authorizationInteractor.auth(email, password, new DisposableSingleObserver() {
             @Override
             public void onSuccess(Object o) {
+                getViewState().hideProgressBar();
                 getViewState().onAuthSuccess();
             }
 
             @Override
             public void onError(Throwable e) {
+                getViewState().hideProgressBar();
                 getViewState().showToast(e.getMessage());
             }
         });

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -24,10 +25,10 @@ public class NewsListTabFragment extends BaseFragment implements NewsListTabView
     private static final String COUNTRY_CODE_TAG = "country_code";
     private static final String DEFAULT_COUNTRY_CODE = "";
 
-    private NewsRecyclerAdapter newsRecyclerAdapter;
-
     @BindView(R.id.recyclerview_newslist_category)
     RecyclerView recyclerView;
+    @BindView(R.id.progressbar_newslist_category)
+    ProgressBar progressBar;
 
     @InjectPresenter
     NewsListTabPresenter presenter;
@@ -66,7 +67,7 @@ public class NewsListTabFragment extends BaseFragment implements NewsListTabView
 
         setupRecyclerView();
 
-        presenter.updateList();
+        presenter.updateList(true);
 
         return view;
     }
@@ -76,16 +77,10 @@ public class NewsListTabFragment extends BaseFragment implements NewsListTabView
         Injector.getInstance().plusNewsListTabComponent().inject(this);
     }
 
-    @Override
-    public void showList(RootObject rootObject) {
-        newsRecyclerAdapter.setItems(rootObject);
-    }
-
     private void setupRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        newsRecyclerAdapter = new NewsRecyclerAdapter();
-        recyclerView.setAdapter(newsRecyclerAdapter);
+        presenter.initRecyclerAdapter();
+        recyclerView.setAdapter(presenter.getNewsRecyclerAdapter());
     }
 
     private void getArg(){
@@ -102,6 +97,16 @@ public class NewsListTabFragment extends BaseFragment implements NewsListTabView
 
     public void setCountryCode(String countryCode){
         presenter.setCountryCode(countryCode);
-        presenter.updateList();
+        presenter.updateList(false);
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }

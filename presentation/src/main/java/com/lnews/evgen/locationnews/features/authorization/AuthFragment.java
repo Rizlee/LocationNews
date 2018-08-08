@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -27,6 +28,8 @@ public class AuthFragment extends BaseFragment implements AuthView{
     EditText editTextEmail;
     @BindView(R.id.edittext_auth_password)
     EditText editTextPassword;
+    @BindView(R.id.progressbar_auth)
+    ProgressBar progressBar;
 
     @InjectPresenter
     AuthPresenter presenter;
@@ -92,5 +95,15 @@ public class AuthFragment extends BaseFragment implements AuthView{
 
     @Override public void onAuthSuccess() {
         authenticationEventListener.authSuccessEvent();
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }

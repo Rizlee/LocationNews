@@ -32,8 +32,8 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     private NewsPagerAdapter newsPagerAdapter;
     private ArrayList<String> titles;
-    private String country;
-    private String countryCode;
+    private String country = "";
+    private String countryCode = "";
     //TODO возможно при каждом успешном определении сохранять в бд(вместе со списком новостей)
 
     @Inject
@@ -56,9 +56,9 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     }
 
     public void initPagerAdapter(FragmentManager fragmentManager) {
-        if (newsPagerAdapter == null) {
+        //if (newsPagerAdapter == null) {
             newsPagerAdapter = new NewsPagerAdapter(fragmentManager, titles, countryCode);
-        }
+       // }
     }
 
     private boolean isPermissionGranted() {
@@ -112,11 +112,15 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         });
     }
 
-    public void checkLocationPermission() {
-        if (isPermissionGranted()) {
-            getLastLocation();
-        } else {
-            getViewState().showRequestPermission(PERMISSIONS_REQUEST_LOCATION);
+    public void checkLocationPermission(boolean isRestoreState) {
+        if (!isRestoreState) {
+            if (isPermissionGranted()) {
+                getLastLocation();
+            } else {
+                getViewState().showRequestPermission(PERMISSIONS_REQUEST_LOCATION);
+            }
+        }else {
+            getViewState().setToolbarTitle(country);
         }
     }
 
