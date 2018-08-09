@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.lnews.evgen.domain.entities.Article;
 import com.lnews.evgen.domain.entities.RootObject;
 import com.lnews.evgen.locationnews.R;
+import com.lnews.evgen.locationnews.utils.GlideApp;
 import de.hdodenhof.circleimageview.CircleImageView;
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -70,7 +71,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
             textViewDate.setText(formatter.format(article.getPublishedAt()));
             textViewSource.setText(article.getAuthor());
             textViewTitle.setText(article.getTitle());
-            Glide.with(itemView.getContext()).load(article.getUrlToImage()).into(imageView);
+            GlideApp.with(itemView.getContext()).load(article.getUrlToImage()).error(R.drawable.ic_broken_image).into(imageView);
         }
     }
 }

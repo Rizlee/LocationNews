@@ -122,4 +122,15 @@ public class Injector {
     public void clearNewsListTabComponent() {
         newsListTabComponent = null;
     }
+
+    public DescriptionComponent plusDescriptionComponent(){
+        if (descriptionComponent == null){
+            descriptionComponent = appComponent.plusDescriptionComponent();
+        }
+        return descriptionComponent;
+    }
+
+    public void clearDescriptionComponent(){
+        descriptionComponent = null;
+    }
 }

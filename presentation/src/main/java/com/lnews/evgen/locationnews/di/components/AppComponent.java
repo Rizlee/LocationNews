@@ -18,4 +18,6 @@ public interface AppComponent {
     TutorialComponent plusTutorialComponent();
 
     NewsListComponent plusNewsListComponent();
+
+    DescriptionComponent plusDescriptionComponent();
 }
