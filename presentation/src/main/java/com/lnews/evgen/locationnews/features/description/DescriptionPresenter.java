@@ -24,4 +24,8 @@ public class DescriptionPresenter extends BasePresenter<DescriptionView> {
         clearComponent();
         super.onDestroy();
     }
+
+    public void incomeDataEvent(String title, String date, String description, String imageUrl){
+        getViewState().showNews(title, date, description, imageUrl);
+    }
 }

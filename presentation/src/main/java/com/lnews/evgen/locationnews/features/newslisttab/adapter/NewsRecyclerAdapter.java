@@ -21,6 +21,11 @@ import java.text.SimpleDateFormat;
 public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.NewsViewHolder> {
     private static final String DATE_FORMAT = "dd.MM.yyyy";
     private RootObject rootObject;
+    private final OnItemClickListener listener;
+
+    public NewsRecyclerAdapter(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     public void setItems(RootObject rootObject) {
         this.rootObject = rootObject;
@@ -37,7 +42,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        holder.bind(rootObject.getArticles().get(position));
+        holder.bind(rootObject.getArticles().get(position), listener);
     }
 
     @Override
@@ -67,11 +72,20 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
             ButterKnife.bind(this, view);
         }
 
-        public void bind(Article article) {
+        public void bind(Article article, final OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(article);
+                }
+            });
             textViewDate.setText(formatter.format(article.getPublishedAt()));
             textViewSource.setText(article.getAuthor());
             textViewTitle.setText(article.getTitle());
-            GlideApp.with(itemView.getContext()).load(article.getUrlToImage()).error(R.drawable.ic_broken_image).into(imageView);
+            GlideApp.with(itemView.getContext())
+                .load(article.getUrlToImage())
+                .error(R.drawable.ic_broken_image)
+                .into(imageView);
         }
     }
 }

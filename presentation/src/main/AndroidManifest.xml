@@ -27,6 +27,7 @@
 
     <activity android:name=".features.tutorial.TutorialActivity"/>
     <activity android:name=".features.newslist.NewsListActivity"/>
+    <activity android:name=".features.description.DescriptionActivity"/>
   </application>
 
 </manifest>

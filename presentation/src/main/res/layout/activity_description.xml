@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     >
 
   <com.github.florent37.shapeofview.shapes.DiagonalView
@@ -20,8 +20,8 @@
         android:id="@+id/imageview_description"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:src="@color/button_apply"
         tools:ignore="ContentDescription"
+        tools:src="@color/button_apply"
         />
 
   </com.github.florent37.shapeofview.shapes.DiagonalView>
@@ -33,6 +33,11 @@
       android:layout_marginEnd="128dp"
       android:layout_marginStart="16dp"
       android:layout_marginTop="32dp"
+      android:shadowColor="@color/primary_dark"
+      android:shadowDx="1.5"
+      android:shadowDy="1.3"
+      android:shadowRadius="1.6"
+      android:textColor="@color/primary_light"
       android:textSize="18sp"
       android:textStyle="bold"
       app:layout_constraintEnd_toEndOf="parent"
@@ -45,9 +50,9 @@
       android:id="@+id/textview_description_date"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="8dp"
+      android:layout_marginBottom="16dp"
       android:layout_marginEnd="16dp"
-      app:layout_constraintBottom_toBottomOf="@id/diagonalview_description"
+      app:layout_constraintBottom_toTopOf="@id/textview_description"
       app:layout_constraintRight_toRightOf="parent"
       tools:text="DATE"
       />

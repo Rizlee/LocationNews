@@ -21,9 +21,12 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 public class NewsListTabFragment extends BaseFragment implements NewsListTabView {
-    private static final String TITLE_TAG = "title";
+    public static final String TITLE_TAG = "title";
     private static final String COUNTRY_CODE_TAG = "country_code";
     private static final String DEFAULT_COUNTRY_CODE = "";
+    public static final String IMAGE_TAG = "image";
+    public static final String DESCRIPTION_TAG = "description";
+    public static final String DATE_TAG = "date";
 
     @BindView(R.id.recyclerview_newslist_category)
     RecyclerView recyclerView;
