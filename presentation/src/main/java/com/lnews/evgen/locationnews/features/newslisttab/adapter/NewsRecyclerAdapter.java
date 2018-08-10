@@ -23,7 +23,8 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     private RootObject rootObject;
     private final OnItemClickListener listener;
 
-    public NewsRecyclerAdapter(OnItemClickListener listener) {
+    public NewsRecyclerAdapter(RootObject rootObject, OnItemClickListener listener) {
+        this.rootObject = rootObject;
         this.listener = listener;
     }
 

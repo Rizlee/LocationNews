@@ -41,17 +41,15 @@ public class NewsListTabPresenter extends BasePresenter<NewsListTabView> {
         super.onDestroy();
     }
 
-    public void initRecyclerAdapter(){
-        if (newsRecyclerAdapter == null){
-            newsRecyclerAdapter = new NewsRecyclerAdapter(item -> {
-                Intent intent = new Intent(context, DescriptionActivity.class);
-                intent.putExtra(NewsListTabFragment.TITLE_TAG, item.getTitle());
-                intent.putExtra(NewsListTabFragment.DATE_TAG, item.getPublishedAt());
-                intent.putExtra(NewsListTabFragment.DESCRIPTION_TAG, item.getDescription());
-                intent.putExtra(NewsListTabFragment.IMAGE_TAG, item.getUrlToImage());
-                getViewState().showActivity(intent);
-            });
-        }
+    public void initRecyclerAdapter() {
+        newsRecyclerAdapter = new NewsRecyclerAdapter(mainObject, item -> {
+            Intent intent = new Intent(context, DescriptionActivity.class);
+            intent.putExtra(NewsListTabFragment.TITLE_TAG, item.getTitle());
+            intent.putExtra(NewsListTabFragment.DATE_TAG, item.getPublishedAt());
+            intent.putExtra(NewsListTabFragment.DESCRIPTION_TAG, item.getDescription());
+            intent.putExtra(NewsListTabFragment.IMAGE_TAG, item.getUrlToImage());
+            getViewState().showActivity(intent);
+        });
     }
 
     public NewsRecyclerAdapter getNewsRecyclerAdapter() {
@@ -63,8 +61,8 @@ public class NewsListTabPresenter extends BasePresenter<NewsListTabView> {
     }
 
     public void updateList(boolean isRestoreState) {
-        if (isRestoreState){
-            if (mainObject != null){
+        if (isRestoreState) {
+            if (mainObject != null) {
                 newsRecyclerAdapter.setItems(mainObject);
                 return;
             }
