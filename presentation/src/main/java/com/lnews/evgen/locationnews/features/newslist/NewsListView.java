@@ -10,7 +10,7 @@ public interface NewsListView extends BaseActivityView {
 
     void showLocationDialog();
 
-    void changeCategoryList();
+    void showManageCategoryDialog(String[] tabs);
 
     void showRequestPermission(int permissionCode);
 

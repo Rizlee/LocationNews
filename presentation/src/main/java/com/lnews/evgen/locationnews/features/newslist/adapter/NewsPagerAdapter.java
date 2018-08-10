@@ -56,6 +56,11 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
         notifyDataSetChanged();
     }
 
+    public void removeFragment(int id){
+        fragments.remove(id);
+        notifyDataSetChanged();
+    }
+
     private void initFragments() {
         fragments = new ArrayList<>();
         for (int i = 0; i < titles.size(); i++) {

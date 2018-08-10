@@ -19,6 +19,7 @@ import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 
 @SuppressWarnings("ALL")
@@ -31,7 +32,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     private final AuthorizationInteractor authorizationInteractor;
 
     private NewsPagerAdapter newsPagerAdapter;
-    private ArrayList<String> titles;
+    private List<String> titles;
     private String country = "";
     private String countryCode = "";
     //TODO возможно при каждом успешном определении сохранять в бд(вместе со списком новостей)
@@ -144,8 +145,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         titles.add("sports");
     }
 
-    //todo испарвить на list
-    public ArrayList<String> getTitles() {
+    public List<String> getTitles() {
         return titles;
     }
 
@@ -161,6 +161,10 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         getViewState().showAddCategoryDialog();
     }
 
+    public void manageTabsAction(){
+        getViewState().showManageCategoryDialog(titles.toArray(new String[0]));
+    }
+
     public void countrySelectEvent(String country, String countryCode) {
         this.country = country;
         this.countryCode = countryCode;
@@ -171,7 +175,11 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     public void addTitleEvent(String title) {
         titles.add(title);
         newsPagerAdapter.addFragment(title);
-        //TODO
+    }
+
+    public void deleteCategoryEvent(int id){
+        titles.remove(id);
+        newsPagerAdapter.removeFragment(id);
     }
 
     public void logOutAction() {

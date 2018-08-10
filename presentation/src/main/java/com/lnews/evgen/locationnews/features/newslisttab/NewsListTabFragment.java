@@ -12,11 +12,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
-import com.lnews.evgen.domain.entities.RootObject;
 import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.features.base.BaseFragment;
-import com.lnews.evgen.locationnews.features.newslisttab.adapter.NewsRecyclerAdapter;
 import javax.inject.Inject;
 import javax.inject.Provider;
 

@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import butterknife.BindString;
 import butterknife.BindView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -25,17 +26,18 @@ import com.lnews.evgen.locationnews.features.base.BaseActivity;
 import com.lnews.evgen.locationnews.features.newslist.adapter.NewsPagerAdapter;
 import com.lnews.evgen.locationnews.features.newslist.dialog.CategoryDialog;
 import com.lnews.evgen.locationnews.features.newslist.dialog.LocationDialog;
+import com.lnews.evgen.locationnews.features.newslist.dialog.ManageDialog;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
 public class NewsListActivity extends BaseActivity implements NewsListView, NavigationView.OnNavigationItemSelectedListener {
-    private static final String START_TOOLBAR_TITLE = "";
     private static final String[] PERMISSIONS =
         { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
     private static final int OFFSCREEN_PAGE_LIMIT = 4;
     private static final String LOCATION = "location";
     private static final String CATEGORY = "category";
+    private static final String MANAGE = "manage";
 
     @BindView(R.id.toolbar_newslist)
     Toolbar toolbar;
@@ -47,6 +49,8 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
     ViewPager viewPager;
     @BindView(R.id.tablayout_newslist)
     TabLayout tabLayout;
+    @BindString(R.string.all_all_news)
+    String startTitleText;
 
     @InjectPresenter
     NewsListPresenter presenter;
@@ -113,7 +117,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
         drawerLayout.closeDrawers();
         switch (item.getItemId()) {
             case R.id.nav_manage_tab: {
-                //TODO
+                presenter.manageTabsAction();
                 break;
             }
 
@@ -166,13 +170,15 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
     }
 
     @Override
-    public void changeCategoryList() {
-
+    public void showManageCategoryDialog(String[] tabs) {
+        ManageDialog manageDialog = ManageDialog.newInstance(tabs);
+        manageDialog.show(getSupportFragmentManager(), MANAGE);
+        manageDialog.setDialogResult(id -> presenter.deleteCategoryEvent(id));
     }
 
     @Override
     public void setToolbarTitle(String title) {
-        Objects.requireNonNull(getSupportActionBar()).setTitle(title);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(startTitleText);
     }
 
     private void setupViewPager() {
@@ -186,7 +192,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
         ActionBar actionbar = getSupportActionBar();
         if (actionbar != null) {
             actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setTitle(START_TOOLBAR_TITLE);
+            actionbar.setTitle(startTitleText);
         }
     }
 
