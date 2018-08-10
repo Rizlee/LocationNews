@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         tools:ignore="ContentDescription"
         tools:src="@color/button_apply"
-        />
+        android:scaleType="centerCrop"/>
 
   </com.github.florent37.shapeofview.shapes.DiagonalView>
 

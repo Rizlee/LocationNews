@@ -15,6 +15,8 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.features.base.BaseFragment;
+import com.lnews.evgen.locationnews.features.newslisttab.adapter.NewsRecyclerAdapter;
+
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -66,10 +68,6 @@ public class NewsListTabFragment extends BaseFragment implements NewsListTabView
         //todo в базовом классе уже есть
         ButterKnife.bind(this, view);
 
-        setupRecyclerView();
-
-        presenter.updateList(true);
-
         return view;
     }
 
@@ -78,10 +76,10 @@ public class NewsListTabFragment extends BaseFragment implements NewsListTabView
         Injector.getInstance().plusNewsListTabComponent().inject(this);
     }
 
-    private void setupRecyclerView() {
+    public void setupList(NewsRecyclerAdapter adapter) {
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        presenter.initRecyclerAdapter();
-        recyclerView.setAdapter(presenter.getNewsRecyclerAdapter());
+        adapter.notifyDataSetChanged();
     }
 
     private void getArg(){

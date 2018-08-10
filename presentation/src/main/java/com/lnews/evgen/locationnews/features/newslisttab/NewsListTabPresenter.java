@@ -41,6 +41,15 @@ public class NewsListTabPresenter extends BasePresenter<NewsListTabView> {
         super.onDestroy();
     }
 
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+
+        initRecyclerAdapter();
+        setupList();
+        updateList(true);
+    }
+
     public void initRecyclerAdapter() {
         newsRecyclerAdapter = new NewsRecyclerAdapter(mainObject, item -> {
             Intent intent = new Intent(context, DescriptionActivity.class);
@@ -52,9 +61,9 @@ public class NewsListTabPresenter extends BasePresenter<NewsListTabView> {
         });
     }
 
-    public NewsRecyclerAdapter getNewsRecyclerAdapter() {
-        return newsRecyclerAdapter;
-    }
+//    public NewsRecyclerAdapter getNewsRecyclerAdapter() {
+//        return newsRecyclerAdapter;
+//    }
 
     public void titleChanged(String title) {
         this.title = title;
@@ -87,5 +96,9 @@ public class NewsListTabPresenter extends BasePresenter<NewsListTabView> {
 
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
+    }
+
+    public void setupList() {
+        getViewState().setupList(newsRecyclerAdapter);
     }
 }

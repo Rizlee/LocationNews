@@ -57,9 +57,9 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     }
 
     public void initPagerAdapter(FragmentManager fragmentManager) {
-        //if (newsPagerAdapter == null) {
+        if (newsPagerAdapter == null) {
             newsPagerAdapter = new NewsPagerAdapter(fragmentManager, titles, countryCode);
-       // }
+        }
     }
 
     private boolean isPermissionGranted() {
@@ -174,12 +174,12 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     public void addTitleEvent(String title) {
         titles.add(title);
-        newsPagerAdapter.addFragment(title);
+     //   newsPagerAdapter.addFragment(title);
     }
 
     public void deleteCategoryEvent(int id){
         titles.remove(id);
-        newsPagerAdapter.removeFragment(id);
+//        newsPagerAdapter.removeFragment(id);
     }
 
     public void logOutAction() {

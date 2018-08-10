@@ -56,6 +56,6 @@ public class DescriptionActivity extends BaseActivity implements DescriptionView
         textViewTitle.setText(title);
         textViewDate.setText(date);
         textViewDescription.setText(description);
-        GlideApp.with(this).load(imageUrl).fitCenter().error(R.drawable.ic_broken_image).into(imageView);
+        GlideApp.with(this).load(imageUrl).error(R.drawable.ic_broken_image).into(imageView);
     }
 }
