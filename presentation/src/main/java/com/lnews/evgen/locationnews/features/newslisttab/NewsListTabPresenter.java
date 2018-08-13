@@ -55,7 +55,7 @@ public class NewsListTabPresenter extends BasePresenter<NewsListTabView> {
     @SuppressLint("SimpleDateFormat")
     public void initRecyclerAdapter() {
         newsRecyclerAdapter = new NewsRecyclerAdapter(articles, item -> {
-            Intent intent = new Intent(context, DescriptionActivity.class);
+            Intent intent = DescriptionActivity.newIntent(context);
             intent.putExtra(NewsListTabFragment.TITLE_TAG, item.getTitle());
             intent.putExtra(NewsListTabFragment.DATE_TAG, item.getPublishedAt());
             intent.putExtra(NewsListTabFragment.DESCRIPTION_TAG, item.getDescription());

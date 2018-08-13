@@ -1,5 +1,7 @@
 package com.lnews.evgen.locationnews.features.description;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -63,5 +65,10 @@ public class DescriptionActivity extends BaseActivity implements DescriptionView
     public void onBackPressed() {
         presenter.onBackPressedEvent();
         super.onBackPressed();
+    }
+
+    //todo сделать так везде
+    public static Intent newIntent(Context context) {
+        return new Intent(context, DescriptionActivity.class);
     }
 }

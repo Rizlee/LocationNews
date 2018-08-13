@@ -12,20 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewsPagerAdapter extends FragmentStatePagerAdapter {
-    private List<NewsListTabFragment> fragments;
+    //private List<NewsListTabFragment> fragments;
     private List<String> titles;
     private String countryCode;
 
-    public NewsPagerAdapter(FragmentManager fm, List<NewsListTabFragment> fragments, List<String> titles, String countryCode) {
+    public NewsPagerAdapter(FragmentManager fm, List<String> titles, String countryCode) {
         super(fm);
         this.countryCode = countryCode;
         this.titles = titles;
-        this.fragments = fragments;
+    //    this.fragments = fragments;
     }
 
     @Override
     public NewsListTabFragment getItem(int position) {
-        return fragments.get(position);
+        return NewsListTabFragment.newInstance(titles.get(position), countryCode);
+        //.get(position);
     }
 
     @Override
@@ -39,12 +40,26 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
         return titles.get(position);
     }
 
-    @Override
-    public Parcelable saveState() {
-        return null;
-    }
+//    @Override
+//    public Parcelable saveState() {
+//        return null;
+//    }
 
     public void dataSetChanged(){
+        notifyDataSetChanged();
+    }
+
+    public void addNewPage(String title) {
+        titles.add(title);
+        notifyDataSetChanged();
+    }
+
+    public void removePage(int position) {
+        titles.remove(position);
+    }
+
+    public void setTitles(List<String> titles) {
+        this.titles = titles;
         notifyDataSetChanged();
     }
 }

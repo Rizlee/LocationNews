@@ -196,6 +196,11 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(final Bundle outState) {
+         super.onSaveInstanceState(outState);
+    }
+
     private void setupMenu() {
         navigationView.setNavigationItemSelectedListener(this);
     }

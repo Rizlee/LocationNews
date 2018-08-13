@@ -104,6 +104,7 @@ public class Repository implements IRepository {
         return storage.insertCategory(category);
     }
 
+    //todo сделать оффлайн режим через репозиторий
     @Override
     public Single<List<Article>> getNewsFromDB(String category) {
         return storage.getDescriptionsByKey(category);
