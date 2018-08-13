@@ -1,7 +1,7 @@
 package com.lnews.evgen.domain.entities;
 
 public class Address {
-    Object address;
+    private Object address;
 
     public Address(Object address){
         this.address = address;

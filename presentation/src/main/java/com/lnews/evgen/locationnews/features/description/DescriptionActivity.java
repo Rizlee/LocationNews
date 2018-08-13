@@ -58,4 +58,10 @@ public class DescriptionActivity extends BaseActivity implements DescriptionView
         textViewDescription.setText(description);
         GlideApp.with(this).load(imageUrl).fitCenter().error(R.drawable.ic_broken_image).into(imageView);
     }
+
+    @Override
+    public void onBackPressed() {
+        presenter.onBackPressedEvent();
+        super.onBackPressed();
+    }
 }

@@ -1,5 +1,6 @@
 package com.lnews.evgen.locationnews.features.newslist.dialog;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.features.newslist.OnLocationDialogResult;
+import java.util.Objects;
 
 public class LocationDialog extends DialogFragment {
 
@@ -26,13 +28,13 @@ public class LocationDialog extends DialogFragment {
     @BindArray(R.array.newslist_countries)
     String[] countries;
 
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
+        @SuppressLint("InflateParams")
         View view = inflater.inflate(R.layout.dialog_location, null);
         ButterKnife.bind(this, view);
 

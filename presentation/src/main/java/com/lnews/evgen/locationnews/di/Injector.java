@@ -4,6 +4,7 @@ import android.app.Application;
 import com.lnews.evgen.locationnews.di.components.AppComponent;
 import com.lnews.evgen.locationnews.di.components.AuthComponent;
 import com.lnews.evgen.locationnews.di.components.AuthenticationComponent;
+
 import com.lnews.evgen.locationnews.di.components.DaggerAppComponent;
 import com.lnews.evgen.locationnews.di.components.DescriptionComponent;
 import com.lnews.evgen.locationnews.di.components.NewsListComponent;

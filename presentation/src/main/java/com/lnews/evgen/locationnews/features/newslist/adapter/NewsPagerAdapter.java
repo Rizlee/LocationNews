@@ -16,11 +16,11 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
     private List<String> titles;
     private String countryCode;
 
-    public NewsPagerAdapter(FragmentManager fm, List<String> titles, String countryCode) {
+    public NewsPagerAdapter(FragmentManager fm, List<NewsListTabFragment> fragments, List<String> titles, String countryCode) {
         super(fm);
         this.countryCode = countryCode;
         this.titles = titles;
-        initFragments();
+        this.fragments = fragments;
     }
 
     @Override
@@ -44,28 +44,8 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
         return null;
     }
 
-    public void rewriteCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-        for (int i = 0; i < titles.size(); i++) {
-            fragments.get(i).setCountryCode(countryCode);
-        }
-    }
-
-    public void addFragment(String title) {
-        fragments.add(NewsListTabFragment.newInstance(title, countryCode));
+    public void dataSetChanged(){
         notifyDataSetChanged();
-    }
-
-    public void removeFragment(int id){
-        fragments.remove(id);
-        notifyDataSetChanged();
-    }
-
-    private void initFragments() {
-        fragments = new ArrayList<>();
-        for (int i = 0; i < titles.size(); i++) {
-            fragments.add(NewsListTabFragment.newInstance(titles.get(i), countryCode));
-        }
     }
 }
 

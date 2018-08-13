@@ -17,19 +17,19 @@ import com.lnews.evgen.locationnews.utils.GlideApp;
 import de.hdodenhof.circleimageview.CircleImageView;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.NewsViewHolder> {
-    private static final String DATE_FORMAT = "dd.MM.yyyy";
-    private RootObject rootObject;
+    private List<Article> articles;
     private final OnItemClickListener listener;
 
-    public NewsRecyclerAdapter(RootObject rootObject, OnItemClickListener listener) {
-        this.rootObject = rootObject;
+    public NewsRecyclerAdapter(List<Article> articles, OnItemClickListener listener) {
+        this.articles = articles;
         this.listener = listener;
     }
 
-    public void setItems(RootObject rootObject) {
-        this.rootObject = rootObject;
+    public void setItems(List<Article> articles) {
+        this.articles = articles;
         notifyDataSetChanged();
     }
 
@@ -43,13 +43,13 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        holder.bind(rootObject.getArticles().get(position), listener);
+        holder.bind(articles.get(position), listener);
     }
 
     @Override
     public int getItemCount() {
-        if (rootObject != null) {
-            return rootObject.getArticles().size();
+        if (articles != null) {
+            return articles.size();
         } else {
             return 0;
         }
@@ -57,7 +57,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     class NewsViewHolder extends RecyclerView.ViewHolder {
         @SuppressLint("SimpleDateFormat")
-        private final Format formatter = new SimpleDateFormat(DATE_FORMAT);
 
         @BindView(R.id.circleimage_newslist_item)
         CircleImageView imageView;
@@ -80,7 +79,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
                     listener.onItemClick(article);
                 }
             });
-            textViewDate.setText(formatter.format(article.getPublishedAt()));
+            textViewDate.setText(article.getPublishedAt());
             textViewSource.setText(article.getAuthor());
             textViewTitle.setText(article.getTitle());
             GlideApp.with(itemView.getContext())

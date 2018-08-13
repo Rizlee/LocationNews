@@ -9,33 +9,11 @@ import io.reactivex.Single;
 import javax.inject.Inject;
 
 public class NewsUseCase extends SingleUseCase<NewsUseCase.NewsData, RootObject> {
-    private static final String COUNTRY_KEY = "country=";
-    private static final String CATEGORY_KEY = "category=";
-    private static final String KEYWORD_KEY = "q=";
-    private static final String AND_KEY = "&";
 
     @Inject
     NewsUseCase(IRepository repository, ExecutionThread threadExecutor,
         PostExecutionThread postExecutionThread) {
         super(repository, threadExecutor, postExecutionThread);
-    }
-
-    public String buildUrl(String country, String category, String keyWord) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        if (!country.isEmpty()) {
-            stringBuilder.append(COUNTRY_KEY).append(country).append(AND_KEY);
-        }
-
-        if (!category.isEmpty()) {
-            stringBuilder.append(CATEGORY_KEY).append(category).append(AND_KEY);
-        }
-
-        if (!keyWord.isEmpty()) {
-            stringBuilder.append(KEYWORD_KEY).append(keyWord).append(AND_KEY);
-        }
-
-        return stringBuilder.toString();
     }
 
     @Override

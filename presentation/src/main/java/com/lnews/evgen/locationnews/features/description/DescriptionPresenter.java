@@ -28,4 +28,8 @@ public class DescriptionPresenter extends BasePresenter<DescriptionView> {
     public void incomeDataEvent(String title, String date, String description, String imageUrl){
         getViewState().showNews(title, date, description, imageUrl);
     }
+
+    public void onBackPressedEvent(){
+        getViewState().finishActivity();
+    }
 }

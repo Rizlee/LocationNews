@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+  <com.github.florent37.shapeofview.shapes.DiagonalView
+      android:id="@+id/diagonalview_description"
+      android:layout_width="300dp"
+      android:layout_height="150dp"
+      app:shape_diagonal_angle="10"
+      app:shape_diagonal_direction="left"
+      app:shape_diagonal_position="bottom"
+      >
+
+    <ImageView
+        android:id="@+id/imageview_description"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="ContentDescription"
+        tools:src="@color/button_apply"
+        />
+
+  </com.github.florent37.shapeofview.shapes.DiagonalView>
+
+  <TextView
+      android:id="@+id/textview_description_title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="128dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="16dp"
+      android:shadowColor="@color/primary_dark"
+      android:shadowDx="1.5"
+      android:shadowDy="1.3"
+      android:shadowRadius="1.6"
+      android:textColor="@color/primary_light"
+      android:textSize="14sp"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="TITLE"
+      />
+
+  <TextView
+      android:id="@+id/textview_description_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="16dp"
+      android:textSize="12sp"
+      app:layout_constraintBottom_toTopOf="@id/textview_description"
+      app:layout_constraintRight_toRightOf="parent"
+      tools:text="DATE"
+      />
+
+  <TextView
+      android:id="@+id/textview_description"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/diagonalview_description"
+      tools:text="Description"
+      />
+</android.support.constraint.ConstraintLayout>

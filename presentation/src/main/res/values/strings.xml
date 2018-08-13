@@ -7,6 +7,11 @@
   <string name="all_button_apply">Apply</string>
   <string name="all_button_cancel">Cancel</string>
   <string name="all_all_news">All</string>
+  <string-array name="all_start_categories">
+    <item>business</item>
+    <item>science</item>
+    <item>sports</item>
+  </string-array>
 
   <!--Tutorial-->
   <string name="tutorial_auth_description">Log in to save your settings</string>
@@ -163,4 +168,5 @@
     <item>sports</item>
     <item>technology</item>
   </string-array>
+  <string name="newslist_db_connection_error">Unexpected error occurred, please restart application</string>
 </resources>

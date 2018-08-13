@@ -7,17 +7,22 @@ import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import com.arellomobile.mvp.InjectViewState;
+import com.lnews.evgen.domain.entities.Category;
 import com.lnews.evgen.domain.interactors.AuthorizationInteractor;
 import com.lnews.evgen.domain.interactors.LocationInteractor;
+import com.lnews.evgen.domain.interactors.NewsInteractor;
 import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.di.annotations.PerActivity;
 import com.lnews.evgen.locationnews.features.authentication.AuthenticationActivity;
 import com.lnews.evgen.locationnews.features.base.BasePresenter;
 import com.lnews.evgen.locationnews.features.newslist.adapter.NewsPagerAdapter;
+import com.lnews.evgen.locationnews.features.newslisttab.NewsListTabFragment;
 import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableCompletableObserver;
+import io.reactivex.observers.DisposableSingleObserver;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -30,18 +35,22 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     private final LocationInteractor locationInteractor;
     private final AuthorizationInteractor authorizationInteractor;
+    private final NewsInteractor newsInteractor;
 
     private NewsPagerAdapter newsPagerAdapter;
     private List<String> titles;
+    private List<NewsListTabFragment> fragments;
     private String country = "";
     private String countryCode = "";
-    //TODO возможно при каждом успешном определении сохранять в бд(вместе со списком новостей)
 
     @Inject
     NewsListPresenter(LocationInteractor locationInteractor,
-        AuthorizationInteractor authorizationInteractor) {
+        AuthorizationInteractor authorizationInteractor, NewsInteractor newsInteractor) {
         this.locationInteractor = locationInteractor;
         this.authorizationInteractor = authorizationInteractor;
+        this.newsInteractor = newsInteractor;
+        titles = new ArrayList<>();
+        fragments = new ArrayList<>();
         initTitles();
     }
 
@@ -57,9 +66,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     }
 
     public void initPagerAdapter(FragmentManager fragmentManager) {
-        //if (newsPagerAdapter == null) {
-            newsPagerAdapter = new NewsPagerAdapter(fragmentManager, titles, countryCode);
-       // }
+        newsPagerAdapter = new NewsPagerAdapter(fragmentManager, fragments, titles, countryCode);
     }
 
     private boolean isPermissionGranted() {
@@ -67,6 +74,23 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
             == PackageManager.PERMISSION_GRANTED
             && ActivityCompat.checkSelfPermission(context,
             Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void rewriteCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+        for (int i = 0; i < titles.size(); i++) {
+            fragments.get(i).setCountryCode(countryCode);
+        }
+    }
+
+    private void addFragment(String title) {
+        fragments.add(NewsListTabFragment.newInstance(title, countryCode));
+        newsPagerAdapter.dataSetChanged();
+    }
+
+    private void removeFragment(int id){
+        fragments.remove(id);
+        newsPagerAdapter.dataSetChanged();
     }
 
     private void getAddressFromLocation(Location location) {
@@ -93,6 +117,24 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
                 }
             });
+    }
+
+    private void initTitles() {
+        newsInteractor.getCategories(new DisposableSingleObserver<List<Category>>() {
+            @Override
+            public void onSuccess(List<Category> categories) {
+                for (int i = 0; i< categories.size(); i++){
+                    titles.add(categories.get(i).categoryName);
+                    fragments.add(NewsListTabFragment.newInstance(titles.get(i), countryCode));
+                    newsPagerAdapter.dataSetChanged();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                getViewState().showToast(R.string.newslist_db_connection_error);
+            }
+        });
     }
 
     public void getLastLocation() {
@@ -138,21 +180,6 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         }
     }
 
-    public void initTitles() { //TODO категории(тайтлы) буду получать от firebase'a, если не доступен то с бд
-        titles = new ArrayList<>();
-        titles.add("business");
-        titles.add("science");
-        titles.add("sports");
-    }
-
-    public List<String> getTitles() {
-        return titles;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
     public void changeLocationAction() {
         getViewState().showLocationDialog();
     }
@@ -169,17 +196,52 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         this.country = country;
         this.countryCode = countryCode;
         getViewState().setToolbarTitle(country);
-        newsPagerAdapter.rewriteCountryCode(countryCode);
+        rewriteCountryCode(countryCode);
     }
 
     public void addTitleEvent(String title) {
+        newsInteractor.insertCategory(new Category(title), new DisposableCompletableObserver() {
+            @Override
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
         titles.add(title);
-        newsPagerAdapter.addFragment(title);
+        addFragment(title);
     }
 
     public void deleteCategoryEvent(int id){
+        newsInteractor.removeCategory(new Category(titles.get(id)), new DisposableCompletableObserver() {
+            @Override
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
+
+        newsInteractor.removeDescription(titles.get(id), new DisposableCompletableObserver() {
+            @Override
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
+
         titles.remove(id);
-        newsPagerAdapter.removeFragment(id);
+        removeFragment(id);
     }
 
     public void logOutAction() {

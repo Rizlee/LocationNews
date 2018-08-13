@@ -2,6 +2,7 @@ package com.lnews.evgen.locationnews.di.modules;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.lnews.evgen.data.local.db.storage.DBStorage;
 import com.lnews.evgen.data.network.RestApi;
 import com.lnews.evgen.locationnews.BuildConfig;
 import dagger.Module;
