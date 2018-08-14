@@ -30,19 +30,21 @@ public interface IRepository {
 
     Observable getAddressFromLocation(Location location);
 
-    Single<RootObject> getNewsByCategory(String country, String category);
+    /*Single<RootObject> getNewsByCategoryOnline(String country, String category);*/
 
-    Single<List<Category>> getCategories();
+    Single<List<Category>> getCategoriesOffline();
 
-    Completable insertCategories(List<Category> categories);
+    Completable insertCategoriesOffline(List<Category> categories);
 
-    Completable removeCategory(Category category);
+    Completable removeCategoryOffline(Category category);
 
-    Completable insertCategory(Category category);
+    Completable insertCategoryOffline(Category category);
 
-    Single<List<Article>> getNewsFromDB(String category);
+    /*Single<List<Article>> getNewsByCategoryOffline(String category);*/
 
     Completable removeNewsByCategoryFromDB(String category);
 
     Completable insertNewsByCategoryInDB(String category, List<Article> articles);
+
+    Single<RootObject> getNewsByCategory(String country, String category);
 }

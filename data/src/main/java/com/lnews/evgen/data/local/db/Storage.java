@@ -6,8 +6,11 @@ import com.lnews.evgen.data.local.db.dao.DescriptionDao;
 import com.lnews.evgen.data.local.db.storage.DBStorage;
 import com.lnews.evgen.domain.entities.Article;
 import com.lnews.evgen.domain.entities.Category;
+import com.lnews.evgen.domain.entities.RootObject;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleOnSubscribe;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -56,8 +59,15 @@ public class Storage {
         return Completable.fromAction(() -> categoryDao.insert(category));
     }
 
-    public Single<List<Article>> getDescriptionsByKey(String category) {
-        return descriptionDao.getAllByKey(category);
+    public Single<RootObject> getDescriptionsByKey(String category) {
+        return Single.create(new SingleOnSubscribe<RootObject>() {
+            @Override
+            public void subscribe(SingleEmitter<RootObject> emitter) throws Exception {
+                RootObject rootObject = new RootObject();
+                rootObject.setArticles(descriptionDao.getAllByKey(category));
+                emitter.onSuccess(rootObject);
+            }
+        });
     }
 
     public Completable insertDescriptions(String category, List<Article> articles) {

@@ -1,12 +1,14 @@
 package com.lnews.evgen.data.network;
 
 import com.google.firebase.auth.AuthResult;
-import com.lnews.evgen.data.local.Cache;
-import com.lnews.evgen.data.util.RxFirebaseAuth;
+import com.lnews.evgen.data.util.firebase.RxFirebaseAuth;
+import com.lnews.evgen.domain.entities.Article;
 import com.lnews.evgen.domain.entities.RootObject;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,27 +18,25 @@ import com.google.firebase.auth.FirebaseAuth;
 public class RestApiService {
 
     private final RestApi restApi;
-
-    private final Cache cache;
+    private final RxFirebaseAuth rxFirebaseAuth;
 
     @Inject
-    RestApiService(RestApi restRestApi, Cache cache) {
+    RestApiService(RestApi restRestApi, RxFirebaseAuth rxFirebaseAuth) {
         this.restApi = restRestApi;
-        this.cache = cache;
+        this.rxFirebaseAuth = rxFirebaseAuth;
     }
 
-    //todo убрать RxFirebaseAuth статику
     public Maybe<AuthResult> register(String email, String password) {
-        return RxFirebaseAuth.createUserWithEmailAndPassword(FirebaseAuth.getInstance(), email,
+        return rxFirebaseAuth.createUserWithEmailAndPassword(FirebaseAuth.getInstance(), email,
             password);
     }
 
     public Maybe<AuthResult> auth(String email, String password) {
-        return RxFirebaseAuth.signInWithEmailAndPassword(FirebaseAuth.getInstance(), email, password);
+        return rxFirebaseAuth.signInWithEmailAndPassword(FirebaseAuth.getInstance(), email, password);
     }
 
     public Completable sendResetRequest(String email) {
-        return RxFirebaseAuth.sendPasswordResetEmail(FirebaseAuth.getInstance(), email);
+        return rxFirebaseAuth.sendPasswordResetEmail(FirebaseAuth.getInstance(), email);
     }
 
     public String getToken() {

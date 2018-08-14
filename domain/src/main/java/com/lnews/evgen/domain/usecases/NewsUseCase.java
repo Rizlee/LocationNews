@@ -1,11 +1,13 @@
 package com.lnews.evgen.domain.usecases;
 
+import com.lnews.evgen.domain.entities.Article;
 import com.lnews.evgen.domain.entities.RootObject;
 import com.lnews.evgen.domain.executor.ExecutionThread;
 import com.lnews.evgen.domain.executor.PostExecutionThread;
 import com.lnews.evgen.domain.repository.IRepository;
 import com.lnews.evgen.domain.usecases.base.SingleUseCase;
 import io.reactivex.Single;
+import java.util.List;
 import javax.inject.Inject;
 
 public class NewsUseCase extends SingleUseCase<NewsUseCase.NewsData, RootObject> {
@@ -24,12 +26,10 @@ public class NewsUseCase extends SingleUseCase<NewsUseCase.NewsData, RootObject>
     public static final class NewsData {
         private String country;
         private String category;
-        private String keyWord;
 
-        public NewsData(String country, String category, String keyWord) {
+        public NewsData(String country, String category) {
             this.country = country;
             this.category = category;
-            this.keyWord = keyWord;
         }
 
         public String getCountry() {
@@ -38,10 +38,6 @@ public class NewsUseCase extends SingleUseCase<NewsUseCase.NewsData, RootObject>
 
         public String getCategory() {
             return category;
-        }
-
-        public String getKeyWord() {
-            return keyWord;
         }
     }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.lnews.evgen.domain.entities.Article;
 import com.lnews.evgen.domain.entities.RootObject;
 import com.lnews.evgen.locationnews.R;
@@ -73,18 +74,15 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         }
 
         public void bind(Article article, final OnItemClickListener listener) {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(article);
-                }
-            });
+            itemView.setOnClickListener(v -> listener.onItemClick(article));
             textViewDate.setText(article.getPublishedAt());
             textViewSource.setText(article.getAuthor());
             textViewTitle.setText(article.getTitle());
             GlideApp.with(itemView.getContext())
                 .load(article.getUrlToImage())
+                .placeholder(R.drawable.ic_watch)
                 .error(R.drawable.ic_broken_image)
+                .centerCrop()
                 .into(imageView);
         }
     }

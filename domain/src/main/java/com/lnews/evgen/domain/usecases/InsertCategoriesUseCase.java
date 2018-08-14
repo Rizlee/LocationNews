@@ -19,6 +19,6 @@ public class InsertCategoriesUseCase extends CompletableUseCase<List<Category>> 
 
     @Override
     protected Completable buildUseCase(List<Category> categories) {
-        return  repository.insertCategories(categories);
+        return  repository.insertCategoriesOffline(categories);
     }
 }

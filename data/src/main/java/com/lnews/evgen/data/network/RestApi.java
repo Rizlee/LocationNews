@@ -3,7 +3,6 @@ package com.lnews.evgen.data.network;
 import com.lnews.evgen.domain.entities.RootObject;
 import io.reactivex.Single;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface RestApi {

@@ -1,11 +1,15 @@
 package com.lnews.evgen.locationnews.features.description;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.lnews.evgen.domain.entities.Article;
 import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.features.base.BaseActivity;
@@ -56,12 +60,26 @@ public class DescriptionActivity extends BaseActivity implements DescriptionView
         textViewTitle.setText(title);
         textViewDate.setText(date);
         textViewDescription.setText(description);
-        GlideApp.with(this).load(imageUrl).fitCenter().error(R.drawable.ic_broken_image).into(imageView);
+        GlideApp.with(this)
+            .load(imageUrl)
+            .placeholder(R.drawable.ic_watch)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .error(R.drawable.ic_broken_image)
+            .into(imageView);
     }
 
     @Override
     public void onBackPressed() {
         presenter.onBackPressedEvent();
         super.onBackPressed();
+    }
+
+    public static Intent newIntent(Context context, Article item) {
+        Intent intent = new Intent(context, DescriptionActivity.class);
+        intent.putExtra(NewsListTabFragment.TITLE_TAG, item.getTitle());
+        intent.putExtra(NewsListTabFragment.DATE_TAG, item.getPublishedAt());
+        intent.putExtra(NewsListTabFragment.DESCRIPTION_TAG, item.getDescription());
+        intent.putExtra(NewsListTabFragment.IMAGE_TAG, item.getUrlToImage());
+        return intent;
     }
 }

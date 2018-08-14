@@ -1,7 +1,11 @@
 package com.lnews.evgen.data.repository;
 
+import android.content.Context;
 import android.location.Address;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.util.Log;
 import com.google.firebase.auth.AuthResult;
 import com.lnews.evgen.data.local.Cache;
 import com.lnews.evgen.data.local.db.Storage;
@@ -22,14 +26,16 @@ public class Repository implements IRepository {
     private final Cache cache;
     private final LocationService locationRepository;
     private final Storage storage;
+    private final Context context;
 
     @Inject
     Repository(RestApiService networkRepository, Cache cache, LocationService locationRepository,
-        Storage storage) {
+        Storage storage, Context context) {
         this.networkRepository = networkRepository;
         this.cache = cache;
         this.locationRepository = locationRepository;
         this.storage = storage;
+        this.context = context;
     }
 
     @Override
@@ -79,35 +85,35 @@ public class Repository implements IRepository {
             .toObservable();
     }
 
-    @Override
-    public Single<RootObject> getNewsByCategory(String country, String category) {
+    /*@Override
+    public Single<RootObject> getNewsByCategoryOnline(String country, String category) {
         return networkRepository.getNewsByCategory(country, category);
-    }
+    }*/
 
     @Override
-    public Single<List<Category>> getCategories() {
+    public Single<List<Category>> getCategoriesOffline() {
         return storage.getCategories();
     }
 
     @Override
-    public Completable insertCategories(List<Category> categories) {
-       return storage.insertCategories(categories);
+    public Completable insertCategoriesOffline(List<Category> categories) {
+        return storage.insertCategories(categories);
     }
 
     @Override
-    public Completable removeCategory(Category category) {
+    public Completable removeCategoryOffline(Category category) {
         return storage.removeCategory(category);
     }
 
     @Override
-    public Completable insertCategory(Category category) {
+    public Completable insertCategoryOffline(Category category) {
         return storage.insertCategory(category);
     }
 
-    @Override
-    public Single<List<Article>> getNewsFromDB(String category) {
+    /*@Override
+    public Single<List<Article>> getNewsByCategoryOffline(String category) {
         return storage.getDescriptionsByKey(category);
-    }
+    }*/
 
     @Override
     public Completable removeNewsByCategoryFromDB(String category) {
@@ -120,7 +126,28 @@ public class Repository implements IRepository {
     }
 
     @Override
+    public Single<RootObject> getNewsByCategory(String country, String category) {
+        if (isOnline()){
+            return networkRepository.getNewsByCategory(country, category);
+        }else {
+            return storage.getDescriptionsByKey(category);
+        }
+    }
+
+    @Override
     public void resetToken() {
         cache.resetToken();
+    }
+
+    private boolean isOnline() {
+        try {
+            ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            assert connectivityManager != null;
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
+        } catch (Exception ignored) {
+        }
+        return false;
     }
 }

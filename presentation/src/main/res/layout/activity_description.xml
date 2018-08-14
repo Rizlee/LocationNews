@@ -22,6 +22,7 @@
         android:layout_height="match_parent"
         tools:ignore="ContentDescription"
         tools:src="@color/button_apply"
+        android:scaleType="centerCrop"
         />
 
   </com.github.florent37.shapeofview.shapes.DiagonalView>
@@ -34,9 +35,9 @@
       android:layout_marginStart="16dp"
       android:layout_marginTop="32dp"
       android:shadowColor="@color/primary_dark"
-      android:shadowDx="1.5"
-      android:shadowDy="1.3"
-      android:shadowRadius="1.6"
+      android:shadowDx="2"
+      android:shadowDy="2"
+      android:shadowRadius="2"
       android:textColor="@color/primary_light"
       android:textSize="18sp"
       android:textStyle="bold"

@@ -39,7 +39,6 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     private NewsPagerAdapter newsPagerAdapter;
     private List<String> titles;
-    private List<NewsListTabFragment> fragments;
     private String country = "";
     private String countryCode = "";
 
@@ -50,7 +49,6 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         this.authorizationInteractor = authorizationInteractor;
         this.newsInteractor = newsInteractor;
         titles = new ArrayList<>();
-        fragments = new ArrayList<>();
         initTitles();
     }
 
@@ -66,7 +64,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     }
 
     public void initPagerAdapter(FragmentManager fragmentManager) {
-        newsPagerAdapter = new NewsPagerAdapter(fragmentManager, fragments, titles, countryCode);
+        newsPagerAdapter = new NewsPagerAdapter(fragmentManager, titles, countryCode);
     }
 
     private boolean isPermissionGranted() {
@@ -79,18 +77,8 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     private void rewriteCountryCode(String countryCode) {
         this.countryCode = countryCode;
         for (int i = 0; i < titles.size(); i++) {
-            fragments.get(i).setCountryCode(countryCode);
+            newsPagerAdapter.getItem(i).setCountryCode(countryCode);
         }
-    }
-
-    private void addFragment(String title) {
-        fragments.add(NewsListTabFragment.newInstance(title, countryCode));
-        newsPagerAdapter.dataSetChanged();
-    }
-
-    private void removeFragment(int id){
-        fragments.remove(id);
-        newsPagerAdapter.dataSetChanged();
     }
 
     private void getAddressFromLocation(Location location) {
@@ -125,8 +113,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
             public void onSuccess(List<Category> categories) {
                 for (int i = 0; i< categories.size(); i++){
                     titles.add(categories.get(i).categoryName);
-                    fragments.add(NewsListTabFragment.newInstance(titles.get(i), countryCode));
-                    newsPagerAdapter.dataSetChanged();
+                    newsPagerAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -212,7 +199,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
             }
         });
         titles.add(title);
-        addFragment(title);
+        newsPagerAdapter.notifyDataSetChanged();
     }
 
     public void deleteCategoryEvent(int id){
@@ -241,7 +228,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         });
 
         titles.remove(id);
-        removeFragment(id);
+        newsPagerAdapter.notifyDataSetChanged();
     }
 
     public void logOutAction() {

@@ -5,7 +5,6 @@ import com.lnews.evgen.domain.entities.Category;
 import com.lnews.evgen.domain.entities.RootObject;
 import com.lnews.evgen.domain.interactors.base.BaseInteractor;
 import com.lnews.evgen.domain.usecases.CategoryUseCase;
-import com.lnews.evgen.domain.usecases.DescriptionOfflineUseCase;
 import com.lnews.evgen.domain.usecases.InsertCategoriesUseCase;
 import com.lnews.evgen.domain.usecases.InsertCategoryUseCase;
 import com.lnews.evgen.domain.usecases.InsertDescriptionUseCase;
@@ -25,15 +24,13 @@ public class NewsInteractor extends BaseInteractor {
     private final InsertCategoryUseCase insertCategoryUseCase;
     private final InsertDescriptionUseCase insertDescriptionUseCase;
     private final RemoveDescriptionUseCase removeDescriptionUseCase;
-    private final DescriptionOfflineUseCase descriptionOfflineUseCase;
 
     @Inject
     NewsInteractor(NewsUseCase newsUseCase, CategoryUseCase categoryUseCase,
         InsertCategoriesUseCase insertCategoriesUseCase,
         RemoveCategoryUseCase removeCategoryUseCase, InsertCategoryUseCase insertCategoryUseCase,
         InsertDescriptionUseCase insertDescriptionUseCase,
-        RemoveDescriptionUseCase removeDescriptionUseCase,
-        DescriptionOfflineUseCase descriptionOfflineUseCase) {
+        RemoveDescriptionUseCase removeDescriptionUseCase) {
         this.newsUseCase = newsUseCase;
         this.categoryUseCase = categoryUseCase;
         this.insertCategoriesUseCase = insertCategoriesUseCase;
@@ -41,12 +38,11 @@ public class NewsInteractor extends BaseInteractor {
         this.insertCategoryUseCase = insertCategoryUseCase;
         this.insertDescriptionUseCase = insertDescriptionUseCase;
         this.removeDescriptionUseCase = removeDescriptionUseCase;
-        this.descriptionOfflineUseCase = descriptionOfflineUseCase;
     }
 
-    public void getNews(String country, String category, String keyWord,
+    public void getNews(String country, String category,
         DisposableSingleObserver<RootObject> observer) {
-        execute(newsUseCase, new NewsUseCase.NewsData(country, category, keyWord), observer);
+        execute(newsUseCase, new NewsUseCase.NewsData(country, category), observer);
     }
 
     public void getCategories(DisposableSingleObserver<List<Category>> observer) {
@@ -72,9 +68,5 @@ public class NewsInteractor extends BaseInteractor {
 
     public void removeDescription(String category, DisposableCompletableObserver observer){
         execute(removeDescriptionUseCase, category, observer);
-    }
-
-    public void getDescription(String category, DisposableSingleObserver<List<Article>> observer){
-        execute(descriptionOfflineUseCase, category, observer);
     }
 }

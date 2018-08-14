@@ -19,6 +19,6 @@ public class CategoryUseCase extends SingleUseCase<Integer,List<Category>> {
 
     @Override
     protected Single<List<Category>> buildUseCase(Integer integer) {
-        return repository.getCategories();
+        return repository.getCategoriesOffline();
     }
 }

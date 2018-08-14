@@ -6,7 +6,6 @@ import com.lnews.evgen.domain.executor.PostExecutionThread;
 import com.lnews.evgen.domain.repository.IRepository;
 import com.lnews.evgen.domain.usecases.base.CompletableUseCase;
 import io.reactivex.Completable;
-import java.util.List;
 import javax.inject.Inject;
 
 public class InsertCategoryUseCase extends CompletableUseCase<Category> {
@@ -19,6 +18,6 @@ public class InsertCategoryUseCase extends CompletableUseCase<Category> {
 
     @Override
     protected Completable buildUseCase(Category category) {
-        return repository.insertCategory(category);
+        return repository.insertCategoryOffline(category);
     }
 }

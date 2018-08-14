@@ -10,7 +10,7 @@ import java.util.List;
 @Dao
 public interface DescriptionDao {
     @Query("SELECT * FROM article WHERE category LIKE :category")
-    Single<List<Article>> getAllByKey(String category);
+    List<Article> getAllByKey(String category);
 
     @Insert
     void insert(Article article);

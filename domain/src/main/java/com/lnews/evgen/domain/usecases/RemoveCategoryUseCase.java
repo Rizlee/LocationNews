@@ -18,6 +18,6 @@ public class RemoveCategoryUseCase extends CompletableUseCase<Category> {
 
     @Override
     protected Completable buildUseCase(Category category) {
-        return repository.removeCategory(category);
+        return repository.removeCategoryOffline(category);
     }
 }

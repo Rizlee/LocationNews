@@ -1,4 +1,4 @@
-package com.lnews.evgen.data.util;
+package com.lnews.evgen.data.util.firebase;
 
 import android.support.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
