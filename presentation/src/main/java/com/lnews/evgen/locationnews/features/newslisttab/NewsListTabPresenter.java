@@ -40,7 +40,7 @@ public class NewsListTabPresenter extends BasePresenter<NewsListTabView> {
 
     public void initRecyclerAdapter() {
         newsRecyclerAdapter = new NewsRecyclerAdapter(articles,
-            item -> getViewState().showActivity(DescriptionActivity.newIntent(context, item)));
+            item -> getViewState().showActivity(DescriptionActivity.newIntent(context, item, title)));
     }
 
     private void updateDB() {

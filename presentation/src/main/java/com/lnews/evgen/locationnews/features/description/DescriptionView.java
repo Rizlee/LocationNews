@@ -7,5 +7,5 @@ import com.lnews.evgen.locationnews.features.base.BaseView;
 
 @StateStrategyType(OneExecutionStateStrategy.class)
 public interface DescriptionView extends BaseActivityView{
-    void showNews(String title, String date, String description, String imageUrl);
+    void showNews(String title, String date, String description, String imageUrl, String category);
 }

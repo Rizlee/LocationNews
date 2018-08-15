@@ -25,6 +25,7 @@ public class NewsListTabFragment extends BaseFragment implements NewsListTabView
     public static final String IMAGE_TAG = "image";
     public static final String DESCRIPTION_TAG = "description";
     public static final String DATE_TAG = "date";
+    public static final String TOOLBAR_TAG = "toolbar";
 
     @BindView(R.id.recyclerview_newslist_category)
     RecyclerView recyclerView;

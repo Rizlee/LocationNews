@@ -9,13 +9,15 @@ import javax.inject.Inject;
 @InjectViewState
 @PerActivity(DescriptionActivity.class)
 public class DescriptionPresenter extends BasePresenter<DescriptionView> {
+    private static final String DATE_DELIMITER = "T";
 
     @Inject
-    DescriptionPresenter(){
+    DescriptionPresenter() {
 
     }
 
-    @Override protected void clearComponent() {
+    @Override
+    protected void clearComponent() {
         Injector.getInstance().clearDescriptionComponent();
     }
 
@@ -25,11 +27,12 @@ public class DescriptionPresenter extends BasePresenter<DescriptionView> {
         super.onDestroy();
     }
 
-    public void incomeDataEvent(String title, String date, String description, String imageUrl){
-        getViewState().showNews(title, date, description, imageUrl);
+    public void incomeDataEvent(String title, String date, String description, String imageUrl,
+        String category) {
+        getViewState().showNews(title, date.substring(0,date.indexOf(DATE_DELIMITER)), description, imageUrl, category);
     }
 
-    public void onBackPressedEvent(){
+    public void onBackPressedEvent() {
         getViewState().finishActivity();
     }
 }

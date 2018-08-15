@@ -21,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.NewsViewHolder> {
+    private static final String DATE_DELIMITER = "T";
+
     private List<Article> articles;
     private final OnItemClickListener listener;
 
@@ -75,7 +77,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
         public void bind(Article article, final OnItemClickListener listener) {
             itemView.setOnClickListener(v -> listener.onItemClick(article));
-            textViewDate.setText(article.getPublishedAt());
+            textViewDate.setText(article.getPublishedAt().substring(0, article.getPublishedAt().indexOf(DATE_DELIMITER)));
             textViewSource.setText(article.getAuthor());
             textViewTitle.setText(article.getTitle());
             GlideApp.with(itemView.getContext())

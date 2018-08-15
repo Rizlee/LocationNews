@@ -23,8 +23,8 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
     }
 
     @Override
-    public void attachView(AuthenticationView view) {
-        super.attachView(view);
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
         getViewState().showFragment(AuthFragment.newInstance());
     }
 
