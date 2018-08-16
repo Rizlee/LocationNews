@@ -17,16 +17,15 @@ import javax.inject.Singleton;
 
 @Singleton
 public class Storage {
-
-    private static final String DATE_FORMAT = "dd.MM.yyyy";
-
-    private CategoryDao categoryDao;
-    private DescriptionDao descriptionDao;
+    private final CategoryDao categoryDao;
+    private final DescriptionDao descriptionDao;
+    private final DBStorage storage;
 
     @Inject
     Storage(DBStorage storage) {
         this.categoryDao = storage.getCategoryDao();
         this.descriptionDao = storage.getDescriptionDao();
+        this.storage = storage;
     }
 
     private void insertCategoryList(List<Category> categories) {
@@ -41,6 +40,11 @@ public class Storage {
             articles.get(i).setCategory(category);
             descriptionDao.insert(articles.get(i));
         }
+    }
+
+    private void clearTables(){
+        categoryDao.nukeTable();
+        descriptionDao.nukeTable();
     }
 
     public Single<List<Category>> getCategories() {
@@ -60,13 +64,10 @@ public class Storage {
     }
 
     public Single<RootObject> getDescriptionsByKey(String category) {
-        return Single.create(new SingleOnSubscribe<RootObject>() {
-            @Override
-            public void subscribe(SingleEmitter<RootObject> emitter) throws Exception {
-                RootObject rootObject = new RootObject();
-                rootObject.setArticles(descriptionDao.getAllByKey(category));
-                emitter.onSuccess(rootObject);
-            }
+        return Single.create(emitter -> {
+            RootObject rootObject = new RootObject();
+            rootObject.setArticles(descriptionDao.getAllByKey(category));
+            emitter.onSuccess(rootObject);
         });
     }
 
@@ -76,5 +77,9 @@ public class Storage {
 
     public Completable clearDescriptionByKey(String category){
         return Completable.fromAction(() -> descriptionDao.clearByKey(category));
+    }
+
+    public Completable clearDB(){
+        return Completable.fromAction(this::clearTables);
     }
 }

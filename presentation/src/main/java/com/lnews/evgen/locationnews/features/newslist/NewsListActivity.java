@@ -27,6 +27,7 @@ import com.lnews.evgen.locationnews.features.newslist.adapter.NewsPagerAdapter;
 import com.lnews.evgen.locationnews.features.newslist.dialog.CategoryDialog;
 import com.lnews.evgen.locationnews.features.newslist.dialog.LocationDialog;
 import com.lnews.evgen.locationnews.features.newslist.dialog.ManageDialog;
+import java.util.ArrayList;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -147,7 +148,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
 
     @Override
     public void showAddCategoryDialog() {
-        CategoryDialog categoryDialog = new CategoryDialog();
+        CategoryDialog categoryDialog = CategoryDialog.newInstance(new ArrayList<>(presenter.getTitles()));
         categoryDialog.show(getSupportFragmentManager(), CATEGORY);
         categoryDialog.setDialogResult(category -> presenter.addTitleEvent(category));
     }
@@ -183,7 +184,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
 
     private void setupViewPager() {
         viewPager.setAdapter(presenter.getNewsPagerAdapter());
-        viewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);
+        //viewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);
         tabLayout.setupWithViewPager(viewPager);
     }
 

@@ -76,6 +76,16 @@ public class Repository implements IRepository {
     }
 
     @Override
+    public void clearPreferences() {
+        cache.clearPreferences();
+    }
+
+    @Override
+    public Completable clearDB() {
+        return storage.clearDB();
+    }
+
+    @Override
     public Single<Location> getLastLocation() {
         return locationRepository.getLastLocation().toSingle();
     }
@@ -127,6 +137,11 @@ public class Repository implements IRepository {
     }
 
     @Override
+    public void saveCategoriesFirebase(List<String> categories) {
+        networkRepository.saveCategories(cache.getToken(), categories);
+    }
+
+    @Override
     public void saveCountry(String country) {
         cache.setCountry(country);
     }
@@ -147,8 +162,13 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public void resetToken() {
-        cache.resetToken();
+    public Single getCategoriesFirestore() {
+        return networkRepository.getCategories(cache.getToken()).toSingle();
+    }
+
+    @Override
+    public String getToken() {
+        return cache.getToken();
     }
 
     private boolean isOnline() {

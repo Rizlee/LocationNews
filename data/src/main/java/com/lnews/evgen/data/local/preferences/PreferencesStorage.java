@@ -7,9 +7,7 @@ import javax.inject.Singleton;
 
 @Singleton
 public class PreferencesStorage implements IPreferencesStorage {
-
     private static final String PREFERENCES_APP = "com.lnews.evgen.PREFERENCES_APP";
-
     private static final String PREFERENCE_TOKEN = "PREFERENCE_TOKEN";
     private static final String PREFERENCE_IS_FIRST_LAUNCH = "PREFERENCE_IS_FIRST_LAUNCH";
     private static final String PREFERENCE_COUNTRY_CODE = "countryCode";
@@ -43,11 +41,6 @@ public class PreferencesStorage implements IPreferencesStorage {
     }
 
     @Override
-    public void resetToken() {
-        pref.edit().putString(PREFERENCE_TOKEN, "").apply();
-    }
-
-    @Override
     public void setCountry(String country) {
         pref.edit().putString(PREFERENCE_COUNTRY, country).apply();
     }
@@ -65,5 +58,10 @@ public class PreferencesStorage implements IPreferencesStorage {
     @Override
     public void setCountryCode(String countryCode) {
         pref.edit().putString(PREFERENCE_COUNTRY_CODE, countryCode).apply();
+    }
+
+    @Override
+    public void clearPreferences() {
+        pref.edit().putString(PREFERENCE_TOKEN, "").apply();
     }
 }

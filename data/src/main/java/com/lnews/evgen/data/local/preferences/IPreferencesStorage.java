@@ -9,8 +9,6 @@ public interface IPreferencesStorage {
 
     boolean isTutorialNeed();
 
-    void resetToken();
-
     void setCountry(String country);
 
     String getCountry();
@@ -18,4 +16,6 @@ public interface IPreferencesStorage {
     String getCountryCode();
 
     void setCountryCode(String countryCode);
+
+    void clearPreferences();
 }

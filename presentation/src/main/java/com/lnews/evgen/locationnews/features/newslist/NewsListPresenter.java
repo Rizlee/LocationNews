@@ -17,7 +17,7 @@ import com.lnews.evgen.locationnews.di.annotations.PerActivity;
 import com.lnews.evgen.locationnews.features.authentication.AuthenticationActivity;
 import com.lnews.evgen.locationnews.features.base.BasePresenter;
 import com.lnews.evgen.locationnews.features.newslist.adapter.NewsPagerAdapter;
-import com.lnews.evgen.locationnews.features.newslisttab.NewsListTabFragment;
+import io.reactivex.CompletableObserver;
 import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
@@ -202,6 +202,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
             }
         });
         titles.add(title);
+        newsInteractor.saveCategoriesFirebase(titles);
         newsPagerAdapter.notifyDataSetChanged();
     }
 
@@ -231,11 +232,24 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         });
 
         titles.remove(id);
+        newsInteractor.saveCategoriesFirebase(titles);
+        newsPagerAdapter.clearState();
         newsPagerAdapter.notifyDataSetChanged();
     }
 
     public void logOutAction() {
-        authorizationInteractor.resetToken();
+        authorizationInteractor.clearPreferences();
+        authorizationInteractor.clearDB(new DisposableCompletableObserver() {
+            @Override
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
         getViewState().showActivity(AuthenticationActivity.getActivityIntent(context));
         getViewState().finishActivity();
     }
@@ -250,5 +264,9 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     public void refreshNews(){
         newsPagerAdapter.notifyDataSetChanged();
+    }
+
+    public List<String> getTitles() {
+        return titles;
     }
 }

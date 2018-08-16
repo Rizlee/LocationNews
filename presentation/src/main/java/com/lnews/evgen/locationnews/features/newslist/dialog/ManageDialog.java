@@ -69,7 +69,7 @@ public class ManageDialog extends DialogFragment {
             if (getArguments().containsKey(TABS_TAG)) {
                 ArrayAdapter<String> spinnerArrayAdapter =
                     new ArrayAdapter<String>(Objects.requireNonNull(getContext()),
-                        android.R.layout.simple_spinner_item,
+                        R.layout.spinner_item,
                         Objects.requireNonNull(getArguments().getStringArray(TABS_TAG)));
 
                 spinnerTabs.setAdapter(spinnerArrayAdapter);

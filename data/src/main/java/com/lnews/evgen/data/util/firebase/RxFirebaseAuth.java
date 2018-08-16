@@ -4,6 +4,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
+import io.reactivex.MaybeEmitter;
+import io.reactivex.MaybeOnSubscribe;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 

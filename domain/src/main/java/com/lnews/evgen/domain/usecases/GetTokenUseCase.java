@@ -3,15 +3,15 @@ package com.lnews.evgen.domain.usecases;
 import com.lnews.evgen.domain.repository.IRepository;
 import javax.inject.Inject;
 
-public class ResetTokenUseCase {
+public class GetTokenUseCase {
     private final IRepository repository;
 
     @Inject
-    ResetTokenUseCase(IRepository repository) {
+    GetTokenUseCase(IRepository repository) {
         this.repository = repository;
     }
 
-    public void execute() {
-        repository.resetToken();
+    public String execute() {
+        return repository.getToken();
     }
 }

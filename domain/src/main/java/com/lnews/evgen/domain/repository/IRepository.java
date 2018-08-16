@@ -25,7 +25,11 @@ public interface IRepository {
 
     void saveToken();
 
-    void resetToken();
+    void clearPreferences();
+
+    Completable clearDB();
+
+    String getToken();
 
     Single getLastLocation();
 
@@ -45,6 +49,8 @@ public interface IRepository {
 
     Single<RootObject> getNewsByCategory(String country, String category);
 
+    void saveCategoriesFirebase(List<String> categories);
+
     void saveCountry(String country);
 
     String getCountry();
@@ -52,4 +58,6 @@ public interface IRepository {
     void saveCountryCode(String countryCode);
 
     String getCountryCode();
+
+    Single getCategoriesFirestore();
 }

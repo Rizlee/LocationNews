@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.lnews.evgen.data.network.RestApi;
 import com.lnews.evgen.data.util.firebase.RxFirebaseAuth;
+import com.lnews.evgen.data.util.firebase.RxFirestore;
 import com.lnews.evgen.locationnews.BuildConfig;
 import dagger.Module;
 import dagger.Provides;
@@ -58,5 +59,11 @@ public interface RestModule {
     @Provides
     static RxFirebaseAuth provideRxFirebase() {
         return new RxFirebaseAuth();
+    }
+
+    @Singleton
+    @Provides
+    static RxFirestore provideRxFirestore() {
+        return new RxFirestore();
     }
 }

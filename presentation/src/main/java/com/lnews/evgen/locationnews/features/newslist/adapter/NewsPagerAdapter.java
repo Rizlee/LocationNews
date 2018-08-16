@@ -35,16 +35,16 @@ public class NewsPagerAdapter extends BaseStateAdapter {
     }
 
     @Override
-    public void clearState() {
-        super.clearState();
-    }
-
-    @Override
     public int getItemPosition(Object object) {
         if (object instanceof UpdateableFragment) {
             ((UpdateableFragment) object).updateCountryCode(countryCode);
         }
         return super.getItemPosition(object);
+    }
+
+    @Override
+    public void clearState() {
+        super.clearState();
     }
 
     public void updateCountryCode(String countryCode){

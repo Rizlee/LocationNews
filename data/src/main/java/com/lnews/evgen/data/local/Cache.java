@@ -30,10 +30,6 @@ public class Cache {
         return preferencesStorage.isTutorialNeed();
     }
 
-    public void resetToken(){
-        preferencesStorage.resetToken();
-    }
-
     public void setCountry(String country){
         preferencesStorage.setCountry(country);
     }
@@ -48,5 +44,9 @@ public class Cache {
 
     public void setCountryCode(String countryCode){
         preferencesStorage.setCountryCode(countryCode);
+    }
+
+    public void clearPreferences(){
+        preferencesStorage.clearPreferences();
     }
 }

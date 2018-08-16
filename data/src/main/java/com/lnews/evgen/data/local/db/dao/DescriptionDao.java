@@ -17,4 +17,7 @@ public interface DescriptionDao {
 
     @Query("DELETE FROM article WHERE category LIKE :category")
     void clearByKey(String category);
+
+    @Query("DELETE FROM article")
+    void nukeTable();
 }

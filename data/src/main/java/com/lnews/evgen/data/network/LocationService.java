@@ -10,15 +10,11 @@ import javax.inject.Singleton;
 
 @Singleton
 public class LocationService {
-
     private final RxLocation rxLocation;
 
-    private final Context context;
-
     @Inject
-    LocationService(RxLocation rxLocation, Context context) {
+    LocationService(RxLocation rxLocation) {
         this.rxLocation = rxLocation;
-        this.context = context;
     }
 
     @SuppressWarnings({"MissingPermission"})
@@ -29,6 +25,4 @@ public class LocationService {
     public Maybe<Address> getAddressFromLocation(Location location){
         return rxLocation.geocoding().fromLocation(location);
     }
-
-
 }

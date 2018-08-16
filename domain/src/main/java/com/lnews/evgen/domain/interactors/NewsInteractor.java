@@ -4,9 +4,11 @@ import com.lnews.evgen.domain.entities.Article;
 import com.lnews.evgen.domain.entities.Category;
 import com.lnews.evgen.domain.entities.RootObject;
 import com.lnews.evgen.domain.interactors.base.BaseInteractor;
+import com.lnews.evgen.domain.usecases.CategoryFirebaseUseCase;
 import com.lnews.evgen.domain.usecases.CategoryUseCase;
 import com.lnews.evgen.domain.usecases.CountryCodeUseCase;
 import com.lnews.evgen.domain.usecases.CountryUseCase;
+import com.lnews.evgen.domain.usecases.GetCategoryFirebaseUseCase;
 import com.lnews.evgen.domain.usecases.GetCountryCodeUseCase;
 import com.lnews.evgen.domain.usecases.GetCountryUseCase;
 import com.lnews.evgen.domain.usecases.InsertCategoriesUseCase;
@@ -17,6 +19,7 @@ import com.lnews.evgen.domain.usecases.RemoveCategoryUseCase;
 import com.lnews.evgen.domain.usecases.RemoveDescriptionUseCase;
 import com.lnews.evgen.domain.usecases.base.FlowableUseCase;
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.subscribers.ResourceSubscriber;
@@ -35,6 +38,8 @@ public class NewsInteractor extends BaseInteractor {
     private final GetCountryUseCase getCountryUseCase;
     private final CountryCodeUseCase countryCodeUseCase;
     private final GetCountryCodeUseCase getCountryCodeUseCase;
+    private final CategoryFirebaseUseCase categoryFirebaseUseCase;
+    private final GetCategoryFirebaseUseCase getCategoryFirebaseUseCase;
 
     @Inject
     NewsInteractor(NewsUseCase newsUseCase, CategoryUseCase categoryUseCase,
@@ -45,7 +50,9 @@ public class NewsInteractor extends BaseInteractor {
         CountryUseCase countryUseCase,
         GetCountryUseCase getCountryUseCase,
         CountryCodeUseCase countryCodeUseCase,
-        GetCountryCodeUseCase getCountryCodeUseCase) {
+        GetCountryCodeUseCase getCountryCodeUseCase,
+        CategoryFirebaseUseCase categoryFirebaseUseCase,
+        GetCategoryFirebaseUseCase getCategoryFirebaseUseCase) {
         this.newsUseCase = newsUseCase;
         this.categoryUseCase = categoryUseCase;
         this.insertCategoriesUseCase = insertCategoriesUseCase;
@@ -57,6 +64,8 @@ public class NewsInteractor extends BaseInteractor {
         this.getCountryUseCase = getCountryUseCase;
         this.countryCodeUseCase = countryCodeUseCase;
         this.getCountryCodeUseCase = getCountryCodeUseCase;
+        this.categoryFirebaseUseCase = categoryFirebaseUseCase;
+        this.getCategoryFirebaseUseCase = getCategoryFirebaseUseCase;
     }
 
     public void getNews(String country, String category,
@@ -103,5 +112,13 @@ public class NewsInteractor extends BaseInteractor {
 
     public String getCountryCode(){
         return getCountryCodeUseCase.execute();
+    }
+
+    public void saveCategoriesFirebase(List<String> categories){
+        categoryFirebaseUseCase.execute(categories);
+    }
+
+    public void getCategoriesFirebase(DisposableSingleObserver observer){
+        execute(getCategoryFirebaseUseCase,"", observer);
     }
 }
