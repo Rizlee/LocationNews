@@ -10,6 +10,7 @@ import com.lnews.evgen.locationnews.features.description.DescriptionActivity;
 import com.lnews.evgen.locationnews.features.newslisttab.adapter.NewsRecyclerAdapter;
 import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.subscribers.ResourceSubscriber;
 import java.util.List;
 import javax.inject.Inject;
 

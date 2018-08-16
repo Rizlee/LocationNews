@@ -16,10 +16,12 @@ import com.lnews.evgen.domain.entities.Category;
 import com.lnews.evgen.domain.entities.RootObject;
 import com.lnews.evgen.domain.repository.IRepository;
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.util.List;
 import javax.inject.Inject;
+import org.reactivestreams.Subscriber;
 
 public class Repository implements IRepository {
     private final RestApiService networkRepository;
@@ -85,11 +87,6 @@ public class Repository implements IRepository {
             .toObservable();
     }
 
-    /*@Override
-    public Single<RootObject> getNewsByCategoryOnline(String country, String category) {
-        return networkRepository.getNewsByCategory(country, category);
-    }*/
-
     @Override
     public Single<List<Category>> getCategoriesOffline() {
         return storage.getCategories();
@@ -110,11 +107,6 @@ public class Repository implements IRepository {
         return storage.insertCategory(category);
     }
 
-    /*@Override
-    public Single<List<Article>> getNewsByCategoryOffline(String category) {
-        return storage.getDescriptionsByKey(category);
-    }*/
-
     @Override
     public Completable removeNewsByCategoryFromDB(String category) {
         return storage.clearDescriptionByKey(category);
@@ -127,11 +119,31 @@ public class Repository implements IRepository {
 
     @Override
     public Single<RootObject> getNewsByCategory(String country, String category) {
-        if (isOnline()){
+        if (isOnline()) {
             return networkRepository.getNewsByCategory(country, category);
-        }else {
+        } else {
             return storage.getDescriptionsByKey(category);
         }
+    }
+
+    @Override
+    public void saveCountry(String country) {
+        cache.setCountry(country);
+    }
+
+    @Override
+    public String getCountry() {
+        return cache.getCountry();
+    }
+
+    @Override
+    public void saveCountryCode(String countryCode) {
+        cache.setCountryCode(countryCode);
+    }
+
+    @Override
+    public String getCountryCode() {
+        return cache.getCountryCode();
     }
 
     @Override

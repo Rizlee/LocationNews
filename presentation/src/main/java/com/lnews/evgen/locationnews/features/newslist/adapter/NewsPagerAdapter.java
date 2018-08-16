@@ -3,10 +3,12 @@ package com.lnews.evgen.locationnews.features.newslist.adapter;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import com.lnews.evgen.locationnews.features.newslist.adapter.base.BaseStateAdapter;
 import com.lnews.evgen.locationnews.features.newslisttab.NewsListTabFragment;
+import com.lnews.evgen.locationnews.features.newslisttab.UpdateableFragment;
 import java.util.List;
 
-public class NewsPagerAdapter extends FragmentStatePagerAdapter {
+public class NewsPagerAdapter extends BaseStateAdapter {
     private List<String> titles;
     private String countryCode;
 
@@ -30,6 +32,24 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return titles.get(position);
+    }
+
+    @Override
+    public void clearState() {
+        super.clearState();
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        if (object instanceof UpdateableFragment) {
+            ((UpdateableFragment) object).updateCountryCode(countryCode);
+        }
+        return super.getItemPosition(object);
+    }
+
+    public void updateCountryCode(String countryCode){
+        this.countryCode = countryCode;
+        notifyDataSetChanged();
     }
 }
 

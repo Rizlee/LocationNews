@@ -33,4 +33,20 @@ public class Cache {
     public void resetToken(){
         preferencesStorage.resetToken();
     }
+
+    public void setCountry(String country){
+        preferencesStorage.setCountry(country);
+    }
+
+    public String getCountry(){
+        return preferencesStorage.getCountry();
+    }
+
+    public String getCountryCode(){
+        return preferencesStorage.getCountryCode();
+    }
+
+    public void setCountryCode(String countryCode){
+        preferencesStorage.setCountryCode(countryCode);
+    }
 }

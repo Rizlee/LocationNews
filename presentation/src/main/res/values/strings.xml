@@ -48,6 +48,7 @@
   <string name="newslist_location_current">Use current location</string>
   <string name="newslist_logout_title">LogOut</string>
   <string name="newslist_manage_tabs_title">Manage tabs</string>
+  <string name="newslist_refresh_hint">Refresh</string>
   <string name="newslist_manage_tabs_hint">Choose the tab you want to delete</string>
   <string-array name="newslist_countries">
     <item>United Arab Emirates</item>

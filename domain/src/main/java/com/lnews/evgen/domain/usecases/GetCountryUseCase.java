@@ -3,15 +3,15 @@ package com.lnews.evgen.domain.usecases;
 import com.lnews.evgen.domain.repository.IRepository;
 import javax.inject.Inject;
 
-public class IsAuthUseCase {
+public class GetCountryUseCase {
     private final IRepository repository;
 
     @Inject
-    IsAuthUseCase(IRepository repository) {
+    GetCountryUseCase(IRepository repository) {
         this.repository = repository;
     }
 
-    public boolean execute() {
-        return repository.isAuth();
+    public String execute() {
+        return repository.getCountry();
     }
 }

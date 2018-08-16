@@ -50,6 +50,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         this.newsInteractor = newsInteractor;
         titles = new ArrayList<>();
         initTitles();
+        initCountry();
     }
 
     @Override
@@ -72,13 +73,6 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
             == PackageManager.PERMISSION_GRANTED
             && ActivityCompat.checkSelfPermission(context,
             Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void rewriteCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-        for (int i = 0; i < titles.size(); i++) {
-            newsPagerAdapter.getItem(i).setCountryCode(countryCode);
-        }
     }
 
     private void getAddressFromLocation(Location location) {
@@ -122,6 +116,11 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
                 getViewState().showToast(R.string.newslist_db_connection_error);
             }
         });
+    }
+
+    private void initCountry(){
+        country = newsInteractor.getCountry();
+        countryCode = newsInteractor.getCountryCode();
     }
 
     public void getLastLocation() {
@@ -182,8 +181,12 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     public void countrySelectEvent(String country, String countryCode) {
         this.country = country;
         this.countryCode = countryCode;
+
+        newsInteractor.saveCountry(country);
+        newsInteractor.saveCountryCode(countryCode);
+
         getViewState().setToolbarTitle(country);
-        rewriteCountryCode(countryCode);
+        newsPagerAdapter.updateCountryCode(countryCode);
     }
 
     public void addTitleEvent(String title) {
@@ -239,5 +242,13 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     public NewsPagerAdapter getNewsPagerAdapter(){
         return newsPagerAdapter;
+    }
+
+    public void setupToolbarTitle(){
+        getViewState().setToolbarTitle(country);
+    }
+
+    public void refreshNews(){
+        newsPagerAdapter.notifyDataSetChanged();
     }
 }

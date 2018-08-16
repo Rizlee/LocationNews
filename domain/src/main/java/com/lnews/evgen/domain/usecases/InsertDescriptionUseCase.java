@@ -36,7 +36,7 @@ public class InsertDescriptionUseCase extends
             return category;
         }
 
-        public List<Article> getArticles() {
+        List<Article> getArticles() {
             return articles;
         }
     }

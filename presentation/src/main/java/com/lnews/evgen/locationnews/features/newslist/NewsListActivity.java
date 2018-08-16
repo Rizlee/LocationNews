@@ -34,7 +34,7 @@ import javax.inject.Provider;
 public class NewsListActivity extends BaseActivity implements NewsListView, NavigationView.OnNavigationItemSelectedListener {
     private static final String[] PERMISSIONS =
         { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
-    private static final int OFFSCREEN_PAGE_LIMIT = 4;
+    private static final int OFFSCREEN_PAGE_LIMIT = 5;
     private static final String LOCATION = "location";
     private static final String CATEGORY = "category";
     private static final String MANAGE = "manage";
@@ -99,6 +99,11 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
                 break;
             }
 
+            case R.id.action_refresh: {
+                presenter.refreshNews();
+                break;
+            }
+
             case R.id.action_location: {
                 presenter.changeLocationAction();
                 break;
@@ -144,12 +149,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
     public void showAddCategoryDialog() {
         CategoryDialog categoryDialog = new CategoryDialog();
         categoryDialog.show(getSupportFragmentManager(), CATEGORY);
-        categoryDialog.setDialogResult(new OnCategoryDialogResult() {
-            @Override
-            public void categorySelectEvent(String category) {
-                presenter.addTitleEvent(category);
-            }
-        });
+        categoryDialog.setDialogResult(category -> presenter.addTitleEvent(category));
     }
 
     @Override
@@ -178,7 +178,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
 
     @Override
     public void setToolbarTitle(String title) {
-        Objects.requireNonNull(getSupportActionBar()).setTitle(startTitleText);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(title);
     }
 
     private void setupViewPager() {
@@ -192,7 +192,7 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
         ActionBar actionbar = getSupportActionBar();
         if (actionbar != null) {
             actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setTitle(startTitleText);
+            presenter.setupToolbarTitle();
         }
     }
 

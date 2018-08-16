@@ -12,6 +12,8 @@ public class PreferencesStorage implements IPreferencesStorage {
 
     private static final String PREFERENCE_TOKEN = "PREFERENCE_TOKEN";
     private static final String PREFERENCE_IS_FIRST_LAUNCH = "PREFERENCE_IS_FIRST_LAUNCH";
+    private static final String PREFERENCE_COUNTRY_CODE = "countryCode";
+    private static final String PREFERENCE_COUNTRY = "country";
 
     private final SharedPreferences pref;
 
@@ -43,5 +45,25 @@ public class PreferencesStorage implements IPreferencesStorage {
     @Override
     public void resetToken() {
         pref.edit().putString(PREFERENCE_TOKEN, "").apply();
+    }
+
+    @Override
+    public void setCountry(String country) {
+        pref.edit().putString(PREFERENCE_COUNTRY, country).apply();
+    }
+
+    @Override
+    public String getCountry() {
+        return pref.getString(PREFERENCE_COUNTRY, "");
+    }
+
+    @Override
+    public String getCountryCode() {
+        return pref.getString(PREFERENCE_COUNTRY_CODE, "");
+    }
+
+    @Override
+    public void setCountryCode(String countryCode) {
+        pref.edit().putString(PREFERENCE_COUNTRY_CODE, countryCode).apply();
     }
 }
