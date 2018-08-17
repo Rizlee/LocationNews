@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.BindString;
 import butterknife.BindView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -19,6 +17,7 @@ import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.features.base.BaseActivity;
 import com.lnews.evgen.locationnews.features.newslisttab.NewsListTabFragment;
 import com.lnews.evgen.locationnews.utils.GlideApp;
+import com.uncopt.android.widget.text.justify.JustifiedTextView;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -28,7 +27,7 @@ public class DescriptionActivity extends BaseActivity implements DescriptionView
     @BindView(R.id.imageview_description)
     ImageView imageView;
     @BindView(R.id.textview_description)
-    TextView textViewDescription;
+    JustifiedTextView textViewDescription;
     @BindView(R.id.textview_description_date)
     TextView textViewDate;
     @BindView(R.id.textview_description_title)
@@ -76,7 +75,7 @@ public class DescriptionActivity extends BaseActivity implements DescriptionView
             .load(imageUrl)
             .placeholder(R.drawable.ic_watch)
             .transition(DrawableTransitionOptions.withCrossFade())
-            .error(R.drawable.ic_broken_image)
+            .error(R.drawable.auth_bg)
             .into(imageView);
     }
 
