@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -23,7 +22,6 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.features.base.BaseActivity;
-import com.lnews.evgen.locationnews.features.newslist.adapter.NewsPagerAdapter;
 import com.lnews.evgen.locationnews.features.newslist.dialog.CategoryDialog;
 import com.lnews.evgen.locationnews.features.newslist.dialog.LocationDialog;
 import com.lnews.evgen.locationnews.features.newslist.dialog.ManageDialog;
@@ -32,7 +30,8 @@ import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-public class NewsListActivity extends BaseActivity implements NewsListView, NavigationView.OnNavigationItemSelectedListener {
+public class NewsListActivity extends BaseActivity
+    implements NewsListView, NavigationView.OnNavigationItemSelectedListener {
     private static final String[] PERMISSIONS =
         { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
     private static final int OFFSCREEN_PAGE_LIMIT = 6;
@@ -148,7 +147,8 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
 
     @Override
     public void showAddCategoryDialog() {
-        CategoryDialog categoryDialog = CategoryDialog.newInstance(new ArrayList<>(presenter.getTitles()));
+        CategoryDialog categoryDialog =
+            CategoryDialog.newInstance(new ArrayList<>(presenter.getTitles()));
         categoryDialog.show(getSupportFragmentManager(), CATEGORY);
         categoryDialog.setDialogResult(category -> presenter.addTitleEvent(category));
     }
@@ -206,5 +206,4 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
     private void setupMenu() {
         navigationView.setNavigationItemSelectedListener(this);
     }
-
 }

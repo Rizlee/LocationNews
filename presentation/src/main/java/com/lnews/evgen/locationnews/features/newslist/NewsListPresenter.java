@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import com.arellomobile.mvp.InjectViewState;
 import com.lnews.evgen.domain.entities.Category;
 import com.lnews.evgen.domain.interactors.AuthorizationInteractor;
+import com.lnews.evgen.domain.interactors.CategoryInteractor;
 import com.lnews.evgen.domain.interactors.LocationInteractor;
 import com.lnews.evgen.domain.interactors.NewsInteractor;
 import com.lnews.evgen.locationnews.R;
@@ -36,6 +37,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     private final LocationInteractor locationInteractor;
     private final AuthorizationInteractor authorizationInteractor;
     private final NewsInteractor newsInteractor;
+    private final CategoryInteractor categoryInteractor;
 
     private NewsPagerAdapter newsPagerAdapter;
     private List<String> titles;
@@ -44,10 +46,13 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     @Inject
     NewsListPresenter(LocationInteractor locationInteractor,
-        AuthorizationInteractor authorizationInteractor, NewsInteractor newsInteractor) {
+        AuthorizationInteractor authorizationInteractor, NewsInteractor newsInteractor,
+        CategoryInteractor categoryInteractor) {
         this.locationInteractor = locationInteractor;
         this.authorizationInteractor = authorizationInteractor;
         this.newsInteractor = newsInteractor;
+        this.categoryInteractor = categoryInteractor;
+
         titles = new ArrayList<>();
         initTitles();
         initCountry();
@@ -102,10 +107,10 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     }
 
     private void initTitles() {
-        newsInteractor.getCategories(new DisposableSingleObserver<List<Category>>() {
+        categoryInteractor.getCategories(new DisposableSingleObserver<List<Category>>() {
             @Override
             public void onSuccess(List<Category> categories) {
-                for (int i = 0; i< categories.size(); i++){
+                for (int i = 0; i < categories.size(); i++) {
                     titles.add(categories.get(i).categoryName);
                     newsPagerAdapter.notifyDataSetChanged();
                 }
@@ -118,9 +123,9 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         });
     }
 
-    private void initCountry(){
-        country = newsInteractor.getCountry();
-        countryCode = newsInteractor.getCountryCode();
+    private void initCountry() {
+        country = categoryInteractor.getCountry();
+        countryCode = categoryInteractor.getCountryCode();
     }
 
     public void getLastLocation() {
@@ -148,7 +153,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
             } else {
                 getViewState().showRequestPermission(PERMISSIONS_REQUEST_LOCATION);
             }
-        }else {
+        } else {
             getViewState().setToolbarTitle(country);
         }
     }
@@ -174,7 +179,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         getViewState().showAddCategoryDialog();
     }
 
-    public void manageTabsAction(){
+    public void manageTabsAction() {
         getViewState().showManageCategoryDialog(titles.toArray(new String[0]));
     }
 
@@ -182,15 +187,15 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         this.country = country;
         this.countryCode = countryCode;
 
-        newsInteractor.saveCountry(country);
-        newsInteractor.saveCountryCode(countryCode);
+        categoryInteractor.saveCountry(country);
+        categoryInteractor.saveCountryCode(countryCode);
 
         getViewState().setToolbarTitle(country);
         newsPagerAdapter.updateCountryCode(countryCode);
     }
 
     public void addTitleEvent(String title) {
-        newsInteractor.insertCategory(new Category(title), new DisposableCompletableObserver() {
+        categoryInteractor.insertCategory(new Category(title), new DisposableCompletableObserver() {
             @Override
             public void onComplete() {
 
@@ -202,22 +207,23 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
             }
         });
         titles.add(title);
-        newsInteractor.saveCategoriesFirebase(titles);
+        categoryInteractor.saveCategoriesFirebase(titles);
         newsPagerAdapter.notifyDataSetChanged();
     }
 
-    public void deleteCategoryEvent(int id){
-        newsInteractor.removeCategory(new Category(titles.get(id)), new DisposableCompletableObserver() {
-            @Override
-            public void onComplete() {
+    public void deleteCategoryEvent(int id) {
+        categoryInteractor.removeCategory(new Category(titles.get(id)),
+            new DisposableCompletableObserver() {
+                @Override
+                public void onComplete() {
 
-            }
+                }
 
-            @Override
-            public void onError(Throwable e) {
+                @Override
+                public void onError(Throwable e) {
 
-            }
-        });
+                }
+            });
 
         newsInteractor.removeDescription(titles.get(id), new DisposableCompletableObserver() {
             @Override
@@ -232,7 +238,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         });
 
         titles.remove(id);
-        newsInteractor.saveCategoriesFirebase(titles);
+        categoryInteractor.saveCategoriesFirebase(titles);
         newsPagerAdapter.clearState();
         newsPagerAdapter.notifyDataSetChanged();
         getViewState().reInitPagerAdapter();
@@ -255,15 +261,15 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         getViewState().finishActivity();
     }
 
-    public NewsPagerAdapter getNewsPagerAdapter(){
+    public NewsPagerAdapter getNewsPagerAdapter() {
         return newsPagerAdapter;
     }
 
-    public void setupToolbarTitle(){
+    public void setupToolbarTitle() {
         getViewState().setToolbarTitle(country);
     }
 
-    public void refreshNews(){
+    public void refreshNews() {
         newsPagerAdapter.notifyDataSetChanged();
     }
 

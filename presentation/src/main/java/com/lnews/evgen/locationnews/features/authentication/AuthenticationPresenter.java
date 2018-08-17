@@ -4,6 +4,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.lnews.evgen.domain.entities.Category;
 import com.lnews.evgen.domain.interactors.AuthorizationInteractor;
+import com.lnews.evgen.domain.interactors.CategoryInteractor;
 import com.lnews.evgen.domain.interactors.NewsInteractor;
 import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
@@ -28,13 +29,17 @@ import static com.lnews.evgen.locationnews.features.launch.LaunchPresenter.CATEG
 public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
     private final AuthorizationInteractor authorizationInteractor;
     private final NewsInteractor newsInteractor;
+    private final CategoryInteractor categoryInteractor;
     private final CategoryParser categoryParser;
 
     @Inject
-    AuthenticationPresenter(AuthorizationInteractor authorizationInteractor, NewsInteractor newsInteractor, CategoryParser categoryParser) {
+    AuthenticationPresenter(AuthorizationInteractor authorizationInteractor,
+        NewsInteractor newsInteractor, CategoryParser categoryParser,
+        CategoryInteractor categoryInteractor) {
         this.authorizationInteractor = authorizationInteractor;
         this.newsInteractor = newsInteractor;
         this.categoryParser = categoryParser;
+        this.categoryInteractor = categoryInteractor;
     }
 
     @Override
@@ -55,7 +60,7 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
     }
 
     private void syncDBCategories() {
-        newsInteractor.getCategoriesFirebase(new DisposableSingleObserver() {
+        categoryInteractor.getCategoriesFirebase(new DisposableSingleObserver() {
             @Override
             public void onSuccess(Object o) {
                 syncCategories(categoryParser.parseCategoriesFirebase(
@@ -78,7 +83,7 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
             bufCategories.add(new Category(categories.get(i)));
         }
 
-        newsInteractor.insertCategories(bufCategories, new DisposableCompletableObserver() {
+        categoryInteractor.insertCategories(bufCategories, new DisposableCompletableObserver() {
             @Override
             public void onComplete() {
                 getViewState().startNextActivity(NewsListActivity.getActivityIntent(context));
@@ -91,14 +96,15 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
         });
     }
 
-    private void initStartCategories(){
+    private void initStartCategories() {
         List<Category> bufCategories = new ArrayList<>();
-        String[] bufArrayCategories = context.getResources().getStringArray(R.array.all_start_categories);
+        String[] bufArrayCategories =
+            context.getResources().getStringArray(R.array.all_start_categories);
 
         for (String bufArrayCategory : bufArrayCategories) {
             bufCategories.add(new Category(bufArrayCategory));
         }
-        newsInteractor.insertCategories(bufCategories, new DisposableCompletableObserver() {
+        categoryInteractor.insertCategories(bufCategories, new DisposableCompletableObserver() {
             @Override
             public void onComplete() {
             }
@@ -121,6 +127,4 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
         authorizationInteractor.saveToken();
         syncDBCategories();
     }
-
-
 }

@@ -5,6 +5,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.lnews.evgen.domain.entities.Category;
+import com.lnews.evgen.domain.interactors.CategoryInteractor;
 import com.lnews.evgen.domain.interactors.LaunchInteractor;
 import com.lnews.evgen.domain.interactors.NewsInteractor;
 import com.lnews.evgen.locationnews.R;
@@ -28,14 +29,16 @@ public class LaunchPresenter extends MvpPresenter<LaunchView> {
     private final NewsInteractor newsInteractor;
     private final CategoryParser categoryParser;
     private final Context context;
+    private final CategoryInteractor categoryInteractor;
 
     @Inject
     LaunchPresenter(LaunchInteractor launchInteractor, NewsInteractor newsInteractor,
-        CategoryParser categoryParser, Context context) {
+        CategoryParser categoryParser, CategoryInteractor categoryInteractor, Context context) {
         this.launchInteractor = launchInteractor;
         this.context = context;
         this.newsInteractor = newsInteractor;
         this.categoryParser = categoryParser;
+        this.categoryInteractor = categoryInteractor;
     }
 
     @Override
@@ -61,7 +64,7 @@ public class LaunchPresenter extends MvpPresenter<LaunchView> {
     }
 
     private void syncDBCategories() {
-        newsInteractor.getCategoriesFirebase(new DisposableSingleObserver() {
+        categoryInteractor.getCategoriesFirebase(new DisposableSingleObserver() {
             @Override
             public void onSuccess(Object o) {
                 syncCategories(categoryParser.parseCategoriesFirebase(
@@ -83,7 +86,7 @@ public class LaunchPresenter extends MvpPresenter<LaunchView> {
             bufCategories.add(new Category(categories.get(i)));
         }
 
-        newsInteractor.insertCategories(bufCategories, new DisposableCompletableObserver() {
+        categoryInteractor.insertCategories(bufCategories, new DisposableCompletableObserver() {
             @Override
             public void onComplete() {
                 getViewState().startNextActivity(NewsListActivity.getActivityIntent(context));

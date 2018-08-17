@@ -17,7 +17,6 @@ public class RootObject {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     public long id;
-    private String category;
 
     private List<Article> articles;
 
