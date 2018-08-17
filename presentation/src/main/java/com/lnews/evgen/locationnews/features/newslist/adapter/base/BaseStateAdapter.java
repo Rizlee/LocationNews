@@ -154,7 +154,6 @@ public abstract class BaseStateAdapter extends PagerAdapter {
     }
 
     public void clearState(){
-        mFragments.clear();
-        mSavedState.clear();
+
     }
 }

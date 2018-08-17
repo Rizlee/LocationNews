@@ -235,6 +235,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         newsInteractor.saveCategoriesFirebase(titles);
         newsPagerAdapter.clearState();
         newsPagerAdapter.notifyDataSetChanged();
+        getViewState().reInitPagerAdapter();
     }
 
     public void logOutAction() {

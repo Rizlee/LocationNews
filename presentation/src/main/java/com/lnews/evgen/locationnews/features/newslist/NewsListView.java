@@ -15,4 +15,6 @@ public interface NewsListView extends BaseActivityView {
     void showRequestPermission(int permissionCode);
 
     void setToolbarTitle(String text);
+
+    void reInitPagerAdapter();
 }

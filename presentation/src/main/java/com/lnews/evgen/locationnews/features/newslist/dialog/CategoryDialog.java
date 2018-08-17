@@ -18,6 +18,7 @@ import com.lnews.evgen.locationnews.features.newslist.OnCategoryDialogResult;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -64,18 +65,14 @@ public class CategoryDialog extends DialogFragment {
         assert getArguments() != null;
         categoriesExisting = getArguments().getStringArrayList(TABS_TAG);
 
-        categoriesAvailable = Arrays.asList(categoriesAll);
-
-        assert categoriesExisting != null;
-        for (int i = 0; i < categoriesExisting.size(); i++) {
-            categoriesAvailable.remove(categoriesExisting.get(i));
-        }
+        categoriesAvailable = new ArrayList<>(Arrays.asList(categoriesAll));
+        categoriesAvailable.removeAll(categoriesExisting);
     }
 
     private void setupSpinner() {
         ArrayAdapter<String> spinnerArrayAdapter =
             new ArrayAdapter<>(Objects.requireNonNull(getContext()),
-                R.layout.spinner_item, categoriesExisting);
+                R.layout.spinner_item, categoriesAvailable);
 
         spinnerCategories.setAdapter(spinnerArrayAdapter);
     }
@@ -84,7 +81,7 @@ public class CategoryDialog extends DialogFragment {
     public void applyCategoryListener() {
         if (dialogResult != null) {
             dialogResult.categorySelectEvent(
-                categoriesExisting.get((int) spinnerCategories.getSelectedItemId()));
+                categoriesAvailable.get((int) spinnerCategories.getSelectedItemId()));
         }
         dismiss();
     }

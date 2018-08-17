@@ -35,7 +35,7 @@ import javax.inject.Provider;
 public class NewsListActivity extends BaseActivity implements NewsListView, NavigationView.OnNavigationItemSelectedListener {
     private static final String[] PERMISSIONS =
         { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
-    private static final int OFFSCREEN_PAGE_LIMIT = 5;
+    private static final int OFFSCREEN_PAGE_LIMIT = 6;
     private static final String LOCATION = "location";
     private static final String CATEGORY = "category";
     private static final String MANAGE = "manage";
@@ -182,9 +182,15 @@ public class NewsListActivity extends BaseActivity implements NewsListView, Navi
         Objects.requireNonNull(getSupportActionBar()).setTitle(title);
     }
 
+    @Override
+    public void reInitPagerAdapter() {
+        presenter.initPagerAdapter(getSupportFragmentManager());
+        setupViewPager();
+    }
+
     private void setupViewPager() {
         viewPager.setAdapter(presenter.getNewsPagerAdapter());
-        //viewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);
+        viewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);
         tabLayout.setupWithViewPager(viewPager);
     }
 
