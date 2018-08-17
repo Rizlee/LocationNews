@@ -61,7 +61,7 @@ public class AuthPresenter extends BasePresenter<AuthView> {
             @Override
             public void onError(Throwable e) {
                 getViewState().hideProgressBar();
-                getViewState().showToast(e.getMessage());
+                handleError(e);
             }
         });
     }

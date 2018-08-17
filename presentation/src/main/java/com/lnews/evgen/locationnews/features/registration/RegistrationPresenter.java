@@ -57,7 +57,7 @@ public class RegistrationPresenter extends BasePresenter<RegistrationView> {
             @Override
             public void onError(Throwable e) {
                 getViewState().hideProgressBar();
-                getViewState().showToast(e.getMessage());
+                handleError(e);
             }
         });
     }

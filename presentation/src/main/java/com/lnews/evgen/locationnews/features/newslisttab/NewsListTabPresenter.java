@@ -98,7 +98,7 @@ public class NewsListTabPresenter extends BasePresenter<NewsListTabView> {
             @Override
             public void onError(Throwable e) {
                 getViewState().hideProgressBar();
-                getViewState().showToast(e.getMessage());
+                handleError(e);
             }
         });
     }

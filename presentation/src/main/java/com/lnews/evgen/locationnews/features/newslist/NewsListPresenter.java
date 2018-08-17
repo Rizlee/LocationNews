@@ -18,7 +18,6 @@ import com.lnews.evgen.locationnews.di.annotations.PerActivity;
 import com.lnews.evgen.locationnews.features.authentication.AuthenticationActivity;
 import com.lnews.evgen.locationnews.features.base.BasePresenter;
 import com.lnews.evgen.locationnews.features.newslist.adapter.NewsPagerAdapter;
-import io.reactivex.CompletableObserver;
 import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
@@ -96,7 +95,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
                 @Override
                 public void onError(Throwable e) {
-                    getViewState().showToast(R.string.newslist_location_error);
+                    handleError(e);
                 }
 
                 @Override
@@ -118,7 +117,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
             @Override
             public void onError(Throwable e) {
-                getViewState().showToast(R.string.newslist_db_connection_error);
+                handleError(e);
             }
         });
     }

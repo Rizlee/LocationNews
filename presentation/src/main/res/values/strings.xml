@@ -37,14 +37,12 @@
   <string name="auth_password_reset_confirm">Check your e-mail</string>
   <string name="auth_password_field_empty">Enter password</string>
   <string name="auth_password_less_than_6">Your password less than 6 symbols</string>
-  <string name="auth_offline_warning">You come in offline mode, some functions will be unavailable</string>
 
   <!--Newslist-->
   <string name="newslist_search_hint">Search</string>
   <string name="newslist_add_hint">Add category</string>
   <string name="newslist_location_hint">Location</string>
   <string name="newslist_category_add_hint">Choose the name of the topic you want to add</string>
-  <string name="newslist_location_error">We can\'t determine the country in which you are located</string>
   <string name="newslist_location_country_hint">You can select a country from the list</string>
   <string name="newslist_location_current">Use current location</string>
   <string name="newslist_logout_title">LogOut</string>
@@ -170,5 +168,11 @@
     <item>sports</item>
     <item>technology</item>
   </string-array>
-  <string name="newslist_db_connection_error">Unexpected error occurred, please restart application</string>
+
+  <!--ERRORS-->
+  <string name="error_user_not_found">Email not found</string>
+  <string name="error_wrong_password">Wrong password</string>
+  <string name="error_invalid_email">Invalid email</string>
+  <string name="error_connection_lost">No internet connection</string>
+  <string name="error_occurred">An error has occurred</string>
 </resources>

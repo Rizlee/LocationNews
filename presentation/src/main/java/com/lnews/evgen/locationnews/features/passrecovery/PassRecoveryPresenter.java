@@ -46,7 +46,7 @@ public class PassRecoveryPresenter extends BasePresenter<PassRecoveryView> {
 
             @Override
             public void onError(Throwable e) {
-                getViewState().showToast(e.getMessage());
+                handleError(e);
             }
         });
     }
