@@ -14,20 +14,34 @@
   </style>
 
   <!--Auth-->
-  <style name="EditTextAuth">
+  <style name="EditTextAuth" parent="Base.Widget.AppCompat.EditText">
     <item name="android:background">@drawable/auth_edittext_bg</item>
     <item name="android:fontFamily">serif-monospace</item>
     <item name="android:gravity">center</item>
   </style>
-  <style name="MainButtonAuth">
+
+  <style name="MainButtonAuth" parent="Base.TextAppearance.AppCompat.Widget.Button">
     <item name="android:background">@drawable/auth_button_bg</item>
     <item name="android:fontFamily">serif</item>
   </style>
-  <style name="TextViewTitle">
+
+  <style name="TextViewTitle" parent="Widget.AppCompat.AutoCompleteTextView">
     <item name="android:gravity">center</item>
     <item name="android:textSize">24sp</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textColor">@color/primary_light</item>
     <item name="android:textAllCaps">true</item>
+  </style>
+
+  <!--NewsList-->
+  <style name="ApplyButton" parent="Base.TextAppearance.AppCompat.Widget.Button">
+    <item name="android:background">@drawable/apply_button_bg</item>
+    <item name="android:fontFamily">serif</item>
+    <item name="android:textColor">@color/primary_light</item>
+  </style>
+  <style name="CancelButton" parent="Base.TextAppearance.AppCompat.Widget.Button">
+    <item name="android:background">@drawable/cancel_button_bg</item>
+    <item name="android:fontFamily">serif</item>
+    <item name="android:textColor">@color/primary_light</item>
   </style>
 </resources>

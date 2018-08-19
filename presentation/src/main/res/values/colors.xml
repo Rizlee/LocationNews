@@ -2,28 +2,28 @@
 <resources>
   <color name="primary">#FF6E81A1</color>
   <color name="primary_dark">#485d81</color>
+  <color name="primary_alpha">#8c6e81a1</color>
   <color name="primary_light">#F5F5F5</color>
   <color name="accent">#f1fd71</color>
+  <color name="accent_dark">#979f43</color>
   <color name="primary_text">#212121</color>
   <color name="secondary_text">#757575</color>
   <color name="edittext_bg">#78ffffff</color>
+  <color name="item_list_bg">#e6e6e6</color>
+  <color name="ic_launcher_background">#2E7AA6</color>
 
   <!--Tutorial-->
   <color name="tutorial_screen_1">#20d1ba</color>
   <color name="tutorial_screen_2">#3394fe</color>
   <color name="tutorial_screen_3">#c773f3</color>
-  <array name="array_dot_inactive">
-    <item>#14a794</item>
-    <item>#2278d3</item>
-    <item>#a754d3</item>
-  </array>
-  <array name="array_dot_active">
-    <item>#8bf8ea</item>
-    <item>#92c5fc</item>
-    <item>#e3b4fb</item>
-  </array>
 
   <!--Auth-->
   <color name="start_gradient">#0b6976</color>
   <color name="end_gradient">#00bbd3</color>
+  
+  <!--NewsList-->
+  <color name="button_apply">#8c30d22a</color>
+  <color name="button_apply_dark">#8c1c8019</color>
+  <color name="button_cancel">#8cd22a2a</color>
+  <color name="button_cancel_dark">#8c861b1b</color>
 </resources>

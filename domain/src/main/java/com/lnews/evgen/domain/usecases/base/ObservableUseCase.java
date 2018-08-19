@@ -11,7 +11,7 @@ public abstract class ObservableUseCase<InParam, OutParam> extends BaseUseCase {
         super(repository, threadExecutor, postExecutionThread);
     }
 
-    abstract Observable<OutParam> buildUseCase(InParam param);
+    protected abstract Observable<OutParam> buildUseCase(InParam param);
 
     public Observable<OutParam> execute(InParam param) {
         return buildUseCase(param)

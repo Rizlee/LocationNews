@@ -29,4 +29,24 @@ public class Cache {
     public boolean isTutorialNeed(){
         return preferencesStorage.isTutorialNeed();
     }
+
+    public void setCountry(String country){
+        preferencesStorage.setCountry(country);
+    }
+
+    public String getCountry(){
+        return preferencesStorage.getCountry();
+    }
+
+    public String getCountryCode(){
+        return preferencesStorage.getCountryCode();
+    }
+
+    public void setCountryCode(String countryCode){
+        preferencesStorage.setCountryCode(countryCode);
+    }
+
+    public void clearPreferences(){
+        preferencesStorage.clearPreferences();
+    }
 }

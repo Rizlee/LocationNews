@@ -1,12 +1,14 @@
 apply plugin: 'java-library'
 
 dependencies {
-    //rx
-    api "io.reactivex.rxjava2:rxjava:2.1.16"
-    //dagger
-    api 'javax.inject:javax.inject:1'
-    //api
-    api 'com.google.code.gson:gson:2.8.2'
+  //rx
+  api "io.reactivex.rxjava2:rxjava:2.1.16"
+  //dagger
+  api 'javax.inject:javax.inject:1'
+  //api
+  api 'com.google.code.gson:gson:2.8.2'
+  //room annotations
+  implementation "android.arch.persistence.room:common:1.1.1"
 }
 
 sourceCompatibility = "1.8"

@@ -2,11 +2,13 @@ package com.lnews.evgen.locationnews.features.authorization;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -26,6 +28,8 @@ public class AuthFragment extends BaseFragment implements AuthView{
     EditText editTextEmail;
     @BindView(R.id.edittext_auth_password)
     EditText editTextPassword;
+    @BindView(R.id.progressbar_auth)
+    ProgressBar progressBar;
 
     @InjectPresenter
     AuthPresenter presenter;
@@ -52,21 +56,19 @@ public class AuthFragment extends BaseFragment implements AuthView{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_auth, container, false);
     }
 
     @OnClick(R.id.button_auth_forgot_pass)
     public void btnForgotPassListener(){
-        //presenter.buttonForgotPassPressed();
-        showForgotPass();
+        presenter.buttonForgotPassPressed();
     }
 
     @OnClick(R.id.button_auth_new_member)
     public void btnNewMemberListener(){
-        //presenter.buttonRegistrationPressed();
-        showRegistration();
+        presenter.buttonRegistrationPressed();
     }
 
     @OnClick(R.id.button_auth_login)
@@ -91,5 +93,15 @@ public class AuthFragment extends BaseFragment implements AuthView{
 
     @Override public void onAuthSuccess() {
         authenticationEventListener.authSuccessEvent();
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }

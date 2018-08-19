@@ -2,27 +2,19 @@ package com.lnews.evgen.locationnews.features.newslist;
 
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
-import com.lnews.evgen.locationnews.features.base.BaseView;
+import com.lnews.evgen.locationnews.features.base.BaseActivityView;
 
 @StateStrategyType(OneExecutionStateStrategy.class)
-public interface NewsListView extends BaseView {
-    void showList();
-
-    void rebuildTabView();
-
+public interface NewsListView extends BaseActivityView {
     void showAddCategoryDialog();
 
     void showLocationDialog();
 
-    void showSearchResult();
+    void showManageCategoryDialog(String[] tabs);
 
-    void changeTheme();
+    void showRequestPermission(int permissionCode);
 
-    void rebuildNavigationDrawer();
+    void setToolbarTitle(String text);
 
-    void showHelpScreen();
-
-    void changeLocation();
-
-    void changeCategoryList();
+    void reInitPagerAdapter();
 }

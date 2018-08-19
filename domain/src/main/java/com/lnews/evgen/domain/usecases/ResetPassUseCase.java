@@ -9,11 +9,14 @@ import javax.inject.Inject;
 
 public class ResetPassUseCase extends CompletableUseCase<ResetPassUseCase.ResetPassData> {
 
-    @Inject ResetPassUseCase(IRepository repository, ExecutionThread executionThread, PostExecutionThread postExecutionThread) {
+    @Inject
+    ResetPassUseCase(IRepository repository, ExecutionThread executionThread,
+        PostExecutionThread postExecutionThread) {
         super(repository, executionThread, postExecutionThread);
     }
 
-    @Override protected Completable buildUseCase(ResetPassUseCase.ResetPassData params) {
+    @Override
+    protected Completable buildUseCase(ResetPassUseCase.ResetPassData params) {
         return repository.sendResetPassRequest(params.getEmail());
     }
 

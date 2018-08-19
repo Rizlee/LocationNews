@@ -16,7 +16,7 @@ import com.lnews.evgen.locationnews.features.base.BaseFragment;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-public class PassRecoveryFragment extends BaseFragment implements PassRecoveryView{
+public class PassRecoveryFragment extends BaseFragment implements PassRecoveryView {
 
     @BindView(R.id.edittext_passrecovery_email)
     EditText editTextEmail;
@@ -27,15 +27,15 @@ public class PassRecoveryFragment extends BaseFragment implements PassRecoveryVi
     Provider<PassRecoveryPresenter> presenterProvider;
 
     @ProvidePresenter
-    PassRecoveryPresenter providePresenter(){
+    PassRecoveryPresenter providePresenter() {
         return presenterProvider.get();
     }
 
-    public static Fragment newInstance(){
+    public static Fragment newInstance() {
         return new PassRecoveryFragment();
     }
 
-    public PassRecoveryFragment(){
+    public PassRecoveryFragment() {
 
     }
 
@@ -51,7 +51,7 @@ public class PassRecoveryFragment extends BaseFragment implements PassRecoveryVi
     }
 
     @OnClick(R.id.button_passrecovery_reset)
-    public void btnResetPassListener(){
+    public void btnResetPassListener() {
         presenter.btnResetPassListener(editTextEmail.getText().toString());
     }
 }

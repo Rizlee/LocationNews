@@ -1,6 +1,5 @@
 package com.lnews.evgen.locationnews.features.passrecovery;
 
-import android.text.Editable;
 import com.arellomobile.mvp.InjectViewState;
 import com.lnews.evgen.domain.interactors.AuthorizationInteractor;
 import com.lnews.evgen.locationnews.R;
@@ -12,12 +11,12 @@ import javax.inject.Inject;
 
 @InjectViewState
 @PerFragment(PassRecoveryFragment.class)
-public class PassRecoveryPresenter extends BasePresenter<PassRecoveryView>{
+public class PassRecoveryPresenter extends BasePresenter<PassRecoveryView> {
 
     private final AuthorizationInteractor authorizationInteractor;
 
     @Inject
-    PassRecoveryPresenter(AuthorizationInteractor authorizationInteractor){
+    PassRecoveryPresenter(AuthorizationInteractor authorizationInteractor) {
         this.authorizationInteractor = authorizationInteractor;
     }
 
@@ -28,7 +27,6 @@ public class PassRecoveryPresenter extends BasePresenter<PassRecoveryView>{
 
     @Override
     public void onDestroy() {
-        authorizationInteractor.dispose();
         clearComponent();
         super.onDestroy();
     }
@@ -39,16 +37,17 @@ public class PassRecoveryPresenter extends BasePresenter<PassRecoveryView>{
             return;
         }
 
-        authorizationInteractor.resetPassRequest(email,
-            new DisposableCompletableObserver(){
+        authorizationInteractor.resetPassRequest(email, new DisposableCompletableObserver() {
 
-                @Override public void onComplete() {
-                    getViewState().showToast(R.string.auth_password_reset_confirm);
-                }
+            @Override
+            public void onComplete() {
+                getViewState().showToast(R.string.auth_password_reset_confirm);
+            }
 
-                @Override public void onError(Throwable e) {
-                    getViewState().showToast(e.getMessage());
-                }
-            });
+            @Override
+            public void onError(Throwable e) {
+                handleError(e);
+            }
+        });
     }
 }

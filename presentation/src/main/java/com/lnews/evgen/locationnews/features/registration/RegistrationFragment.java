@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -25,6 +26,8 @@ public class RegistrationFragment extends BaseFragment implements RegistrationVi
     EditText editTextEmail;
     @BindView(R.id.edittext_registration_password)
     EditText editTextPassword;
+    @BindView(R.id.progressbar_registration)
+    ProgressBar progressBar;
 
     @InjectPresenter
     RegistrationPresenter presenter;
@@ -32,15 +35,16 @@ public class RegistrationFragment extends BaseFragment implements RegistrationVi
     Provider<RegistrationPresenter> presenterProvider;
 
     @ProvidePresenter
-    RegistrationPresenter providePresenter(){
-        return presenterProvider.get();
+    RegistrationPresenter providePresenter() {
+        return
+                presenterProvider.get();
     }
 
-    public static Fragment newInstance(){
+    public static Fragment newInstance() {
         return new RegistrationFragment();
     }
 
-    public RegistrationFragment(){
+    public RegistrationFragment() {
     }
 
     @Override
@@ -60,12 +64,24 @@ public class RegistrationFragment extends BaseFragment implements RegistrationVi
         Injector.getInstance().plusRegistrationComponent().inject(this);
     }
 
-    @Override public void onRegisterSuccess() {
+    @Override
+    public void onRegisterSuccess() {
         authenticationEventListener.authSuccessEvent();
     }
 
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
     @OnClick(R.id.button_registration_register)
-    public void btnRegisterListener(){
-        presenter.btnRegisterListener(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+    public void btnRegisterListener() {
+        presenter.btnRegisterListener(editTextEmail.getText().toString(),
+            editTextPassword.getText().toString());
     }
 }

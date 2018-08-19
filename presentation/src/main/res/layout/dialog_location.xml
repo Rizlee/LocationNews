@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    >
+
+  <TextView
+      android:id="@+id/textview_newslist_location_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_newslist_dialog_16dp"
+      android:gravity="center"
+      android:text="@string/newslist_location_hint"
+      android:textColor="@color/primary_text"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <TextView
+      android:id="@+id/textview_newslist_country_hint"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_newslist_dialog_16dp"
+      android:text="@string/newslist_location_country_hint"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/textview_newslist_location_title"
+      />
+
+  <Spinner
+      android:id="@+id/spinner_newslist_location"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_newslist_dialog_16dp"
+      android:background="@drawable/spinner_bg"
+      android:entries="@array/newslist_countries"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/textview_newslist_country_hint"
+
+      />
+
+  <Button
+      android:id="@+id/button_newslist_location_apply"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/margin_newslist_dialog_16dp"
+      android:layout_marginStart="@dimen/margin_newslist_dialog_16dp"
+      android:layout_marginTop="@dimen/margin_newslist_dialog_16dp"
+      android:background="@drawable/apply_button_bg"
+      android:text="@string/all_button_apply"
+      android:textColor="@color/primary_light"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/spinner_newslist_location"
+      />
+
+  <View
+      android:id="@+id/view_newslist_line_left"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:layout_marginTop="24dp"
+      android:background="@color/primary_text"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toLeftOf="@id/textview_newslist_or"
+      app:layout_constraintTop_toBottomOf="@id/button_newslist_location_apply"
+      />
+
+  <View
+      android:id="@+id/view_newslist_line_right"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:layout_marginTop="24dp"
+      android:background="@color/primary_text"
+      app:layout_constraintLeft_toRightOf="@id/textview_newslist_or"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/button_newslist_location_apply"
+      />
+
+  <TextView
+      android:id="@+id/textview_newslist_or"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/margin_newslist_dialog_16dp"
+      android:text="@string/all_or"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/button_newslist_location_apply"
+      />
+
+  <Button
+      android:id="@+id/button_newslist_current_location_apply"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/margin_newslist_dialog_16dp"
+      android:layout_marginStart="@dimen/margin_newslist_dialog_16dp"
+      android:layout_marginTop="@dimen/margin_newslist_dialog_16dp"
+      android:text="@string/newslist_location_current"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/textview_newslist_or"
+      style="@style/ApplyButton"
+      />
+
+  <Button
+      android:id="@+id/button_newslist_location_cancel"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/margin_newslist_dialog_16dp"
+      android:layout_marginEnd="@dimen/margin_newslist_dialog_16dp"
+      android:layout_marginStart="@dimen/margin_newslist_dialog_16dp"
+      android:layout_marginTop="@dimen/margin_newslist_dialog_16dp"
+      android:text="@string/all_button_cancel"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/button_newslist_current_location_apply"
+      style="@style/CancelButton"
+      />
+</android.support.constraint.ConstraintLayout>
+</ScrollView>

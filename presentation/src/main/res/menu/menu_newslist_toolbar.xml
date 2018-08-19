@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <item
-      android:id="@+id/action_search"
+      android:id="@+id/action_refresh"
       app:showAsAction="ifRoom"
-      android:icon="@drawable/ic_search_white_24dp"
-      android:title="@string/newslist_search_hint"/>
+      android:icon="@drawable/ic_refresh"
+      android:title="@string/newslist_refresh_hint"/>
 
   <item
       android:id="@+id/action_location"

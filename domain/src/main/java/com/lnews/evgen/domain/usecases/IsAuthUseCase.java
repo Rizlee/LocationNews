@@ -4,7 +4,6 @@ import com.lnews.evgen.domain.repository.IRepository;
 import javax.inject.Inject;
 
 public class IsAuthUseCase {
-
     private final IRepository repository;
 
     @Inject

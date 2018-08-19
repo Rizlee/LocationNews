@@ -7,9 +7,12 @@ import com.lnews.evgen.domain.usecases.base.SingleUseCase;
 import io.reactivex.Single;
 import javax.inject.Inject;
 
-public class AuthorizationUseCase extends SingleUseCase<AuthorizationUseCase.AuthorizationData, Single> {
+public class AuthorizationUseCase
+    extends SingleUseCase<AuthorizationUseCase.AuthorizationData, Single> {
 
-    @Inject AuthorizationUseCase(IRepository repository, ExecutionThread executionThread, PostExecutionThread postExecutionThread) {
+    @Inject
+    AuthorizationUseCase(IRepository repository, ExecutionThread executionThread,
+        PostExecutionThread postExecutionThread) {
         super(repository, executionThread, postExecutionThread);
     }
 

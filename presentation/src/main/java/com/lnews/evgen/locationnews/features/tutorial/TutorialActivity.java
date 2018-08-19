@@ -7,14 +7,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -23,25 +20,32 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.lnews.evgen.locationnews.R;
 import com.lnews.evgen.locationnews.di.Injector;
 import com.lnews.evgen.locationnews.features.base.BaseActivity;
-import com.lnews.evgen.locationnews.features.tutorial.adapter.TutorialEnum;
 import com.lnews.evgen.locationnews.features.tutorial.adapter.TutorialPagerAdapter;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
 public class TutorialActivity extends BaseActivity implements TutorialView {
     private static final int ONE_PAGE = 1;
-    private static final int LAYOUTS_COUNT = TutorialEnum.values().length;
+    private TutorialPagerAdapter tutorialPagerAdapter;
 
-    @BindView(R.id.button_tutorial_next) Button buttonNext;
-    @BindView(R.id.button_tutorial_skip) Button buttonSkip;
-    @BindView(R.id.viewpager_tutorial) ViewPager viewPagerTutorial;
-    @BindView(R.id.tablayout_tutorial) TabLayout tabLayout;
+    @BindView(R.id.button_tutorial_next)
+    Button buttonNext;
+    @BindView(R.id.button_tutorial_skip)
+    Button buttonSkip;
+    @BindView(R.id.viewpager_tutorial)
+    ViewPager viewPagerTutorial;
+    @BindView(R.id.tablayout_tutorial)
+    TabLayout tabLayout;
 
-    @BindString(R.string.tutorial_start_button) String startButtonDescription;
-    @BindString(R.string.tutorial_next_button) String nextButtonDescription;
+    @BindString(R.string.tutorial_start_button)
+    String startButtonDescription;
+    @BindString(R.string.tutorial_next_button)
+    String nextButtonDescription;
 
-    @InjectPresenter TutorialPresenter tutorialPresenter;
-    @Inject Provider<TutorialPresenter> presenterProvider;
+    @InjectPresenter
+    TutorialPresenter tutorialPresenter;
+    @Inject
+    Provider<TutorialPresenter> presenterProvider;
 
     @ProvidePresenter
     TutorialPresenter providePresenter() {
@@ -79,7 +83,7 @@ public class TutorialActivity extends BaseActivity implements TutorialView {
 
     @OnClick(R.id.button_tutorial_next)
     public void buttonNextListener() {
-        tutorialPresenter.buttonNextPressed(getNextPage(), LAYOUTS_COUNT);
+        tutorialPresenter.buttonNextPressed(getNextPage(), tutorialPagerAdapter.getCount());
     }
 
     private int getNextPage() {
@@ -98,7 +102,7 @@ public class TutorialActivity extends BaseActivity implements TutorialView {
     }
 
     private void setupViewPager() {
-        TutorialPagerAdapter tutorialPagerAdapter = new TutorialPagerAdapter(
+        tutorialPagerAdapter = new TutorialPagerAdapter(
             (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE));
         viewPagerTutorial.setAdapter(tutorialPagerAdapter);
         viewPagerTutorial.addOnPageChangeListener(simpleOnPageChangeListener);
@@ -114,7 +118,7 @@ public class TutorialActivity extends BaseActivity implements TutorialView {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
 
-                if (position == LAYOUTS_COUNT - 1) {
+                if (position == tutorialPagerAdapter.getCount() - 1) {
                     buttonNext.setText(startButtonDescription);
                     buttonSkip.setVisibility(View.GONE);
                 } else {
