@@ -1,5 +1,6 @@
 package com.lnews.evgen.locationnews.features.newslisttab;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -62,11 +63,9 @@ public class NewsListTabFragment extends BaseFragment
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_newslist_tab, container, false);
+        ButterKnife.bind(this, view);
 
         getArg();
-
-        //todo в базовом классе уже есть
-        ButterKnife.bind(this, view);
 
         setupRecyclerView();
 

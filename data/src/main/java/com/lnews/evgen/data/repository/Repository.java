@@ -171,7 +171,8 @@ public class Repository implements IRepository {
         return cache.getToken();
     }
 
-    private boolean isOnline() {
+    @Override
+    public boolean isOnline() {
         try {
             ConnectivityManager connectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

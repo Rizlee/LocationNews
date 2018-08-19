@@ -26,17 +26,15 @@ public class LaunchPresenter extends MvpPresenter<LaunchView> {
     public static final String CATEGORY_FIREBASE_TAG = "categoryName";
 
     private final LaunchInteractor launchInteractor;
-    private final NewsInteractor newsInteractor;
     private final CategoryParser categoryParser;
     private final Context context;
     private final CategoryInteractor categoryInteractor;
 
     @Inject
-    LaunchPresenter(LaunchInteractor launchInteractor, NewsInteractor newsInteractor,
+    LaunchPresenter(LaunchInteractor launchInteractor,
         CategoryParser categoryParser, CategoryInteractor categoryInteractor, Context context) {
         this.launchInteractor = launchInteractor;
         this.context = context;
-        this.newsInteractor = newsInteractor;
         this.categoryParser = categoryParser;
         this.categoryInteractor = categoryInteractor;
     }
@@ -51,6 +49,10 @@ public class LaunchPresenter extends MvpPresenter<LaunchView> {
     public void onDestroy() {
         launchInteractor.dispose();
         super.onDestroy();
+    }
+
+    private void startNewsListActivity(){
+        getViewState().startNextActivity(NewsListActivity.getActivityIntent(context));
     }
 
     private void showNextActivity() {
@@ -74,7 +76,7 @@ public class LaunchPresenter extends MvpPresenter<LaunchView> {
 
             @Override
             public void onError(Throwable e) {
-                getViewState().startNextActivity(NewsListActivity.getActivityIntent(context));
+                startNewsListActivity();
             }
         });
     }
@@ -89,12 +91,12 @@ public class LaunchPresenter extends MvpPresenter<LaunchView> {
         categoryInteractor.insertCategories(bufCategories, new DisposableCompletableObserver() {
             @Override
             public void onComplete() {
-                getViewState().startNextActivity(NewsListActivity.getActivityIntent(context));
+                startNewsListActivity();
             }
 
             @Override
             public void onError(Throwable e) {
-                getViewState().startNextActivity(NewsListActivity.getActivityIntent(context));
+                startNewsListActivity();
             }
         });
     }

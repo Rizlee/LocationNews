@@ -1,7 +1,9 @@
 package com.lnews.evgen.locationnews.features.newslist.adapter.base;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,8 +18,8 @@ public abstract class BaseStateAdapter extends PagerAdapter {
     private static final boolean DEBUG = false;
     private final FragmentManager mFragmentManager;
     private FragmentTransaction mCurTransaction = null;
-    private ArrayList<Fragment.SavedState> mSavedState = new ArrayList<Fragment.SavedState>();
-    private ArrayList<Fragment> mFragments = new ArrayList<Fragment>();
+    private ArrayList<Fragment.SavedState> mSavedState = new ArrayList<>();
+    private ArrayList<Fragment> mFragments = new ArrayList<>();
     private Fragment mCurrentPrimaryItem = null;
     public BaseStateAdapter(FragmentManager fm) {
         mFragmentManager = fm;
@@ -27,10 +29,12 @@ public abstract class BaseStateAdapter extends PagerAdapter {
      */
     public abstract Fragment getItem(int position);
     @Override
-    public void startUpdate(ViewGroup container) {
+    public void startUpdate(@NonNull ViewGroup container) {
     }
+    @SuppressLint("CommitTransaction")
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         // If we already have this item instantiated, there is nothing
         // to do.  This can happen when we are restoring the entire pager
         // from its saved state, where the fragment manager has already
@@ -154,6 +158,5 @@ public abstract class BaseStateAdapter extends PagerAdapter {
     }
 
     public void clearState(){
-
     }
 }

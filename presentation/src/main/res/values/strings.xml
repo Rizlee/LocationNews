@@ -49,6 +49,8 @@
   <string name="newslist_manage_tabs_title">Manage tabs</string>
   <string name="newslist_refresh_hint">Refresh</string>
   <string name="newslist_manage_tabs_hint">Choose the tab you want to delete</string>
+  <string name="newslist_add_category_warning">Sorry, there are no more categories you can add</string>
+  <string name="newslist_location_connection_warning">Please check your internet connection</string>
   <string-array name="newslist_countries">
     <item>United Arab Emirates</item>
     <item>Argentina</item>

@@ -4,6 +4,7 @@ import com.lnews.evgen.domain.entities.Article;
 import com.lnews.evgen.domain.entities.RootObject;
 import com.lnews.evgen.domain.interactors.base.BaseInteractor;
 import com.lnews.evgen.domain.usecases.InsertDescriptionUseCase;
+import com.lnews.evgen.domain.usecases.IsOnlineUseCase;
 import com.lnews.evgen.domain.usecases.NewsUseCase;
 import com.lnews.evgen.domain.usecases.RemoveDescriptionUseCase;
 import io.reactivex.observers.DisposableCompletableObserver;
@@ -15,13 +16,15 @@ public class NewsInteractor extends BaseInteractor {
     private final NewsUseCase newsUseCase;
     private final InsertDescriptionUseCase insertDescriptionUseCase;
     private final RemoveDescriptionUseCase removeDescriptionUseCase;
+    private final IsOnlineUseCase isOnlineUseCase;
 
     @Inject
     NewsInteractor(NewsUseCase newsUseCase, InsertDescriptionUseCase insertDescriptionUseCase,
-        RemoveDescriptionUseCase removeDescriptionUseCase) {
+        RemoveDescriptionUseCase removeDescriptionUseCase, IsOnlineUseCase isOnlineUseCase) {
         this.newsUseCase = newsUseCase;
         this.insertDescriptionUseCase = insertDescriptionUseCase;
         this.removeDescriptionUseCase = removeDescriptionUseCase;
+        this.isOnlineUseCase = isOnlineUseCase;
     }
 
     public void getNews(String country, String category,
@@ -37,5 +40,9 @@ public class NewsInteractor extends BaseInteractor {
 
     public void removeDescription(String category, DisposableCompletableObserver observer) {
         execute(removeDescriptionUseCase, category, observer);
+    }
+
+    public boolean isOnline(){
+        return isOnlineUseCase.execute();
     }
 }

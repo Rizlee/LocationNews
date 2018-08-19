@@ -34,7 +34,7 @@ public class NewsListActivity extends BaseActivity
     implements NewsListView, NavigationView.OnNavigationItemSelectedListener {
     private static final String[] PERMISSIONS =
         { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
-    private static final int OFFSCREEN_PAGE_LIMIT = 6;
+    private static final int OFFSCREEN_PAGE_LIMIT = 7;
     private static final String LOCATION = "location";
     private static final String CATEGORY = "category";
     private static final String MANAGE = "manage";

@@ -1,5 +1,6 @@
 package com.lnews.evgen.locationnews.features.newslist.dialog;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,7 +26,6 @@ import java.util.Objects;
 public class CategoryDialog extends DialogFragment {
     private static final String TABS_TAG = "categories";
     private OnCategoryDialogResult dialogResult;
-    private List<String> categoriesExisting;
     private List<String> categoriesAvailable;
 
     @BindView(R.id.spinner_newslist_category)
@@ -50,7 +50,7 @@ public class CategoryDialog extends DialogFragment {
             new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View view = inflater.inflate(R.layout.dialog_category, null);
+        @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.dialog_category, null);
         ButterKnife.bind(this, view);
 
         initCategories();
@@ -63,10 +63,10 @@ public class CategoryDialog extends DialogFragment {
 
     private void initCategories() {
         assert getArguments() != null;
-        categoriesExisting = getArguments().getStringArrayList(TABS_TAG);
+        List<String> categoriesExisting = getArguments().getStringArrayList(TABS_TAG);
 
         categoriesAvailable = new ArrayList<>(Arrays.asList(categoriesAll));
-        categoriesAvailable.removeAll(categoriesExisting);
+        categoriesAvailable.removeAll(Objects.requireNonNull(categoriesExisting));
     }
 
     private void setupSpinner() {

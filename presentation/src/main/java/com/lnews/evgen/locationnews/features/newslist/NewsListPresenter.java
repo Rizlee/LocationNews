@@ -32,6 +32,7 @@ import javax.inject.Inject;
 @PerActivity(NewsListActivity.class)
 public class NewsListPresenter extends BasePresenter<NewsListView> {
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;
+    private static final int MAX_TITLES_COUNT = 7;
 
     private final LocationInteractor locationInteractor;
     private final AuthorizationInteractor authorizationInteractor;
@@ -171,11 +172,19 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     }
 
     public void changeLocationAction() {
-        getViewState().showLocationDialog();
+        if (newsInteractor.isOnline()) {
+            getViewState().showLocationDialog();
+        }else {
+            getViewState().showToast(R.string.newslist_location_connection_warning);
+        }
     }
 
     public void changeCategoryAction() {
-        getViewState().showAddCategoryDialog();
+        if (titles.size() == MAX_TITLES_COUNT) {
+            getViewState().showToast(R.string.newslist_add_category_warning);
+        } else {
+            getViewState().showAddCategoryDialog();
+        }
     }
 
     public void manageTabsAction() {

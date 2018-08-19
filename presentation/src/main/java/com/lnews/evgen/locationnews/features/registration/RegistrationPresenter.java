@@ -50,6 +50,7 @@ public class RegistrationPresenter extends BasePresenter<RegistrationView> {
         authorizationInteractor.register(email, password, new DisposableSingleObserver() {
             @Override
             public void onSuccess(Object o) {
+                authorizationInteractor.saveToken();
                 getViewState().hideProgressBar();
                 getViewState().onRegisterSuccess();
             }

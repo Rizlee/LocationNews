@@ -27,6 +27,8 @@ public interface IRepository {
 
     void clearPreferences();
 
+    boolean isOnline();
+
     Completable clearDB();
 
     String getToken();

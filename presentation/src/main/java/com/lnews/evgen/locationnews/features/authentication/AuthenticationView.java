@@ -9,4 +9,8 @@ import com.lnews.evgen.locationnews.features.base.BaseActivityView;
 @StateStrategyType(OneExecutionStateStrategy.class)
 interface AuthenticationView extends BaseActivityView {
     void showFragment(Fragment fragment);
+
+    void showProgressBar();
+
+    void hideProgressBar();
 }

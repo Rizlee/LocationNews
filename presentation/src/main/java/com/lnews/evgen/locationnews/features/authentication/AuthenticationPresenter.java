@@ -27,8 +27,6 @@ import static com.lnews.evgen.locationnews.features.launch.LaunchPresenter.CATEG
 @InjectViewState
 @PerActivity(AuthenticationActivity.class)
 public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
-    private final AuthorizationInteractor authorizationInteractor;
-    private final NewsInteractor newsInteractor;
     private final CategoryInteractor categoryInteractor;
     private final CategoryParser categoryParser;
 
@@ -36,8 +34,6 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
     AuthenticationPresenter(AuthorizationInteractor authorizationInteractor,
         NewsInteractor newsInteractor, CategoryParser categoryParser,
         CategoryInteractor categoryInteractor) {
-        this.authorizationInteractor = authorizationInteractor;
-        this.newsInteractor = newsInteractor;
         this.categoryParser = categoryParser;
         this.categoryInteractor = categoryInteractor;
     }
@@ -59,6 +55,11 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
         super.onDestroy();
     }
 
+    private void startNextActivity(){
+        getViewState().hideProgressBar();
+        getViewState().startNextActivity(NewsListActivity.getActivityIntent(context));
+    }
+
     private void syncDBCategories() {
         categoryInteractor.getCategoriesFirebase(new DisposableSingleObserver() {
             @Override
@@ -71,7 +72,6 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
             @Override
             public void onError(Throwable e) {
                 initStartCategories();
-                getViewState().startNextActivity(NewsListActivity.getActivityIntent(context));
             }
         });
     }
@@ -86,12 +86,12 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
         categoryInteractor.insertCategories(bufCategories, new DisposableCompletableObserver() {
             @Override
             public void onComplete() {
-                getViewState().startNextActivity(NewsListActivity.getActivityIntent(context));
-            }
+                startNextActivity();
+        }
 
             @Override
             public void onError(Throwable e) {
-                getViewState().startNextActivity(NewsListActivity.getActivityIntent(context));
+                startNextActivity();
             }
         });
     }
@@ -107,10 +107,12 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
         categoryInteractor.insertCategories(bufCategories, new DisposableCompletableObserver() {
             @Override
             public void onComplete() {
+                startNextActivity();
             }
 
             @Override
             public void onError(Throwable e) {
+                startNextActivity();
             }
         });
     }
@@ -124,7 +126,7 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationView> {
     }
 
     public void authSuccessEvent() {
-        authorizationInteractor.saveToken();
+        getViewState().showProgressBar();
         syncDBCategories();
     }
 }

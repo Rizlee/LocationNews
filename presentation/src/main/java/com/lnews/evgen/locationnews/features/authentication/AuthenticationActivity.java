@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.ProgressBar;
+import butterknife.BindView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.lnews.evgen.locationnews.R;
@@ -16,6 +19,9 @@ import javax.inject.Provider;
 
 public class AuthenticationActivity extends BaseActivity
     implements AuthenticationView, AuthenticationEventListener {
+
+    @BindView(R.id.progressbar_auth)
+    ProgressBar progressBar;
 
     @InjectPresenter
     AuthenticationPresenter presenter;
@@ -66,6 +72,16 @@ public class AuthenticationActivity extends BaseActivity
             ft.addToBackStack(backStateName);
             ft.commit();
         }
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
