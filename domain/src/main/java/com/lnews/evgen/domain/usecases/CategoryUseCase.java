@@ -9,7 +9,7 @@ import io.reactivex.Single;
 import java.util.List;
 import javax.inject.Inject;
 
-public class CategoryUseCase extends SingleUseCase<Integer,List<Category>> {
+public class CategoryUseCase extends SingleUseCase<Void,List<Category>> {
 
     @Inject
     CategoryUseCase(IRepository repository, ExecutionThread threadExecutor,
@@ -18,7 +18,7 @@ public class CategoryUseCase extends SingleUseCase<Integer,List<Category>> {
     }
 
     @Override
-    protected Single<List<Category>> buildUseCase(Integer integer) {
+    protected Single<List<Category>> buildUseCase(Void aVoid) {
         return repository.getCategoriesOffline();
     }
 }

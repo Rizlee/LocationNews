@@ -30,7 +30,7 @@ public class CategoryInteractor extends BaseInteractor {
     private final GetCategoryFirebaseUseCase getCategoryFirebaseUseCase;
 
     @Inject
-    public CategoryInteractor(CategoryUseCase categoryUseCase,
+    CategoryInteractor(CategoryUseCase categoryUseCase,
         InsertCategoriesUseCase insertCategoriesUseCase,
         RemoveCategoryUseCase removeCategoryUseCase, InsertCategoryUseCase insertCategoryUseCase,
         CountryUseCase countryUseCase, GetCountryUseCase getCountryUseCase,
@@ -50,7 +50,7 @@ public class CategoryInteractor extends BaseInteractor {
     }
 
     public void getCategories(DisposableSingleObserver<List<Category>> observer) {
-        execute(categoryUseCase, 1, observer);
+        execute(categoryUseCase, null, observer);
     }
 
     public void insertCategories(List<Category> categories,
@@ -87,6 +87,6 @@ public class CategoryInteractor extends BaseInteractor {
     }
 
     public void getCategoriesFirebase(DisposableSingleObserver observer) {
-        execute(getCategoryFirebaseUseCase, "", observer);
+        execute(getCategoryFirebaseUseCase, null, observer);
     }
 }

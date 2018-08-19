@@ -63,6 +63,6 @@ public class AuthorizationInteractor extends BaseInteractor {
     }
 
     public void clearDB(DisposableCompletableObserver observer){
-        execute(clearDBUseCase, 1, observer);
+        execute(clearDBUseCase, null, observer);
     }
 }

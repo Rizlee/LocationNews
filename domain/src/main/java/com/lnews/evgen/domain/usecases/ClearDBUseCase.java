@@ -7,7 +7,7 @@ import com.lnews.evgen.domain.usecases.base.CompletableUseCase;
 import io.reactivex.Completable;
 import javax.inject.Inject;
 
-public class ClearDBUseCase extends CompletableUseCase<Integer> {
+public class ClearDBUseCase extends CompletableUseCase<Void> {
 
     @Inject
     ClearDBUseCase(IRepository repository, ExecutionThread executionThread,
@@ -15,12 +15,13 @@ public class ClearDBUseCase extends CompletableUseCase<Integer> {
         super(repository, executionThread, postExecutionThread);
     }
 
+
     public Completable execute() {
         return repository.clearDB();
     }
 
     @Override
-    protected Completable buildUseCase(Integer i) {
+    protected Completable buildUseCase(Void aVoid) {
         return repository.clearDB();
     }
 }
